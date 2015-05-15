@@ -1,0 +1,78 @@
+/*
+** key.c for particular key functions in /home/gascon/Epitech/PSU/42tmp
+**
+** Made by Vertigo
+** Login   <gascon@epitech.net>
+**
+** Started on  Wed May 13 21:57:58 2015 Vertigo
+** Last update Fri May 15 12:24:59 2015 
+*/
+
+#include <stdlib.h>
+#include <my.h>
+#include <mysh.h>
+
+void	remove_letter(char *s, int nb)
+{
+  while (s[nb] != '\0')
+    {
+      s[nb] = s[nb + 1];
+      ++nb;
+    }
+}
+
+void	delete_char(char *line, int *pos, char c)
+{
+  char	*old;
+  int	nb;
+
+  if (c == 127)
+    nb = *pos - 1;
+  else
+    nb = *pos;
+  if (nb < 0 || nb >= my_strlen(line))
+    return;
+  if (!(old = my_strdup(line)))
+    return;
+  remove_letter(line, nb);
+  if (c != 127)
+    *pos = *pos + 1;
+  display_line(line, old, pos, 2);
+  *pos = *pos - 1;
+  free(old);
+}
+
+void	init_arrows(void  (*arrow[4]) (int *, char **, t_mysh *))
+{
+  arrow[0] = up_arrow;
+  arrow[1] = down_arrow;
+  arrow[2] = right_arrow;
+  arrow[3] = left_arrow;
+}
+
+void	end_key(char *line, int *pos)
+{
+  while (line[*pos] != '\0')
+    {
+      my_putchar(line[*pos]);
+      *pos = *pos + 1;
+    }
+}
+
+int	particular_key(char buf[4], int *pos, t_mysh *sh, char **line)
+{
+  void	(*arrow[4]) (int *, char **, t_mysh *);
+
+  init_arrows(arrow);
+  if ((buf[0] == 27 && buf[1] == 91 && buf[2] == 51) || buf[0] == 127)
+    delete_char(*line, pos, buf[0]);
+  else if (buf[0] == 27 && buf[1] == 91 && (buf[2] >= 65 && buf[2] <= 68))
+    arrow[buf[2] - 65](pos, line, sh);
+  else if (buf[0] == 12)
+    clear_screen(sh);
+  else if (buf[0] == 27 && buf[1] == 79 && buf[2] == 70)
+    end_key(*line, pos);
+  else if (buf[0] == 4)
+    return (-1);
+  return (0);
+}

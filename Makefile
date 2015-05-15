@@ -5,15 +5,24 @@
 ## Login   <cano_c@epitech.net>
 ## 
 ## Started on  Mon May  4 07:03:45 2015 
-## Last update Sun May 10 02:22:30 2015 
+## Last update Fri May 15 11:34:47 2015 
+## Last update Fri May 15 06:36:24 2015 
 ##
-NAME	= lexer
+
+NAME	= 42sh
+
 SRCS	= lexer.c lexer_common.c lexer_red.c lexer_pct.c lexer_lst.c \
 	make_binary.c make_leaf.c parse_cmd.c parse_expr.c \
-	parse_instr.c parser.c parse_red.c parser_get_token.c
+	parse_instr.c parser.c parse_red.c parser_get_token.c \
+	main.c error.c sh.c can.c get_line.c \
+	char_isprintable.c key.c clear_screen.c \
+	environement.c string.c utils.c words.c words_env.c \
+	list.c environement_2.c exit.c arrows.c \
+	exe_cmd.c list_goto.c exe_sep.c exe_pipe.c
+
 OBJS	= $(addprefix obj/, $(notdir $(SRCS:.c=.o)))
 
-CFLAGS	+= -Wall -Wextra
+CFLAGS	+= -Wall -Wextra -ggdb
 
 all: obj/ include/my.h $(NAME)
 

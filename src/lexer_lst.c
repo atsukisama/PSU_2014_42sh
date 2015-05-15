@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Sun May 10 02:15:37 2015 
-** Last update Sun May 10 02:15:44 2015 
+** Last update Fri May 15 05:07:06 2015 
 */
 #include <parser.h>
 
@@ -14,12 +14,9 @@ t_lex		*lex_append_new(t_lex **lex, char *line)
   t_lex		*new;
   t_lex		*tmp;
 
-  if (!(new = malloc(sizeof(*new))))
+  if (!(new = my_memalloc(sizeof(*new))))
     return (NULL);
-  new->len = 0;
-  new->type = 0;
   new->s = line;
-  new->prev = NULL;
   if (!*lex)
     *lex = new;
   else

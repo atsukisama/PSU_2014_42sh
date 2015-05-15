@@ -5,14 +5,24 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Sun May 10 02:12:09 2015 
-** Last update Sun May 10 02:12:14 2015 
+** Last update Fri May 15 13:39:58 2015 
 */
 #include <parser.h>
 
 int		lex_idt(t_lex *lex, char **line, char *types)
 {
-  while (types[(int)*(*line + lex->len)] == C_DFLT)
-    ++lex->len;
+  int		type;
+
+  type = types[(int)*(*line + lex->len)];
+  while (type == C_DFLT || type == C_ESC)
+    {
+      if (type == C_ESC && *(*line + lex->len + 1))
+	++lex->len;
+      else if (type && (*line += lex->len))
+	return (LX_ERR);
+      ++lex->len;
+      type = types[(int)*(*line + lex->len)];
+    }
   *line += lex->len;
   return (LX_IDT);
 }

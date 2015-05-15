@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Fri Jan 30 18:42:39 2015
-** Last update Sun Mar  8 05:35:51 2015 Cano Chloe
+** Last update Wed May 13 09:54:41 2015 Vertigo
 */
 #ifndef MY_ERR_H_
 # define MY_ERR_H_
@@ -41,7 +41,6 @@ typedef enum		e_errno_idx
   } t_errno_idx;
 
 void		my_perror(int my_errno, char *prog_name, char *msg);
-
 int		my_access(const char *path, int flags);
 int		my_open(char *path, int flags);
 pid_t		my_fork(void);

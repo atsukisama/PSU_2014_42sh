@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Mon Nov 17 11:15:36 2014
-** Last update Tue Jan 20 15:24:42 2015 
+** Last update Thu May 14 18:51:42 2015 Vertigo
 */
 
 #include <get_next_line.h>
@@ -99,7 +99,7 @@ char		*concat_glst(t_glst **lst, t_glst *s_eol, ptrdiff_t off)
       free(tmp);
     }
   idx = -1;
-  while (++idx < off)
+  while ((unsigned)++idx < off)
     *(line + len + idx) = (*lst)->blk.data[idx];
   *(line + len + idx) = 0;
   idx = copy_end(lst, s_eol, off, idx);
@@ -108,9 +108,9 @@ char		*concat_glst(t_glst **lst, t_glst *s_eol, ptrdiff_t off)
 
 char		*get_next_line(const int fd)
 {
-  t_glst		**fd_lst = NULL;
-  t_glst		*lst;
-  t_glst		*s_eol;
+  t_glst	**fd_lst = NULL;
+  t_glst	*lst;
+  t_glst	*s_eol;
   ptrdiff_t	off;
   char		*line;
 

@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Mon May  4 06:14:56 2015
-** Last update Sun May 10 02:25:29 2015 
+** Last update Fri May 15 13:32:22 2015 
 */
 #include <parser.h>
 
@@ -26,6 +26,8 @@ void		set_types(char *types)
 	types[idx] = C_GTHAN;
       else if (idx == '<')
 	types[idx] = C_LTHAN;
+      else if (idx == '\\')
+	types[idx] = C_ESC;
       else if (idx == ' ' || idx == '\t')
 	types[idx] = C_SPC;
       else if (!idx)
@@ -52,6 +54,8 @@ void		lex_init_xpect(char **line, char *types, t_lex *new_lex)
     new_lex->type = lex_redto(new_lex, line, types);
   else if (LX_XPECT(*line, types, C_LTHAN))
     new_lex->type = lex_redti(new_lex, line, types);
+  else if (LX_XPECT(*line, types, C_ESC))
+    new_lex->type = lex_idt(new_lex, line, types);
   else
     new_lex->type = LX_ERR;
 }
@@ -86,7 +90,7 @@ t_lex		*lexer(char *line)
   return (lex);
 }
 
-int		main(int argc, char **argv)
+/*int		main(int argc, char **argv)
 {
   t_lex		*lex;
   t_ast         *ast;
@@ -97,7 +101,7 @@ int		main(int argc, char **argv)
 	return (0);
       if (!(ast = parse_init(lex)))
 	return (0);
-      /*      free_lex(lex);*/
+      //      free_lex(lex);
     }
   return (-1);
-}
+}*/

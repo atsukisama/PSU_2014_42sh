@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Mon May  4 06:17:13 2015 
-** Last update Sun May 10 02:17:04 2015 
+** Last update Fri May 15 13:33:04 2015 
 */
 
 #ifndef LEXER_H_
@@ -37,6 +37,7 @@ enum		e_char_type
     C_LTHAN,
     C_GTHAN,
     C_SPC,
+    C_ESC,
     C_EOL
   };
 
@@ -57,6 +58,8 @@ enum		e_lex_type
     LX_EOL,
     LX_ERR
   };
+
+t_lex		*lexer(char *s);
 
 int		lex_idt(t_lex *lex, char **line, char* types);
 int		lex_sep(t_lex *lex, char **line, char *types);

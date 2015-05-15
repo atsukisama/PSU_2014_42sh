@@ -5,12 +5,12 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Sun Nov 23 22:49:44 2014
-** Last update Sun Nov 23 22:52:05 2014 
+** Last update Thu May 14 18:53:51 2015 Vertigo
 */
 
 #include <get_next_line.h>
 
-static t_glst		**init_fd_tab(t_glst **s_lst, const int fd)
+static t_glst	**init_fd_tab(t_glst **s_lst, const int fd)
 {
   ssize_t	idx;
 
@@ -60,7 +60,7 @@ t_glst		*glst_memchr(t_glst *haystack, char needle, ptrdiff_t *off)
   while (haystack)
     {
       p = haystack->blk.data;
-      while (p - haystack->blk.data < haystack->blk.len)
+      while ((unsigned)(p - haystack->blk.data) < haystack->blk.len)
 	{
 	  if (*p == needle)
 	    {

@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Tue May  5 10:13:00 2015
-** Last update Tue May  5 11:47:31 2015 
+** Last update Fri May 15 10:00:20 2015 
 */
 
 #ifndef PARSER_H_
@@ -13,8 +13,8 @@
 
 # include <lexer.h>
 
-# define DEBUG_AST	1
-# define DEBUG_PARSER	1
+# define DEBUG_AST	0
+# define DEBUG_PARSER	0
 
 typedef struct s_ast	t_ast;
 typedef union u_parse	t_parse;
