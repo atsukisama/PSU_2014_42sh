@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include "project.h"
 
-void	exe_echo_opt_n(char *str, int i)
+int	exe_echo_opt_e(char *str, int i)
 {
   i++;
   if (str[i] == 'n')
@@ -33,9 +33,15 @@ void	exe_echo_opt_n(char *str, int i)
     my_putchar('\r');
   else if (str[i] == 'v')
     my_putchar('\v');
+  else if (str[i] == 'c')
+    {
+      write(1, "\n", 1);
+      return (2);
+    }
+  return (0);
 }
 
-void	exe_echo(char *str, int opt)
+int	exe_echo(char *str, int opt, int status)
 {
   int	i;
 
@@ -45,16 +51,25 @@ void	exe_echo(char *str, int opt)
       while (str[++i] != 0)
 	{
 	  if (str[i] == '\\')
-	    exe_echo_opt_n(str, i++);
+	    {
+	      if (exe_echo_opt_e(str, i++) == 2)
+		return (2);
+	    }
 	  else
 	    my_putchar(str[i]);
 	}
     }
   else
-    my_putstr(str);
+    {
+      if (str[0] == '$' && str[1] == '?')
+	printf("%d\n", status);
+      else
+	my_putstr(str);
+    }
+  return (0);
 }
 
-void	print_echo(char **cmd, int opt)
+int	print_echo(char **cmd, int opt, t_mysh *sh)
 {
   int	i;
 
@@ -67,16 +82,18 @@ void	print_echo(char **cmd, int opt)
 	i++;
       else
 	{
-	  exe_echo(cmd[i++], opt);
+	  if (exe_echo(cmd[i++], opt, sh->status) == 2)
+	    return (2);
 	  if (cmd[i])
 	    my_putchar(' ');
 	}
     }
   if (opt == 0 || opt == 2)
     my_putchar(10);
+  return (0);
 }
 
-int		my_echo(char **cmd)
+int		my_echo(char **cmd, t_mysh *sh)
 {
   char		opt;
   int		i;
@@ -92,6 +109,6 @@ int		my_echo(char **cmd)
       if ((my_strcmp(cmd[i], "-E")) == 0)
 	opt = 0;
     }
-  print_echo(cmd, opt);
+  print_echo(cmd, opt, sh);
   return (1);
 }

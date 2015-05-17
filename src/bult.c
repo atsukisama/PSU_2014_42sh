@@ -33,7 +33,7 @@ int		chk_bult2(t_mysh *sh, char **cmd)
   if (cmd[0] && my_strcmp("cd", cmd[0]) == 0)
     return (my_cd(sh, cmd));
   else if (cmd[0] && my_strcmp("echo", cmd[0]) == 0)
-    return (my_echo(cmd));
+    return (my_echo(cmd, sh));
   else if (cmd[0] && my_strcmp("history", cmd[0]) == 0)
     return (my_history(sh->history));
   else if (cmd[0] && cmd[0][0] == '!')
