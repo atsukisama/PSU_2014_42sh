@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Fri May 15 06:14:14 2015 
-** Last update Fri May 15 13:49:36 2015 
+** Last update Fri May 15 17:37:44 2015 
 */
 #include <mysh.h>
 #include <sys/wait.h>
@@ -13,6 +13,7 @@
 #include <glob.h>
 #include <string.h>
 #include <stdio.h>
+#include <signal.h>
 
 int		is_exe(char *cmd, char err)
 {
@@ -22,18 +23,21 @@ int		is_exe(char *cmd, char err)
     {
       write(2, "mysh: ", 6);
       if (access(cmd, F_OK) && err)
-	write(2, "no such file or directory\n", 26);
+	{
+	  write(2, "no such file or directory\n", 26);
+	  return (127);
+	}
       else if (access(cmd, X_OK) && err)
 	write(2, "permission denied\n", 18);
-      return (0);
+      return (126);
     }
   else if (stat(cmd, &s_stat) || !S_ISREG(s_stat.st_mode))
     {
       if (err)
 	write(2, "mysh: is not a regular file\n", 28);
-      return (0);
+      return (126);
     }
-  return (1);
+  return (0);
 }
 
 int		get_exe(char **cmd)
@@ -52,15 +56,52 @@ int		get_exe(char **cmd)
   return (-1);
 }
 
+void		set_sig_msg(t_mysh *sh)
+{
+  size_t	idx;
+
+  idx = 0;
+  while (idx < SIG_MAX)
+    my_bzero(sh->sig_msg[idx++], NAME_MAX + 1);
+  my_strncpy(sh->sig_msg[SIGQUIT], "Quit from keyboard", NAME_MAX);
+  my_strncpy(sh->sig_msg[SIGILL], "Illegal instruction", NAME_MAX);
+  my_strncpy(sh->sig_msg[SIGABRT], "Abort signal from abort(3)", NAME_MAX);
+  my_strncpy(sh->sig_msg[SIGFPE], "Floating point exception", NAME_MAX);
+  my_strncpy(sh->sig_msg[SIGSEGV], "Invalid memory reference (SEGV)", NAME_MAX);
+  my_strncpy(sh->sig_msg[SIGPIPE], "Broken pipe: write to pipe with no readers",
+	     NAME_MAX);
+  my_strncpy(sh->sig_msg[SIGBUS], "Bus error (bad memory access)", NAME_MAX);
+  my_strncpy(sh->sig_msg[SIGBUS], "Bus error (bad memory access)", NAME_MAX);
+  my_strncpy(sh->sig_msg[SIGSYS], "Bad argument to routine", NAME_MAX);
+  my_strncpy(sh->sig_msg[SIGTRAP], "It's a trap", NAME_MAX);
+  my_strncpy(sh->sig_msg[SIGXCPU], "Cpu time limit exceeded", NAME_MAX);
+  my_strncpy(sh->sig_msg[SIGXFSZ], "File size limit exceeded", NAME_MAX);
+  my_strncpy(sh->sig_msg[SIGIOT], "It's also a trap", NAME_MAX);
+  my_strncpy(sh->sig_msg[SIGUNUSED], "Bad argument to routine", NAME_MAX);
+}
+
+int		exit_status(int status, t_mysh *sh)
+{
+  if (WIFSIGNALED(status) && sh->sig_msg[WTERMSIG(status)])
+    {
+      fprintf(stderr, "mysh: killed by signal %d: %s\n",
+	      WTERMSIG(status), sh->sig_msg[WTERMSIG(status)]);
+    }
+  else
+    status = WEXITSTATUS(status);
+  return (status);
+}
+
 int		exe_abs(char *cmd, char **arv, t_mysh *sh)
 {
   char		**env;
   int		pid;
   int		status;
+  int		ret;
 
   get_exe(&cmd);
-  if (!is_exe(cmd, 1))
-    return (-1);
+  if ((ret = is_exe(cmd, 1)))
+    return (ret);
   if (!(env = list_to_tab(sh->env_list)))
     return (-1);
   if ((pid = fork()) > -1)
@@ -70,14 +111,13 @@ int		exe_abs(char *cmd, char **arv, t_mysh *sh)
 	  /*	  can_set(sh->tsave);*/
 	  execve(cmd, arv, env);
 	  write(2, "failed to execute command\n", 26);
-	  exit(EXIT_FAILURE);
+	  exit(126);
 	}
       else if (sh->wait)
 	{
 	  while (waitpid(-1, &status, 0) != pid)
-	    {
-	      status = WEXITSTATUS(status);
-	    }
+	    status = exit_status(status, sh);
+	  status = exit_status(status, sh);
 	}
     }
   else
@@ -108,7 +148,7 @@ int		exe_path(char **cmd, t_mysh *sh)
 	  strncat(pathname, cmd[0], NAME_MAX);
 	  p = cmd[0];
 	  cmd[0] = pathname;
-	  if (!get_exe(cmd) && is_exe(cmd[0], 0))
+	  if (!get_exe(cmd) && !is_exe(cmd[0], 0))
 	    return (exe_abs(cmd[0], cmd, sh));
 	  cmd[0] = p;
 	}
@@ -146,7 +186,9 @@ int		exe_cmd(t_ast *ast, t_mysh *sh)
     {
       if (!my_strncmp(ast->content.cmd[0], "./", 2))
 	sh->status = exe_rlt(ast->content.cmd, sh);
-      else if (*ast->content.cmd[0] == '/')
+      else if (chk_bult(sh, ast->content.cmd) != 0)
+	sh->status = 0;
+      else if (*ast->content.cmd[0] == '/' && sh->status != 9)
 	sh->status = exe_abs(ast->content.cmd[0], ast->content.cmd, sh);
       else
 	sh->status = exe_path(ast->content.cmd, sh);

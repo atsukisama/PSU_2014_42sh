@@ -5,9 +5,10 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Mon May  4 06:14:56 2015
-** Last update Fri May 15 13:32:22 2015 
+** Last update Fri May 15 19:53:18 2015 
 */
 #include <parser.h>
+#include <stdio.h>
 
 void		set_types(char *types)
 {
@@ -75,6 +76,10 @@ int		lex_init(t_lex **lex, char *line, char *types)
       lex_init_xpect(&line, types, new_lex);
       ret = new_lex->type;
     }
+  if (ret == LX_ERR && *line)
+    fprintf(stderr, "mysh: lexing error: unexpected token \'%c\'\n", *line);
+  else if (ret == LX_ERR)
+    fprintf(stderr, "mysh: lexing error: unexpected end of line\n");
   return (ret);
 }
 

@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 10:21:40 2015 Vertigo
-** Last update Fri May 15 11:15:20 2015 
+** Last update Fri May 15 18:26:31 2015 
 */
 
 #include <stdio.h>
@@ -17,7 +17,7 @@ void		init_ast(t_mysh *sh)
   sh->exe_ft[PA_AND] = exe_and;
   sh->exe_ft[PA_OR] = exe_or;
   sh->exe_ft[PA_TRM] = exe_trm;
-  /*  sh->exe_ft[PA_RED] = exe_red; */
+  sh->exe_ft[PA_RED] = exe_red;
   sh->exe_ft[PA_PIPE] = exe_pipe;
 }
 

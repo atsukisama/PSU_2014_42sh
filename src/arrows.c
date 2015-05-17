@@ -5,11 +5,9 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 22:06:16 2015 Vertigo
-** Last update Fri May 15 20:32:15 2015 Vertigo
+** Last update Fri May 15 11:02:54 2015 Vertigo
 */
 
-#include <stropts.h>
-#include <sys/ioctl.h>
 #include <string.h>
 #include <my.h>
 #include <mysh.h>
@@ -34,28 +32,21 @@ void    down_arrow(int *pos, char **line, t_mysh *sh)
   *pos = my_strlen(*line);
 }
 
-void			right_arrow(int *pos, char **line, t_mysh *sh)
+void    right_arrow(int *pos, char **line, t_mysh *sh)
 {
-  struct winsize	ws;
-
   (void)sh;
-  ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws);
   if (*pos >= my_strlen(*line))
     return;
   my_putstr("\033[1C");
   *pos = *pos + 1;
 }
 
-void			left_arrow(int *pos, char **line, t_mysh *sh)
+void    left_arrow(int *pos, char **line, t_mysh *sh)
 {
-  struct winsize	ws;
-
   (void)line;
   (void)sh;
-  ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws);
   if (*pos <= 0)
     return;
   *pos = *pos - 1;
-  //my_put_nbr(ws.ws_col);
   my_putstr("\033[1D");
 }

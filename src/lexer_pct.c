@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Sun May 10 02:13:58 2015 
-** Last update Sun May 10 02:14:06 2015 
+** Last update Fri May 15 19:47:24 2015 
 */
 #include <parser.h>
 
@@ -24,8 +24,6 @@ int		lex_amp(t_lex *lex, char **line, char *types)
     return (lex_and(lex, line, types));
   if (LX_XPECT(*line, types, C_GTHAN))
     return (lex_redto(lex, line, types));
-  if (LX_XPECT(*line, types, C_LTHAN))
-    return (lex_redti(lex, line, types));
   return (LX_ERR);
 }
 

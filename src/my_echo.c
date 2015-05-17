@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include "project.h"
 
-int	exe_echo_opt_n(char *str, int i)
+void	exe_echo_opt_n(char *str, int i)
 {
   i++;
   if (str[i] == 'n')
@@ -35,7 +35,7 @@ int	exe_echo_opt_n(char *str, int i)
     my_putchar('\v');
 }
 
-int	exe_echo(char *str, int opt)
+void	exe_echo(char *str, int opt)
 {
   int	i;
 
@@ -52,10 +52,9 @@ int	exe_echo(char *str, int opt)
     }
   else
     my_putstr(str);
-  return (0);
 }
 
-int	print_echo(char **cmd, int opt)
+void	print_echo(char **cmd, int opt)
 {
   int	i;
 
@@ -75,7 +74,6 @@ int	print_echo(char **cmd, int opt)
     }
   if (opt == 0 || opt == 2)
     my_putchar(10);
-  return (0);
 }
 
 int		my_echo(char **cmd)
@@ -95,4 +93,5 @@ int		my_echo(char **cmd)
 	opt = 0;
     }
   print_echo(cmd, opt);
+  return (1);
 }

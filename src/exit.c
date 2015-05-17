@@ -27,14 +27,14 @@ void	my_putstr_file(char *s, int fd)
   write(fd, "\n", 1);
 }
 
-void		save_history(t_list *history)
+int		save_history(t_list *history)
 {
   int		fd;
   t_list	*tmp;
 
   tmp = history->next;
   if ((fd = open(HISTORY_FILE, O_CREAT | O_WRONLY | O_TRUNC, 0644)) < 0)
-    return;
+    return (-1);
   while (tmp != history)
     {
       if (tmp->key != NULL)
@@ -42,4 +42,42 @@ void		save_history(t_list *history)
       tmp = tmp->next;
     }
   close(fd);
+  return (1);
 }
+
+int		my_history(t_list *history)
+{
+  t_list	*tmp;
+
+  tmp = history->next;
+  while (tmp != history)
+    {
+      if (tmp->key != NULL)
+	{
+	  my_putstr(tmp->key);
+	  my_putchar(10);
+	}
+      tmp = tmp->next;
+    }
+  return (1);
+}
+
+int		my_seek_history(t_list *history, char *val)
+{
+  t_list	*tmp;
+  int		nb;
+
+  nb = -1 * atoi(val);
+  tmp = history->next;
+  while (tmp != history)
+    tmp = tmp->next;
+  while (nb > 0)
+    {
+      tmp = tmp->prev;
+      nb--;
+    }
+  my_putstr(tmp->key);
+  my_putchar(10);
+  return (1);
+}
+

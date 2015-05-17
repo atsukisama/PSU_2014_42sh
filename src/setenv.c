@@ -34,21 +34,16 @@ char	*add_egale(char *var)
 
 int		my_setenv(t_list *list, char **cmd)
 {
-  t_list	*tmp;
-  int		i;
-
-  i = 0;
-  tmp = list->next;
   if (cmd[1] == NULL)
-    return (my_puterror("usage: setenv [key] [content] or setenv [key] \n", 2));
+    return (my_puterror("usage: setenv [key] [content] or setenv [key] \n", -1));
   if (cmd[2] == NULL)
     env_set(list, cmd[1], "");
   else
     {
       if (cmd[1] == NULL || my_strlen(cmd[1]) == 0
 	  || my_strchr(cmd[1], '=') != NULL)
-	return (my_puterror("error cmd[1] null\n"));
+	return (my_puterror("error cmd[1] null\n", -1));
       env_set(list, cmd[1], cmd[2]);
     }
-  return (0);
+  return (1);
 }

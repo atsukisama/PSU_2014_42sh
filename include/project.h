@@ -16,6 +16,7 @@
 #include <string.h>
 #include <stdio.h>
 #include "list.h"
+#include "mysh.h"
 
 char	*xstrstr(char *str, char *keyword);
 int	xlen(char *str);
