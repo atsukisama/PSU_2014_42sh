@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Tue May  5 11:53:11 2015 
-** Last update Tue May  5 11:53:18 2015 
+** Last update Sun May 17 17:55:38 2015 Vertigo
 */
 #include <parser.h>
 
@@ -27,8 +27,6 @@ t_ast		*parse_red(t_ast **ast, t_lex **lexem)
   t_lex		*to_rm;
   t_ast		*tmp;
 
-  if (DEBUG_PARSER)
-    my_putstr("parser -> RED\n");
   if (!(next = lexer_next_token(*lexem)))
     return (NULL);
   if (!(r_ast = make_red(ast, next)))

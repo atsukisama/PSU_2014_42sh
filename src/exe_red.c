@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Fri May 15 14:36:48 2015 Vertigo
-** Last update Fri May 15 19:42:10 2015 
+** Last update Sun May 17 17:53:22 2015 Vertigo
 */
 
 #include <unistd.h>
@@ -35,6 +35,15 @@ int	do_red(int red_fd[2], int flags, t_ast *ast, t_mysh *sh)
   return (sh->status);
 }
 
+int	swap_red(t_ast *ast, int red_fd[2])
+{
+  ast->content.red[0] = ast->content.red[1];
+  ast->content.red[1] = ast->content.red[2];
+  ast->content.red[2] = 0;
+  red_fd[1] = 2;
+  return (0);
+}
+
 int	exe_red(t_ast *ast, t_mysh *sh)
 {
   int	flags;
@@ -44,12 +53,7 @@ int	exe_red(t_ast *ast, t_mysh *sh)
   flags = 0;
   red_fd[1] = -1;
   if (ast->content.red[0] == '&')
-    {
-      ast->content.red[0] = ast->content.red[1];
-      ast->content.red[1] = ast->content.red[2];
-      ast->content.red[2] = 0;
-      red_fd[1] = 2;
-    }
+    swap_red(ast, red_fd);
   if (ast->content.red[0] == '<')
     {
       flags = O_RDONLY | O_APPEND;

@@ -5,8 +5,10 @@
 ** Login   <nicolas.rusig@epitech.eu>
 ** 
 ** Started on  Fri May 15 09:45:09 2015 rusig_n
-** Last update Fri May 15 09:45:09 2015 rusig_n
+** Last update Sun May 17 17:46:12 2015 Vertigo
 */
+
+#include <my.h>
 #include <stdlib.h>
 #include <unistd.h>
 
@@ -24,20 +26,6 @@ char            *my_strchr(char *s, int c)
   return (NULL);
 }
 
-int             my_putchar(char c)
-{
-  return (write(1, &c, 1));
-}
-
-int             my_strlen(char *str)
-{
-  int           i;
-
-  i = 0;
-  while (str[i])
-    i++;
-  return (i);
-}
 void            my_error(char *str)
 {
   int           i;
@@ -49,20 +37,6 @@ void            my_error(char *str)
       i++;
     }
   exit(1);
-}
-
-void            my_putstr(char *str)
-{
-  int           i;
-
-  i = 0;
-  if (str == NULL)
-    my_error("error : my_putstr");
-  while (str[i])
-    {
-      my_putchar(str[i]);
-      i++;
-    }
 }
 
 int            my_puterror(char *str, int err)
