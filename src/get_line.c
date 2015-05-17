@@ -6,7 +6,7 @@
 **
 ** Started on  Wed May 13 17:40:46 2015 Vertigo
 <<<<<<< HEAD
-** Last update Fri May 15 09:32:49 2015 Vertigo
+** Last update Sun May 17 17:06:48 2015 Vertigo
 =======
 ** Last update Fri May 15 05:40:16 2015 
 >>>>>>> 8f2a3e921d4ff41392b021e2d9c1b11caaa7225f
@@ -81,6 +81,7 @@ char	*get_line(t_mysh *sh)
   int	pos;
 
   pos = 0;
+  my_putstr(":> ");
   if (!(line = malloc(sizeof(*line))))
     return (NULL);
   line[0] = '\0';
