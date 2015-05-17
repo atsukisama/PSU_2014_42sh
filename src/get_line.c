@@ -5,11 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 17:40:46 2015 Vertigo
-<<<<<<< HEAD
-** Last update Sun May 17 17:06:48 2015 Vertigo
-=======
-** Last update Fri May 15 05:40:16 2015 
->>>>>>> 8f2a3e921d4ff41392b021e2d9c1b11caaa7225f
+** Last update Sun May 17 17:08:19 2015 Vertigo
 */
 
 #include <stdlib.h>

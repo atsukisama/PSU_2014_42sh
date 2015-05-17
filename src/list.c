@@ -5,11 +5,7 @@
 ** Login   <king_j@epitech.net>
 **
 ** Started on  Wed May 13 21:14:10 2015 Jimmy KING
-<<<<<<< HEAD
-** Last update Fri May 15 09:30:06 2015 Vertigo
-=======
-** Last update Fri May 15 08:10:30 2015 
->>>>>>> 8f2a3e921d4ff41392b021e2d9c1b11caaa7225f
+** Last update Sun May 17 17:08:34 2015 Vertigo
 */
 
 #include "project.h"
