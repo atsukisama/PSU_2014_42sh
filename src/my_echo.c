@@ -5,7 +5,7 @@
 ** Login   <nicolas.rusig@epitech.eu>
 ** 
 ** Started on  Thu May 14 11:51:53 2015 rusig_n
-** Last update Thu May 14 11:51:53 2015 rusig_n
+** Last update Sun May 17 19:46:48 2015 Vertigo
 */
 
 #include <stdio.h>
@@ -62,7 +62,7 @@ int	exe_echo(char *str, int opt, int status)
   else
     {
       if (str[0] == '$' && str[1] == '?')
-	printf("%d\n", status);
+	my_put_nbr(status);
       else
 	my_putstr(str);
     }
