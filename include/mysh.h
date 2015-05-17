@@ -60,7 +60,7 @@ int			exe_pipe(t_ast *ast, t_mysh *sh);
 int			exe_red(t_ast *ast, t_mysh *sh);
 int			my_cd(t_mysh *sh, char **tab);
 int			my_unsetenv(t_list *list, char **cmd);
-int			my_echo(char **cmd);
+int			my_echo(char **cmd, t_mysh *sh);
 int		        my_history(t_list *history);
 int	                my_seek_history(t_list *history, char *val);
 int			my_setenv(t_list *list, char **cmd);
