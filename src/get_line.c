@@ -6,7 +6,7 @@
 **
 ** Started on  Wed May 13 17:40:46 2015 Vertigo
 <<<<<<< HEAD
-** Last update Fri May 15 09:32:49 2015 Vertigo
+** Last update Fri May 15 19:31:48 2015 Vertigo
 =======
 ** Last update Fri May 15 05:40:16 2015 
 >>>>>>> 8f2a3e921d4ff41392b021e2d9c1b11caaa7225f
@@ -46,6 +46,8 @@ char	*my_reallocc(char *s, char c, int *pos)
   i = 0;
   if (!(new = malloc(sizeof(*new) * (my_strlen(s) + 2))))
     return (NULL);
+  if (c == '\t')
+    c = ' ';
   while (s[i] != '\0' && i != *pos)
     {
       new[i] = s[i];
