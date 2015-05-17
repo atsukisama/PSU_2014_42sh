@@ -1,11 +1,11 @@
 /*
-1;2802;0c1;2802;0c** get_next_line.c for get_next_line in ~/rendu/ELEM/CPE_2014_get_next_line
+** get_next_line.c for get_next_line in ~/rendu/ELEM/CPE_2014_get_next_line
 ** 
 ** Made by Chloe  Cano
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Mon Nov 17 11:15:36 2014
-** Last update Thu May 14 18:51:42 2015 Vertigo
+** Last update Sun May 17 17:29:15 2015 Vertigo
 */
 
 #include <get_next_line.h>
@@ -108,12 +108,13 @@ char		*concat_glst(t_glst **lst, t_glst *s_eol, ptrdiff_t off)
 
 char		*get_next_line(const int fd)
 {
-  t_glst	**fd_lst = NULL;
+  t_glst	**fd_lst;
   t_glst	*lst;
   t_glst	*s_eol;
   ptrdiff_t	off;
   char		*line;
 
+  fd_lst = NULL;
   if (!(fd_lst = get_fd_tab(fd)) < 0)
     return (NULL);
   lst = fd_lst[fd];

@@ -5,7 +5,7 @@
 ** Login   <king_j@epitech.net>
 **
 ** Started on  Thu May 14 04:57:45 2015 Jimmy KING
-** Last update Thu May 14 17:44:14 2015 Jimmy KING
+** Last update Sun May 17 17:36:40 2015 Vertigo
 */
 
 #include "project.h"
@@ -31,7 +31,6 @@ char    *str_ass(char *dest, char *src, char *src2)
   dest[n + i] = '\0';
   return (dest);
 }
-
 
 /*
 ** Generate environment tab

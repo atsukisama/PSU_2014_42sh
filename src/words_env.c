@@ -5,7 +5,7 @@
 ** Login   <king_j@epitech.net>
 **
 ** Started on  Wed May 13 23:35:04 2015 Jimmy KING
-** Last update Thu May 14 18:23:54 2015 Vertigo
+** Last update Sun May 17 17:38:16 2015 Vertigo
 */
 
 #include <stdlib.h>
@@ -35,7 +35,6 @@ int	we_count(char *str)
     }
   return (count);
 }
-
 
 /*
 ** Get the lenght of a env var in a string

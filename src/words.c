@@ -5,7 +5,7 @@
 ** Login   <king_j@epitech.net>
 **
 ** Started on  Wed May 13 21:39:18 2015 Jimmy KING
-** Last update Fri May 15 09:08:27 2015 Vertigo
+** Last update Sun May 17 17:42:56 2015 Vertigo
 */
 
 #include "project.h"
@@ -74,7 +74,6 @@ int	words_lenght(char *str, int word, char *seps)
     }
   return (lenght);
 }
-
 
 /*
 ** Get a word in a string

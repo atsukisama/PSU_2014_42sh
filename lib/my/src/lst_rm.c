@@ -5,11 +5,11 @@
 ** Login   <k6@epitech.net>
 ** 
 ** Started on  Sun Nov 30 17:40:36 2014 Cano Chloe
-** Last update Sun Mar  8 05:37:05 2015 Cano Chloe
+** Last update Sun May 17 17:30:40 2015 Vertigo
 */
 #include <my.h>
 
-void			lst_rm(t_lst **lst, t_lst *p)
+void	lst_rm(t_lst **lst, t_lst *p)
 {
   if (p->prev)
     p->prev->next = p->next;

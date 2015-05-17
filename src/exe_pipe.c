@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Fri May 15 10:38:48 2015 
-** Last update Fri May 15 11:18:42 2015 
+** Last update Sun May 17 17:38:59 2015 Vertigo
 */
 #include <mysh.h>
 #include <sys/types.h>
@@ -24,7 +24,6 @@ int		exe_pipe_right(t_ast *ast, t_mysh *sh, int *pfd)
       sh->exe_ft[ast->type](ast, sh);
       if (dup2(fd, 0) < 0)
 	return (-1);
-      /* can_set(sh->term) */
       return (0);
     }
   return (-1);

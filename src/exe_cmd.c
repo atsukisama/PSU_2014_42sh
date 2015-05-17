@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Fri May 15 06:14:14 2015 
-** Last update Fri May 15 17:37:44 2015 
+** Last update Sun May 17 17:38:05 2015 Vertigo
 */
 #include <mysh.h>
 #include <sys/wait.h>
@@ -108,7 +108,6 @@ int		exe_abs(char *cmd, char **arv, t_mysh *sh)
     {
       if (!pid)
 	{
-	  /*	  can_set(sh->tsave);*/
 	  execve(cmd, arv, env);
 	  write(2, "failed to execute command\n", 26);
 	  exit(126);
@@ -122,7 +121,6 @@ int		exe_abs(char *cmd, char **arv, t_mysh *sh)
     }
   else
     status = -1;
-  /*  can_set(sh->term);*/
   free(env);
   return (status);
 }

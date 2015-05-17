@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Sun Nov 23 22:49:44 2014
-** Last update Thu May 14 18:53:51 2015 Vertigo
+** Last update Sun May 17 17:28:34 2015 Vertigo
 */
 
 #include <get_next_line.h>
@@ -31,7 +31,7 @@ t_glst		**get_fd_tab(const int fd)
 {
   static t_glst	**s_lst;
   ssize_t	idx;
-  t_glst		**tmp;
+  t_glst	**tmp;
 
   if (!(s_lst = init_fd_tab(s_lst, fd)))
     return (NULL);

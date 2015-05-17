@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Mon May  4 06:17:13 2015 
-** Last update Fri May 15 13:33:04 2015 
+** Last update Sun May 17 17:22:05 2015 Vertigo
 */
 
 #ifndef LEXER_H_

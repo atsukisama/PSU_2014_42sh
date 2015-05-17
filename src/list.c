@@ -5,11 +5,11 @@
 ** Login   <king_j@epitech.net>
 **
 ** Started on  Wed May 13 21:14:10 2015 Jimmy KING
-** Last update Sun May 17 17:08:34 2015 Vertigo
+** Last update Sun May 17 17:33:44 2015 Vertigo
 */
 
-#include "project.h"
 #include <my.h>
+#include <project.h>
 
 /*
 ** Create and initialize a new linked list (type: t_list)

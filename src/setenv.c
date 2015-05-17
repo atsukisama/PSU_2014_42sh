@@ -5,7 +5,7 @@
 ** Login   <nicolas.rusig@epitech.eu>
 ** 
 ** Started on  Thu May 14 11:50:32 2015 rusig_n
-** Last update Thu May 14 11:50:32 2015 rusig_n
+** Last update Sun May 17 17:42:02 2015 Vertigo
 */
 
 #include <stdlib.h>
@@ -35,7 +35,8 @@ char	*add_egale(char *var)
 int		my_setenv(t_list *list, char **cmd)
 {
   if (cmd[1] == NULL)
-    return (my_puterror("usage: setenv [key] [content] or setenv [key] \n", -1));
+    return (my_puterror("usage: setenv [key] [content] or setenv [key] \n",
+			-1));
   if (cmd[2] == NULL)
     env_set(list, cmd[1], "");
   else

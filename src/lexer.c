@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Mon May  4 06:14:56 2015
-** Last update Fri May 15 19:53:18 2015 
+** Last update Sun May 17 17:39:34 2015 Vertigo
 */
 #include <parser.h>
 #include <stdio.h>
@@ -94,19 +94,3 @@ t_lex		*lexer(char *line)
     return (NULL);
   return (lex);
 }
-
-/*int		main(int argc, char **argv)
-{
-  t_lex		*lex;
-  t_ast         *ast;
-
-  if (argc == 2)
-    {
-      if (!(lex = lexer(argv[1])))
-	return (0);
-      if (!(ast = parse_init(lex)))
-	return (0);
-      //      free_lex(lex);
-    }
-  return (-1);
-}*/
