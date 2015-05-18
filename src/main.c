@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 09:45:35 2015 Vertigo
-** Last update Fri May 15 17:18:09 2015 
+** Last update Mon May 18 13:52:51 2015 
 */
 
 #include <sys/stat.h>
@@ -37,7 +37,7 @@ int	init_sh(t_mysh *sh, char **env)
   if (access(HISTORY_FILE, R_OK) == 0)
     load_history(sh->history);
   env_collect(env, sh->env_list);
-  if (!(sh->tsave = can_on()))
+  if (!(sh->tsave = can_on(&sh->term)))
     return (-1);
   return (0);
 }

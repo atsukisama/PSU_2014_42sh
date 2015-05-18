@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Fri May 15 06:14:14 2015 
-** Last update Sun May 17 19:08:26 2015 Vertigo
+** Last update Mon May 18 13:57:35 2015 
 */
 #include <mysh.h>
 #include <sys/wait.h>
@@ -108,6 +108,7 @@ int		exe_abs(char *cmd, char **arv, t_mysh *sh)
     {
       if (!pid)
 	{
+	  can_set(sh->tsave);
 	  execve(cmd, arv, env);
 	  write(2, "failed to execute command\n", 26);
 	  exit(126);
@@ -118,6 +119,7 @@ int		exe_abs(char *cmd, char **arv, t_mysh *sh)
 	    status = exit_status(status, sh);
 	  status = exit_status(status, sh);
 	}
+      can_set(sh->term);
     }
   else
     status = -1;

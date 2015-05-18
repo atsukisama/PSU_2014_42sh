@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 09:57:43 2015 Vertigo
-** Last update Sun May 17 17:57:48 2015 Vertigo
+** Last update Mon May 18 14:00:22 2015 
 */
 
 #ifndef MYSH_H_
@@ -50,7 +50,7 @@ void			clear_screen(t_mysh *);
 void			my_exit(t_mysh *, int, char *, int *);
 void			list_goto_root_hist(t_mysh *);
 int			save_history(t_list *);
-struct termios		*can_on();
+struct termios		*can_on(struct termios **term);
 int			can_set(struct termios *term);
 int			exe_cmd(t_ast *ast, t_mysh *sh);
 int			exe_and(t_ast *ast, t_mysh *sh);
