@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Fri May 15 14:36:48 2015 Vertigo
-** Last update Sun May 17 17:53:22 2015 Vertigo
+** Last update Tue May 19 22:19:33 2015 
 */
 
 #include <unistd.h>
@@ -13,6 +13,28 @@
 #include <fcntl.h>
 #include <parser.h>
 #include <mysh.h>
+#include <stdio.h>
+
+int		open_failure(char *file, int flags)
+{
+  struct stat	s_stat;
+
+  if (access(file, F_OK))
+    {
+      if (flags & O_TRUNC)
+	fprintf(stderr, "42sh: %s: cannot create file\n", file);
+      else
+	fprintf(stderr, "42sh: %s: no such file or directory\n", file);
+    }
+  else if ((flags & O_WRONLY && access(file, W_OK))
+	   || (!flags && access(file, R_OK)))
+    fprintf(stderr, "42sh: %s: permission denied\n", file);
+  else if (flags && !(stat(file, &s_stat)) && S_ISDIR(s_stat.st_mode))
+    fprintf(stderr, "42sh: %s: is a directory\n", file);
+  else
+    fprintf(stderr, "42sh: %s: undefined error at open\n", file);
+  return (-1);
+}
 
 int	do_red(int red_fd[2], int flags, t_ast *ast, t_mysh *sh)
 {
@@ -20,7 +42,7 @@ int	do_red(int red_fd[2], int flags, t_ast *ast, t_mysh *sh)
   int	save_fd[2];
 
   if ((fd = open(ast->left->content.file, flags, 0644)) < 0)
-    return (-1);
+    return (open_failure(ast->left->content.file, flags));
   save_fd[0] = dup(red_fd[0]);
   if (red_fd[1] > -1)
     {
@@ -56,7 +78,8 @@ int	exe_red(t_ast *ast, t_mysh *sh)
     swap_red(ast, red_fd);
   if (ast->content.red[0] == '<')
     {
-      flags = O_RDONLY | O_APPEND;
+
+      flags = O_RDONLY;
       red_fd[0] = 0;
     }
   else if (ast->content.red[0] == '>')

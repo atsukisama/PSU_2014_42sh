@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Tue May  5 10:13:00 2015
-** Last update Fri May 15 19:36:17 2015 
+** Last update Tue May 19 21:32:37 2015 
 */
 
 #ifndef PARSER_H_
@@ -53,8 +53,9 @@ void		lexer_rm_token(t_lex *lex, t_lex **lexems);
 t_ast		*parse_init(t_lex *lex);
 t_ast		*parse_expr(t_ast **ast, t_lex **lex);
 t_ast		*parse_instr(t_ast **ast, t_lex **lex);
-t_ast		*parse_cmd(t_ast **ast, t_lex **lex);
+t_ast		*parse_pipeline(t_ast **ast, t_lex **lex);
 t_ast		*parse_red(t_ast **ast, t_lex **lex);
+t_ast		*parse_cmd(t_ast **ast, t_lex **lex);
 t_ast		*parse_end(t_ast **ast, t_lex **lex);
 t_ast		*parse_err(t_ast **ast, t_lex **lex);
 

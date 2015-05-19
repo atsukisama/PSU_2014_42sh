@@ -1,11 +1,11 @@
 /*
-1;2802;0c** sh.c for my_sh functions in /home/gascon/Epitech/PSU/42tmp
+** sh.c for my_sh functions in /home/gascon/Epitech/PSU/42tmp
 **
 ** Made by Vertigo
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 10:21:40 2015 Vertigo
-** Last update Tue May 19 20:10:22 2015 
+** Last update Tue May 19 22:26:21 2015 
 */
 
 #include <stdio.h>
@@ -40,7 +40,8 @@ int	my_sh(t_mysh *sh)
 	  else
 	    sh->status = 0;
 	}
-      can_set(sh->term);
+      while (waitpid(-1, NULL, WNOHANG) != -1)
+	;
     }
   can_set(sh->tsave);
   return (sh->status);

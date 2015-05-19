@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Fri May 15 06:14:14 2015 
-** Last update Tue May 19 20:11:33 2015 
+** Last update Tue May 19 22:37:32 2015 
 */
 #include <mysh.h>
 #include <sys/wait.h>
@@ -21,20 +21,21 @@ int		is_exe(char *cmd, char err)
 
   if (access(cmd, F_OK | X_OK) || stat(cmd, &s_stat))
     {
-      write(2, "mysh: ", 6);
+      write(2, "42sh: ", 6);
+      my_putstr(cmd);
       if (access(cmd, F_OK) && err)
 	{
-	  write(2, "no such file or directory\n", 26);
+	  write(2, ": no such file or directory\n", 28);
 	  return (127);
 	}
       else if (access(cmd, X_OK) && err)
-	write(2, "permission denied\n", 18);
+	write(2, ": permission denied\n", 20);
       return (126);
     }
   else if (stat(cmd, &s_stat) || !S_ISREG(s_stat.st_mode))
     {
       if (err)
-	write(2, "mysh: is not a regular file\n", 28);
+	write(2, ": is not a regular file\n", 30);
       return (126);
     }
   return (0);
@@ -100,6 +101,7 @@ int		exe_abs(char *cmd, char **arv, t_mysh *sh)
   int		ret;
 
   get_exe(&cmd);
+  printf("%s\n", cmd);
   if ((ret = is_exe(cmd, 1)))
     return (ret);
   if (!(env = list_to_tab(sh->env_list)))
@@ -134,6 +136,7 @@ int		exe_path(char **cmd, t_mysh *sh)
   char		*p;
   char		*path_cpy;
 
+  printf("CMD: %s\n", cmd[0]);
   if ((path_list = get_node_by_key(sh->env_list, "PATH")))
     {
       path = path_list->content;
