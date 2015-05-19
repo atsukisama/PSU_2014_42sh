@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 09:45:35 2015 Vertigo
-** Last update Mon May 18 13:52:51 2015 
+** Last update Tue May 19 15:51:44 2015 Vertigo
 */
 
 #include <sys/stat.h>
@@ -32,6 +32,7 @@ void	load_history(t_list *history)
 int	init_sh(t_mysh *sh, char **env)
 {
   set_sig_msg(sh);
+  sh->prompt = strdup(":> ");
   sh->env_list = list_create();
   sh->history = list_create();
   if (access(HISTORY_FILE, R_OK) == 0)

@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 17:40:46 2015 Vertigo
-** Last update Tue May 19 15:36:39 2015 Vertigo
+** Last update Tue May 19 15:52:01 2015 Vertigo
 */
 
 #include <stdlib.h>
@@ -77,7 +77,7 @@ char	*get_line(t_mysh *sh)
   int	pos;
 
   pos = 0;
-  my_putstr(":> ");
+  my_putstr(sh->prompt);
   if (!(line = malloc(sizeof(*line))))
     return (NULL);
   line[0] = '\0';

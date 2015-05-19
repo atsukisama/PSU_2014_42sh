@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 09:57:43 2015 Vertigo
-** Last update Mon May 18 14:00:22 2015 
+** Last update Tue May 19 15:51:09 2015 Vertigo
 */
 
 #ifndef MYSH_H_
@@ -32,6 +32,7 @@ struct			s_mysh
   struct termios	*tsave;
   int			(*exe_ft[PA_TRM + 1])(t_ast *, t_mysh *);
   int			wait;
+  char			*prompt;
 };
 
 void			set_sig_msg(t_mysh *sh);
