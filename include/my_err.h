@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Fri Jan 30 18:42:39 2015
-** Last update Sun May 17 17:23:57 2015 Vertigo
+** Last update Wed May 13 09:54:41 2015 Vertigo
 */
 #ifndef MY_ERR_H_
 # define MY_ERR_H_
@@ -20,7 +20,7 @@ int			errno;
 # define CP(str, msg)			(my_strncpy(str, msg, MAX_ERRMSG))
 # define SET_ERRSTR(str, errno, msg)	(CP((str) + (errno) * MAX_ERRMSG, msg))
 
-typedef enum	e_errno_idx
+typedef enum		e_errno_idx
   {
     E_SUCCESS,
     E_OOM,
@@ -38,7 +38,7 @@ typedef enum	e_errno_idx
     E_PIPE,
     E_DUP,
     MAX_ERRNO
-  } 		t_errno_idx;
+  } t_errno_idx;
 
 void		my_perror(int my_errno, char *prog_name, char *msg);
 int		my_access(const char *path, int flags);

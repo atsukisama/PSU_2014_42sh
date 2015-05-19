@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 10:21:40 2015 Vertigo
-** Last update Fri May 15 18:26:31 2015 
+** Last update Tue May 19 09:47:31 2015 
 */
 
 #include <stdio.h>
@@ -39,6 +39,7 @@ int	my_sh(t_mysh *sh)
 	  else
 	    sh->status = 0;
 	}
+      can_set(sh->term);
     }
   can_set(sh->tsave);
   return (sh->status);

@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Fri May 15 06:14:14 2015 
-** Last update Mon May 18 13:57:35 2015 
+** Last update Tue May 19 09:47:44 2015 
 */
 #include <mysh.h>
 #include <sys/wait.h>
@@ -47,7 +47,7 @@ int		get_exe(char **cmd)
   memset(&s_glob, 0, sizeof(s_glob));
   if (!glob(cmd[0], 0, NULL, &s_glob))
     {
-      if (s_glob.gl_pathc)
+      if (s_glob.gl_pathc && *s_glob.gl_pathv[0])
 	{
 	  cmd[0] = my_strdup(s_glob.gl_pathv[0]);
 	  return (0);
@@ -100,6 +100,7 @@ int		exe_abs(char *cmd, char **arv, t_mysh *sh)
   int		ret;
 
   get_exe(&cmd);
+  fprintf(stderr, "%s\n", cmd);
   if ((ret = is_exe(cmd, 1)))
     return (ret);
   if (!(env = list_to_tab(sh->env_list)))
@@ -115,8 +116,9 @@ int		exe_abs(char *cmd, char **arv, t_mysh *sh)
 	}
       else if (sh->wait)
 	{
-	  while (waitpid(-1, &status, 0) != pid)
+	  while (waitpid(-1, &status, 0) != pid && fprintf(stderr, "%d\n", status))
 	    status = exit_status(status, sh);
+	  fprintf(stderr, "%d\n", status);
 	  status = exit_status(status, sh);
 	}
       can_set(sh->term);
