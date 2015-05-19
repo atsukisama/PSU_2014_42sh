@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Fri May 15 06:14:14 2015 
-** Last update Tue May 19 09:47:44 2015 
+** Last update Tue May 19 09:49:48 2015 
 */
 #include <mysh.h>
 #include <sys/wait.h>
@@ -100,7 +100,6 @@ int		exe_abs(char *cmd, char **arv, t_mysh *sh)
   int		ret;
 
   get_exe(&cmd);
-  fprintf(stderr, "%s\n", cmd);
   if ((ret = is_exe(cmd, 1)))
     return (ret);
   if (!(env = list_to_tab(sh->env_list)))
@@ -116,9 +115,8 @@ int		exe_abs(char *cmd, char **arv, t_mysh *sh)
 	}
       else if (sh->wait)
 	{
-	  while (waitpid(-1, &status, 0) != pid && fprintf(stderr, "%d\n", status))
+	  while (waitpid(-1, &status, 0) != pid)
 	    status = exit_status(status, sh);
-	  fprintf(stderr, "%d\n", status);
 	  status = exit_status(status, sh);
 	}
       can_set(sh->term);
