@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 17:40:46 2015 Vertigo
-** Last update Sun May 17 17:08:19 2015 Vertigo
+** Last update Tue May 19 15:36:39 2015 Vertigo
 */
 
 #include <stdlib.h>
@@ -18,15 +18,15 @@ void	display_line(char *new, char *old, int *pos, int mode)
   int	lim;
 
   i = -1;
+    lim = (my_strlen(old) - *pos) - 1;
   if (mode == 1)
     lim = (my_strlen(old) - *pos);
-  else
-    lim = (my_strlen(old) - *pos) - 1;
-  while (++i < my_strlen(old))
+  while (++i < *pos - 1)
     my_putstr("\b");
-  while (--i > -1)
+  i = -1;
+  while (++i > my_strlen(old))
     my_putchar(' ');
-  while (++i < my_strlen(old))
+  while (--i > -1)
     my_putstr("\b");
   my_putstr(new);
   i = -1;
