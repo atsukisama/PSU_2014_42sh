@@ -5,13 +5,13 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Fri May 15 10:38:48 2015 
-** Last update Sun May 17 17:38:59 2015 Vertigo
+** Last update Tue May 19 00:16:27 2015 
 */
 #include <mysh.h>
 #include <sys/types.h>
 #include <signal.h>
 
-int		exe_pipe_right(t_ast *ast, t_mysh *sh, int *pfd)
+int		exe_pipe_right(t_ast *ast, t_mysh *sh, int *pfd, t_job *job)
 {
   int		fd;
 
@@ -21,7 +21,7 @@ int		exe_pipe_right(t_ast *ast, t_mysh *sh, int *pfd)
     {
       if (dup2(pfd[0], 0) < 0)
 	return (-1);
-      sh->exe_ft[ast->type](ast, sh);
+      sh->exe_ft[ast->type](ast, sh, job);
       if (dup2(fd, 0) < 0)
 	return (-1);
       return (0);
@@ -29,16 +29,16 @@ int		exe_pipe_right(t_ast *ast, t_mysh *sh, int *pfd)
   return (-1);
 }
 
-void		exe_pipe_left(t_ast *ast, t_mysh *sh, int *pfd)
+void		exe_pipe_left(t_ast *ast, t_mysh *sh, int *pfd, t_job *job)
 {
   close(pfd[0]);
   if (dup2(pfd[1], 1) != -1)
-    exit(sh->exe_ft[ast->type](ast, sh));
+    exit(sh->exe_ft[ast->type](ast, sh, job));
   write(2, "42sh: error on dup2\n", 20);
-  exit(EXIT_FAILURE);
+  exit(-1);
 }
 
-int		exe_pipe(t_ast *ast, t_mysh *sh)
+int		exe_pipe(t_ast *ast, t_mysh *sh, t_job *job)
 {
   int		pfd[2];
   int		pid;
@@ -55,8 +55,8 @@ int		exe_pipe(t_ast *ast, t_mysh *sh)
       return (-1);
     }
   if (!pid)
-    exe_pipe_left(ast->left, sh, pfd);
-  else if (exe_pipe_right(ast->right, sh, pfd))
+    exe_pipe_left(ast->left, sh, pfd, job);
+  else if (exe_pipe_right(ast->right, sh, pfd, job))
     {
       kill(pid, SIGKILL);
       return (-1);

@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Tue May  5 11:48:42 2015 
-** Last update Tue May  5 11:48:51 2015 
+** Last update Mon May 18 21:32:28 2015 
 */
 #include <parser.h>
 
@@ -41,6 +41,8 @@ t_ast		*make_binary(t_ast **ast, t_lex **lex)
     }
   else if ((*lex)->type == LX_SEP)
     bin->type = PA_TRM;
+  else if ((*lex)->type == LX_AMP)
+    bin->type = PA_BG;
   else if ((*lex)->type >= LX_REDTO && (*lex)->type <= LX_REDI)
     bin->type = PA_RED;
   else

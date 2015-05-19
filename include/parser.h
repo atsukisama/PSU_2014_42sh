@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Tue May  5 10:13:00 2015
-** Last update Fri May 15 19:36:17 2015 
+** Last update Mon May 18 21:32:51 2015 
 */
 
 #ifndef PARSER_H_
@@ -29,7 +29,8 @@ typedef enum	e_parse
     PA_AND,
     PA_OR,
     PA_PIPE,
-    PA_TRM
+    PA_TRM,
+    PA_BG
   } t_e_parse;
 
 union		u_parse

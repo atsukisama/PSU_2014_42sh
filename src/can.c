@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 10:26:14 2015 Vertigo
-** Last update Mon May 18 14:01:23 2015 
+** Last update Tue May 19 00:13:53 2015 
 */
 
 #include <termios.h>
@@ -23,7 +23,7 @@ struct termios		*can_on(struct termios **attr)
     return (NULL);
   if (tcgetattr(0, tsave) == -1)
     return (NULL);
-  my_memcpy(*attr, tsave, sizeof(*attr));
+  my_memcpy(*attr, tsave, sizeof(**attr));
   (*attr)->c_lflag &= ~ICANON;
   (*attr)->c_lflag &= ~ECHO;
   (*attr)->c_cc[VTIME] = 0;

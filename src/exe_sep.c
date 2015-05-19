@@ -5,31 +5,48 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Fri May 15 09:38:50 2015 
-** Last update Fri May 15 09:49:11 2015 
+** Last update Mon May 18 21:35:02 2015 
 */
 #include <mysh.h>
 
-int		exe_and(t_ast *ast, t_mysh *sh)
+int		exe_and(t_ast *ast, t_mysh *sh, t_job *job)
 {
-  if (!(sh->status = sh->exe_ft[ast->left->type](ast->left, sh)))
-    sh->status = sh->exe_ft[ast->right->type](ast->right, sh);
+  if (!(sh->status = sh->exe_ft[ast->left->type](ast->left, sh, job)))
+    sh->status = sh->exe_ft[ast->right->type](ast->right, sh, job);
   return (sh->status);
 }
 
-int		exe_or(t_ast *ast, t_mysh *sh)
+int		exe_or(t_ast *ast, t_mysh *sh, t_job *job)
 {
-  if ((sh->status = sh->exe_ft[ast->left->type](ast->left, sh)))
-    sh->status = sh->exe_ft[ast->right->type](ast->right, sh);
+  if ((sh->status = sh->exe_ft[ast->left->type](ast->left, sh, job)))
+    sh->status = sh->exe_ft[ast->right->type](ast->right, sh, job);
   return (sh->status);
 }
 
-int		exe_trm(t_ast *ast, t_mysh *sh)
+int		exe_trm(t_ast *ast, t_mysh *sh, t_job *job)
 {
   if (ast->left)
     {
-      sh->status = sh->exe_ft[ast->left->type](ast->left, sh);
+      if (!(job = my_memalloc(sizeof(*job))))
+	return (-2);
+      job->status = JOB_FG;
+      sh->status = sh->exe_ft[ast->left->type](ast->left, sh, job);
       if (ast->right)
-	sh->status = sh->exe_ft[ast->right->type](ast->right, sh);
+	sh->status = sh->exe_ft[ast->right->type](ast->right, sh, job);
+    }
+  return (sh->status);
+}
+
+int		exe_bg(t_ast *ast, t_mysh *sh, t_job *job)
+{
+  if (ast->left)
+    {
+      if (!(job = my_memalloc(sizeof(*job))))
+	return (-2);
+      job->status = JOB_BG;
+      sh->status = sh->exe_ft[ast->left->type](ast->left, sh, job);
+      if (ast->right)
+	sh->status = sh->exe_ft[ast->right->type](ast->right, sh, job);
     }
   return (sh->status);
 }

@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 09:45:35 2015 Vertigo
-** Last update Mon May 18 13:52:51 2015 
+** Last update Mon May 18 23:34:45 2015 
 */
 
 #include <sys/stat.h>
@@ -29,8 +29,38 @@ void	load_history(t_list *history)
   close(fd);
 }
 
+int	control_term(t_mysh *sh)
+{
+  int	pgid;
+
+  if ((sh->is_tty = isatty(0)))
+    {
+      while (tcgetpgrp(0) != (pgid = getpgrp()))
+	kill(-pgid, SIGTTIN);
+      signal(SIGQUIT, SIG_IGN);
+      signal(SIGINT, SIG_IGN);
+      signal(SIGSTOP, SIG_IGN);
+      signal(SIGTTIN, SIG_IGN);
+      signal(SIGTTOU, SIG_IGN);
+      sh->pgid = getpid();
+      if (setpgid(sh->pgid, sh->pgid))
+	{
+	  write(2, "42sh: failed to set process group\n", 34);
+	  return (-1);
+	}
+      if (tcsetpgrp(0, sh->pgid))
+	{
+	  write(2, "42sh: failed to become foreground process\n", 42);
+	  return (-1);
+       	}
+    }
+  return (0);
+}
+
 int	init_sh(t_mysh *sh, char **env)
 {
+  /*  if (control_term(sh))
+      return (-1); */
   set_sig_msg(sh);
   sh->env_list = list_create();
   sh->history = list_create();
