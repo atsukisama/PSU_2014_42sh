@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Fri May 15 10:38:48 2015 
-** Last update Sun May 17 17:38:59 2015 Vertigo
+** Last update Tue May 19 19:54:11 2015 
 */
 #include <mysh.h>
 #include <sys/types.h>
@@ -26,7 +26,7 @@ int		exe_pipe_right(t_ast *ast, t_mysh *sh, int *pfd)
 	return (-1);
       return (0);
     }
-  return (-1);
+  return (sh->status);
 }
 
 void		exe_pipe_left(t_ast *ast, t_mysh *sh, int *pfd)

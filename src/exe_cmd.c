@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Fri May 15 06:14:14 2015 
-** Last update Tue May 19 09:49:48 2015 
+** Last update Tue May 19 20:11:33 2015 
 */
 #include <mysh.h>
 #include <sys/wait.h>
@@ -113,13 +113,12 @@ int		exe_abs(char *cmd, char **arv, t_mysh *sh)
 	  write(2, "failed to execute command\n", 26);
 	  exit(126);
 	}
-      else if (sh->wait)
+      if (sh->wait)
 	{
 	  while (waitpid(-1, &status, 0) != pid)
 	    status = exit_status(status, sh);
 	  status = exit_status(status, sh);
 	}
-      can_set(sh->term);
     }
   else
     status = -1;
@@ -195,5 +194,8 @@ int		exe_cmd(t_ast *ast, t_mysh *sh)
     }
   free(ast->content.cmd);
   free(ast);
+  while (waitpid(-1, NULL, WNOHANG) > -1)
+    ;
+  can_set(sh->term);
   return (sh->status);
 }

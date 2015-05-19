@@ -1,15 +1,16 @@
 /*
-** sh.c for my_sh functions in /home/gascon/Epitech/PSU/42tmp
+1;2802;0c** sh.c for my_sh functions in /home/gascon/Epitech/PSU/42tmp
 **
 ** Made by Vertigo
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 10:21:40 2015 Vertigo
-** Last update Tue May 19 09:47:31 2015 
+** Last update Tue May 19 20:10:22 2015 
 */
 
 #include <stdio.h>
 #include <mysh.h>
+#include <sys/wait.h>
 
 void		init_ast(t_mysh *sh)
 {
