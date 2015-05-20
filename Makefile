@@ -5,7 +5,7 @@
 ## Login   <cano_c@epitech.net>
 ## 
 ## Started on  Mon May  4 07:03:45 2015 
-## Last update Wed May 20 12:06:38 2015 Vertigo
+## Last update Wed May 20 19:20:27 2015 
 ## Last update Fri May 15 06:36:24 2015 
 ##
 
@@ -20,7 +20,8 @@ SRCS	= lexer.c lexer_common.c lexer_red.c lexer_pct.c lexer_lst.c \
 	list.c environement_2.c exit.c arrows.c \
 	my_unsetenv.c setenv.c my_cd.c bult.c \
         basic.c my_echo.c list_2.c my_putnbr.c \
-	exe_cmd.c list_goto.c exe_sep.c exe_pipe.c exe_red.c
+	exe_cmd.c list_goto.c exe_sep.c exe_pipe.c exe_red.c \
+	cmd_utils.c handle_proc.c
 
 OBJS	= $(addprefix obj/, $(notdir $(SRCS:.c=.o)))
 
