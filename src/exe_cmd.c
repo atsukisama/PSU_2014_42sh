@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Fri May 15 06:14:14 2015 
-** Last update Tue May 19 22:37:32 2015 
+** Last update Wed May 20 18:49:35 2015 
 */
 #include <mysh.h>
 #include <sys/wait.h>
@@ -21,21 +21,19 @@ int		is_exe(char *cmd, char err)
 
   if (access(cmd, F_OK | X_OK) || stat(cmd, &s_stat))
     {
-      write(2, "42sh: ", 6);
-      my_putstr(cmd);
       if (access(cmd, F_OK) && err)
 	{
-	  write(2, ": no such file or directory\n", 28);
+	  fprintf(stderr, "42sh: %s: no such file or directory\n", cmd);
 	  return (127);
 	}
       else if (access(cmd, X_OK) && err)
-	write(2, ": permission denied\n", 20);
+	fprintf(stderr, "42sh: %s: permission denied\n", cmd);
       return (126);
     }
-  else if (stat(cmd, &s_stat) || !S_ISREG(s_stat.st_mode))
+  else if (stat(cmd, &s_stat) || S_ISDIR(s_stat.st_mode))
     {
       if (err)
-	write(2, ": is not a regular file\n", 30);
+	fprintf(stderr, "42sh: %s: is a directory\n", cmd);
       return (126);
     }
   return (0);
@@ -101,8 +99,7 @@ int		exe_abs(char *cmd, char **arv, t_mysh *sh)
   int		ret;
 
   get_exe(&cmd);
-  printf("%s\n", cmd);
-  if ((ret = is_exe(cmd, 1)))
+  if ((ret = is_exe(arv[0], 1)))
     return (ret);
   if (!(env = list_to_tab(sh->env_list)))
     return (-1);
@@ -112,7 +109,7 @@ int		exe_abs(char *cmd, char **arv, t_mysh *sh)
 	{
 	  can_set(sh->tsave);
 	  execve(cmd, arv, env);
-	  write(2, "failed to execute command\n", 26);
+	  write(2, "42sh: failed to execute command\n", 32);
 	  exit(126);
 	}
       if (sh->wait)
@@ -136,7 +133,6 @@ int		exe_path(char **cmd, t_mysh *sh)
   char		*p;
   char		*path_cpy;
 
-  printf("CMD: %s\n", cmd[0]);
   if ((path_list = get_node_by_key(sh->env_list, "PATH")))
     {
       path = path_list->content;
