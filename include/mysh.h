@@ -5,22 +5,23 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 09:57:43 2015 Vertigo
-** Last update Wed May 20 19:22:57 2015 
+** Last update Wed May 20 19:36:31 2015 Cano Chloe
 */
 
 #ifndef MYSH_H_
 # define MYSH_H_
 
-# define HISTORY_FILE	".42sh_history"
-
-# include "list.h"
-# include "parser.h"
 # include <signal.h>
 # include <glob.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
 # include <string.h>
 # include <stdio.h>
+
+# include "list.h"
+# include "parser.h"
+
+# define HISTORY_FILE	".42sh_history"
 
 typedef struct s_mysh	t_mysh;
 
@@ -64,7 +65,6 @@ int			forward_cursor(t_mysh *, int);
 void			clear_plus(char **, t_mysh *, int);
 void			display_line_hist(char *tab[2], int *, int, t_mysh *);
 
-
 /*
 ** termcaps
 */
@@ -102,7 +102,6 @@ int		        my_history(t_list *history);
 int	                my_seek_history(t_list *history, char *val);
 int			my_setenv(t_list *list, char **cmd);
 
-
 /*
 ** MISC
 */
@@ -110,6 +109,5 @@ int			my_setenv(t_list *list, char **cmd);
 char			*my_strchr(char *, int);
 int			my_puterror(char *, int);
 void			malloc_error();
-
 
 #endif /* !MYSH_H_ */
