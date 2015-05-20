@@ -5,7 +5,7 @@
 ## Login   <cano_c@epitech.net>
 ## 
 ## Started on  Mon May  4 07:03:45 2015 
-## Last update Sun May 17 19:46:07 2015 Vertigo
+## Last update Wed May 20 12:06:38 2015 Vertigo
 ## Last update Fri May 15 06:36:24 2015 
 ##
 
@@ -14,7 +14,7 @@ NAME	= 42sh
 SRCS	= lexer.c lexer_common.c lexer_red.c lexer_pct.c lexer_lst.c \
 	make_binary.c make_leaf.c parse_cmd.c parse_expr.c \
 	parse_instr.c parser.c parse_red.c parser_get_token.c \
-	main.c error.c sh.c can.c get_line.c \
+	main.c error.c sh.c can.c get_line.c disp.c cursor.c \
 	char_isprintable.c key.c clear_screen.c \
 	environement.c string.c utils.c words.c words_env.c \
 	list.c environement_2.c exit.c arrows.c \

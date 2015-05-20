@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 21:57:58 2015 Vertigo
-** Last update Fri May 15 12:24:59 2015 
+** Last update Wed May 20 12:01:20 2015 Vertigo
 */
 
 #include <stdlib.h>
@@ -21,9 +21,10 @@ void	remove_letter(char *s, int nb)
     }
 }
 
-void	delete_char(char *line, int *pos, char c)
+void	delete_char(char *line, int *pos, char c, t_mysh *sh)
 {
   char	*old;
+  char	*tab[2];
   int	nb;
 
   if (c == 127)
@@ -37,7 +38,11 @@ void	delete_char(char *line, int *pos, char c)
   remove_letter(line, nb);
   if (c != 127)
     *pos = *pos + 1;
-  display_line(line, old, pos, 2);
+  else if (c == 127)
+    back_cursor(sh, *pos);
+  tab[0] = line;
+  tab[1] = old;
+  display_line(tab, *pos, 2, sh);
   *pos = *pos - 1;
   free(old);
 }
@@ -65,7 +70,7 @@ int	particular_key(char buf[4], int *pos, t_mysh *sh, char **line)
 
   init_arrows(arrow);
   if ((buf[0] == 27 && buf[1] == 91 && buf[2] == 51) || buf[0] == 127)
-    delete_char(*line, pos, buf[0]);
+    delete_char(*line, pos, buf[0], sh);
   else if (buf[0] == 27 && buf[1] == 91 && (buf[2] >= 65 && buf[2] <= 68))
     arrow[buf[2] - 65](pos, line, sh);
   else if (buf[0] == 12)
