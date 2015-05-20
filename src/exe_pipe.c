@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Fri May 15 10:38:48 2015 
-** Last update Tue May 19 21:31:31 2015 
+** Last update Wed May 20 19:33:23 2015 Cano Chloe
 */
 #include <mysh.h>
 #include <sys/types.h>
@@ -13,21 +13,14 @@
 #include <signal.h>
 #include <stdio.h>
 
-/*int **select**(int nfds, fd_set *restrict readfds,
-	       fd_set *restrict writefds, **fd_set *restrict errorfds**,
-	       struct timeval *restrict timeout);*/
-
 int		exe_pipe_right(t_ast *ast, t_mysh *sh, int *pfd)
 {
   int		fd;
-  fd_set	readset;
 
   sh->wait = 1;
   close(pfd[1]);
   if ((fd = dup(0)) != -1)
     {
-      FD_ZERO(&readset);
-      FD_SET(pfd[0], &readset);
       if (dup2(pfd[0], 0) < 0)
 	return (-1);
       sh->exe_ft[ast->type](ast, sh);

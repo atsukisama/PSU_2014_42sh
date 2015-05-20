@@ -5,7 +5,7 @@
 ** Login   <nicolas.rusig@epitech.eu>
 ** 
 ** Started on  Thu May 14 12:29:31 2015 rusig_n
-** Last update Thu May 14 12:29:31 2015 rusig_n
+** Last update Wed May 20 19:34:23 2015 Cano Chloe
 */
 
 # include       <sys/wait.h>
@@ -22,7 +22,7 @@ char		*get_cur_pwd()
 
   if (getcwd(pwd, sizeof(pwd)) == NULL)
     {
-      fprintf(stderr,"getcwd() error");
+      fprintf(stderr, "getcwd() error");
       return (NULL);
     }
   res = pwd;

@@ -5,7 +5,7 @@
 ** Login   <king_j@epitech.net>
 **
 ** Started on  Wed May 13 21:35:35 2015 Jimmy KING
-** Last update Sun May 17 17:32:50 2015 Vertigo
+** Last update Wed May 20 19:32:47 2015 Cano Chloe
 */
 
 #include "project.h"
@@ -35,7 +35,7 @@ void		env_show(t_list *list)
   tmp = list->next;
   while (tmp != list)
     {
-      printf("%s=%s\n",tmp->key, tmp->content);
+      printf("%s=%s\n", tmp->key, tmp->content);
       tmp = tmp->next;
     }
 }

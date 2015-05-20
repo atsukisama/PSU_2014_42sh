@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Wed May 20 19:05:12 2015 
-** Last update Wed May 20 19:13:20 2015 
+** Last update Wed May 20 19:32:10 2015 Cano Chloe
 */
 #include <mysh.h>
 
@@ -60,9 +60,10 @@ void		set_sig_msg(t_mysh *sh)
   my_strncpy(sh->sig_msg[SIGILL], "Illegal instruction", NAME_MAX);
   my_strncpy(sh->sig_msg[SIGABRT], "Abort signal from abort(3)", NAME_MAX);
   my_strncpy(sh->sig_msg[SIGFPE], "Floating point exception", NAME_MAX);
-  my_strncpy(sh->sig_msg[SIGSEGV], "Invalid memory reference (SEGV)", NAME_MAX);
-  my_strncpy(sh->sig_msg[SIGPIPE], "Broken pipe: write to pipe with no readers",
+  my_strncpy(sh->sig_msg[SIGSEGV], "Invalid memory reference (SEGV)", \
 	     NAME_MAX);
+  my_strncpy(sh->sig_msg[SIGPIPE], "Broken pipe: write to pipe with no \
+readers", NAME_MAX);
   my_strncpy(sh->sig_msg[SIGBUS], "Bus error (bad memory access)", NAME_MAX);
   my_strncpy(sh->sig_msg[SIGBUS], "Bus error (bad memory access)", NAME_MAX);
   my_strncpy(sh->sig_msg[SIGSYS], "Bad argument to routine", NAME_MAX);
