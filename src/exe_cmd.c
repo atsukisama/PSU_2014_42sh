@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Fri May 15 06:14:14 2015 
-** Last update Wed May 20 18:49:35 2015 
+** Last update Wed May 20 18:55:12 2015 
 */
 #include <mysh.h>
 #include <sys/wait.h>
@@ -99,7 +99,7 @@ int		exe_abs(char *cmd, char **arv, t_mysh *sh)
   int		ret;
 
   get_exe(&cmd);
-  if ((ret = is_exe(arv[0], 1)))
+  if ((ret = is_exe(cmd, 1)))
     return (ret);
   if (!(env = list_to_tab(sh->env_list)))
     return (-1);
