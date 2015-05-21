@@ -5,25 +5,29 @@
 ## Login   <cano_c@epitech.net>
 ## 
 ## Started on  Mon May  4 07:03:45 2015 
-## Last update Wed May 20 19:20:27 2015 
-## Last update Fri May 15 06:36:24 2015 
+## Last update Thu May 21 14:31:35 2015 Vertigo
 ##
 
 NAME	= 42sh
 
-SRCS	= lexer.c lexer_common.c lexer_red.c lexer_pct.c lexer_lst.c \
-	make_binary.c make_leaf.c parse_cmd.c parse_expr.c \
-	parse_instr.c parser.c parse_red.c parser_get_token.c \
-	main.c error.c sh.c can.c get_line.c disp.c cursor.c \
-	char_isprintable.c key.c clear_screen.c \
-	environement.c string.c utils.c words.c words_env.c \
-	list.c environement_2.c exit.c arrows.c \
-	my_unsetenv.c setenv.c my_cd.c bult.c \
-        basic.c my_echo.c list_2.c my_putnbr.c \
-	exe_cmd.c list_goto.c exe_sep.c exe_pipe.c exe_red.c \
-	cmd_utils.c handle_proc.c
+SRCS	= lexer/lexer.c lexer/lexer_common.c lexer/lexer_red.c \
+	lexer/lexer_pct.c lexer/lexer_lst.c \
+	basics/make_binary.c basics/make_leaf.c basics/cmd_utils.c \
+	basics/error.c basics/sh.c basics/basic.c \
+	parser/parse_cmd.c parser/parse_expr.c \
+	parser/parse_instr.c parser/parser.c parser/parse_red.c \
+	parser/parser_get_token.c \
+	main.c string.c utils.c words.c words_env.c my_putnbr.c handle_proc.c \
+	termcaps/can.c termcaps/get_line.c termcaps/disp.c termcaps/cursor.c \
+	termcaps/char_isprintable.c termcaps/key.c termcaps/clear_screen.c \
+	termcaps/arrows.c \
+	builtins/environement.c builtins/environement_2.c builtins/my_unsetenv.c \
+	builtins/setenv.c builtins/my_cd.c builtins/bult.c builtins/my_echo.c \
+	builtins/exit.c \
+	list/list.c list/list_2.c list/list_goto.c \
+	exe/exe_cmd.c exe/exe_sep.c exe/exe_pipe.c exe/exe_red.c
 
-OBJS	= $(addprefix obj/, $(notdir $(SRCS:.c=.o)))
+OBJS	= $(addprefix obj/, $(SRCS:.c=.o))
 
 CFLAGS	+= -Wall -Wextra -ggdb
 
@@ -35,6 +39,13 @@ include/my.h: lib/my/include/my.h
 
 obj/:
 	mkdir obj/
+	mkdir obj/termcaps/
+	mkdir obj/builtins/
+	mkdir obj/list/
+	mkdir obj/lexer/
+	mkdir obj/parser/
+	mkdir obj/exe/
+	mkdir obj/basics/
 
 $(NAME): $(OBJS)
 	make -C lib/my
