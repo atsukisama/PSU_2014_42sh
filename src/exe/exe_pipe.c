@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Fri May 15 10:38:48 2015 
-** Last update Wed May 20 19:33:23 2015 Cano Chloe
+** Last update Fri May 22 20:17:18 2015 
 */
 #include <mysh.h>
 #include <sys/types.h>
@@ -35,7 +35,10 @@ void		exe_pipe_left(t_ast *ast, t_mysh *sh, int *pfd)
 {
   close(pfd[0]);
   if (dup2(pfd[1], 1) != -1)
-    exit(sh->exe_ft[ast->type](ast, sh));
+    {
+      sh->exe_ft[ast->type](ast, sh);
+      exit(sh->status);
+    }
   write(2, "42sh: error on dup2\n", 20);
   exit(EXIT_FAILURE);
 }
@@ -63,5 +66,5 @@ int		exe_pipe(t_ast *ast, t_mysh *sh)
       kill(pid, SIGKILL);
       return (-1);
     }
-  return (0);
+  return (sh->status);
 }
