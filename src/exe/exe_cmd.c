@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Fri May 15 06:14:14 2015 
-** Last update Wed May 20 19:21:50 2015 
+** Last update Fri May 22 18:53:51 2015 
 */
 #include <mysh.h>
 #include <sys/wait.h>
@@ -31,7 +31,7 @@ int		exe_abs(char *cmd, char **arv, t_mysh *sh)
     {
       if (!pid)
 	{
-	  can_set(sh->tsave);
+	  /*	  init_proc(sh);*/
 	  execve(cmd, arv, env);
 	  write(2, "42sh: failed to execute command\n", 32);
 	  exit(126);
@@ -114,6 +114,10 @@ int		exe_cmd(t_ast *ast, t_mysh *sh)
   free(ast);
   while (waitpid(-1, NULL, WNOHANG) > -1)
     ;
-  can_set(sh->term);
+  if (sh->is_tty && sh->wait)
+    {
+      /*      tcsetpgrp(0, sh->pgid);*/
+      can_set(sh->term);
+    }
   return (sh->status);
 }

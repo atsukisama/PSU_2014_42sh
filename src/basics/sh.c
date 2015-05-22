@@ -5,12 +5,13 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 10:21:40 2015 Vertigo
-** Last update Tue May 19 22:26:21 2015 
+** Last update Fri May 22 19:08:19 2015 
 */
 
 #include <stdio.h>
 #include <mysh.h>
 #include <sys/wait.h>
+#include <get_next_line.h>
 
 void		init_ast(t_mysh *sh)
 {
@@ -31,7 +32,8 @@ int	my_sh(t_mysh *sh)
   sh->status = 0;
   sh->wait = 1;
   init_ast(sh);
-  while ((line = get_line(sh)))
+  while ((sh->is_tty && (line = get_line(sh)))
+	 || (!sh->is_tty && (line = get_next_line(0))))
     {
       if ((lex = lexer(line)))
 	{
@@ -43,6 +45,7 @@ int	my_sh(t_mysh *sh)
       while (waitpid(-1, NULL, WNOHANG) != -1)
 	;
     }
-  can_set(sh->tsave);
+  if (sh->is_tty)
+    can_set(sh->tsave);
   return (sh->status);
 }

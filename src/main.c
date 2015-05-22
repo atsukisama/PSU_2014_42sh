@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 09:45:35 2015 Vertigo
-** Last update Tue May 19 15:51:44 2015 Vertigo
+** Last update Fri May 22 18:52:22 2015 
 */
 
 #include <sys/stat.h>
@@ -31,6 +31,9 @@ void	load_history(t_list *history)
 
 int	init_sh(t_mysh *sh, char **env)
 {
+  if ((sh->is_tty = isatty(0)))
+    if (!(sh->tsave = can_on(&sh->term)))
+      return (-1);
   set_sig_msg(sh);
   sh->prompt = strdup(":> ");
   sh->env_list = list_create();
@@ -38,8 +41,6 @@ int	init_sh(t_mysh *sh, char **env)
   if (access(HISTORY_FILE, R_OK) == 0)
     load_history(sh->history);
   env_collect(env, sh->env_list);
-  if (!(sh->tsave = can_on(&sh->term)))
-    return (-1);
   return (0);
 }
 

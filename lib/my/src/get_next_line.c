@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Mon Nov 17 11:15:36 2014
-** Last update Sun May 17 17:29:15 2015 Vertigo
+** Last update Fri May 22 18:20:32 2015 
 */
 
 #include <get_next_line.h>
@@ -15,7 +15,7 @@ t_glst			*read_again(t_glst **lst, const int fd, ptrdiff_t *off)
   t_glst		*tmp;
   t_glst		*new;
   t_glst		*s_eol;
-  int			read_len;
+  ssize_t      		read_len;
 
   tmp = *lst;
   while (tmp && tmp->next)
@@ -115,7 +115,7 @@ char		*get_next_line(const int fd)
   char		*line;
 
   fd_lst = NULL;
-  if (!(fd_lst = get_fd_tab(fd)) < 0)
+  if (!(fd_lst = get_fd_tab(fd)))
     return (NULL);
   lst = fd_lst[fd];
   if (!lst || !(s_eol = glst_memchr(lst, EOL, &off)))

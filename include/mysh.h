@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 09:57:43 2015 Vertigo
-** Last update Wed May 20 19:36:31 2015 Cano Chloe
+** Last update Fri May 22 18:21:39 2015 
 */
 
 #ifndef MYSH_H_
@@ -40,6 +40,8 @@ struct			s_mysh
   int			(*exe_ft[PA_TRM + 1])(t_ast *, t_mysh *);
   int			wait;
   char			*prompt;
+  int			is_tty;
+  int			pgid;
 };
 
 int			my_sh(t_mysh *);
@@ -86,6 +88,9 @@ int			exe_red(t_ast *ast, t_mysh *sh);
 void			set_sig_msg(t_mysh *sh);
 int			exit_status(int status, t_mysh *sh);
 int			wait_proc(t_mysh *sh, int pid);
+int			init_proc(t_mysh *sh);
+int			proc_status(t_mysh *sh, int pid);
+int			control_term(t_mysh *sh);
 
 int			is_exe(char *cmd, char err);
 int			get_exe(char **cmd);

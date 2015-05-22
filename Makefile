@@ -5,7 +5,7 @@
 ## Login   <cano_c@epitech.net>
 ## 
 ## Started on  Mon May  4 07:03:45 2015 
-## Last update Thu May 21 14:31:35 2015 Vertigo
+## Last update Fri May 22 18:15:21 2015 
 ##
 
 NAME	= 42sh
@@ -17,7 +17,7 @@ SRCS	= lexer/lexer.c lexer/lexer_common.c lexer/lexer_red.c \
 	parser/parse_cmd.c parser/parse_expr.c \
 	parser/parse_instr.c parser/parser.c parser/parse_red.c \
 	parser/parser_get_token.c \
-	main.c string.c utils.c words.c words_env.c my_putnbr.c handle_proc.c \
+	main.c string.c utils.c words.c words_env.c my_putnbr.c \
 	termcaps/can.c termcaps/get_line.c termcaps/disp.c termcaps/cursor.c \
 	termcaps/char_isprintable.c termcaps/key.c termcaps/clear_screen.c \
 	termcaps/arrows.c \
@@ -25,7 +25,8 @@ SRCS	= lexer/lexer.c lexer/lexer_common.c lexer/lexer_red.c \
 	builtins/setenv.c builtins/my_cd.c builtins/bult.c builtins/my_echo.c \
 	builtins/exit.c \
 	list/list.c list/list_2.c list/list_goto.c \
-	exe/exe_cmd.c exe/exe_sep.c exe/exe_pipe.c exe/exe_red.c
+	exe/exe_cmd.c exe/exe_sep.c exe/exe_pipe.c exe/exe_red.c \
+	exe/handle_proc.c
 
 OBJS	= $(addprefix obj/, $(SRCS:.c=.o))
 
