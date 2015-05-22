@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Fri May 15 06:14:14 2015 
-** Last update Fri May 22 18:53:51 2015 
+** Last update Fri May 22 19:14:58 2015 
 */
 #include <mysh.h>
 #include <sys/wait.h>
@@ -70,7 +70,8 @@ int		exe_path(char **cmd, t_mysh *sh)
 	  cmd[0] = p;
 	}
     }
-  return (exe_abs(cmd[0], cmd, sh));
+  fprintf(stderr, "42sh: %s: command not found\n", cmd[0]);
+  return (127);
 }
 
 int		exe_rlt(char **cmd, t_mysh *sh)
