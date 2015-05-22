@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Fri May 15 06:14:14 2015 
-** Last update Fri May 22 19:14:58 2015 
+** Last update Fri May 22 21:16:35 2015 
 */
 #include <mysh.h>
 #include <sys/wait.h>
@@ -32,6 +32,7 @@ int		exe_abs(char *cmd, char **arv, t_mysh *sh)
       if (!pid)
 	{
 	  /*	  init_proc(sh);*/
+	  can_set(sh->tsave);
 	  execve(cmd, arv, env);
 	  write(2, "42sh: failed to execute command\n", 32);
 	  exit(126);
