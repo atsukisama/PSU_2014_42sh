@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 09:57:43 2015 Vertigo
-** Last update Fri May 22 18:21:39 2015 
+** Last update Fri May 22 21:07:29 2015 
 */
 
 #ifndef MYSH_H_
@@ -86,7 +86,7 @@ int			exe_pipe(t_ast *ast, t_mysh *sh);
 int			exe_red(t_ast *ast, t_mysh *sh);
 
 void			set_sig_msg(t_mysh *sh);
-int			exit_status(int status, t_mysh *sh);
+int			exit_status(int status);
 int			wait_proc(t_mysh *sh, int pid);
 int			init_proc(t_mysh *sh);
 int			proc_status(t_mysh *sh, int pid);

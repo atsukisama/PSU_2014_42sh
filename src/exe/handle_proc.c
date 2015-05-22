@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Wed May 20 19:14:07 2015
-** Last update Fri May 22 18:48:20 2015 
+** Last update Fri May 22 21:07:53 2015 
 */
 #include <mysh.h>
 
@@ -83,8 +83,8 @@ int		wait_proc(t_mysh *sh, int pid)
   if (sh->wait)
     {
       while (waitpid(-1, &status, 0) != pid)
-	status = exit_status(status, sh);
-      status = exit_status(status, sh);
+	status = exit_status(status);
+      status = exit_status(status);
     }
   return (status);
 }

@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 10:21:40 2015 Vertigo
-** Last update Fri May 22 19:08:19 2015 
+** Last update Fri May 22 21:04:10 2015 
 */
 
 #include <stdio.h>
@@ -44,6 +44,7 @@ int	my_sh(t_mysh *sh)
 	}
       while (waitpid(-1, NULL, WNOHANG) != -1)
 	;
+      can_set(sh->term);
     }
   if (sh->is_tty)
     can_set(sh->tsave);

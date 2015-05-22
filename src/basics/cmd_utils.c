@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Wed May 20 19:05:12 2015 
-** Last update Wed May 20 19:32:10 2015 Cano Chloe
+** Last update Fri May 22 21:11:11 2015 
 */
 #include <mysh.h>
 
@@ -49,37 +49,18 @@ int		get_exe(char **cmd)
   return (-1);
 }
 
-void		set_sig_msg(t_mysh *sh)
+int		exit_status(int status)
 {
-  size_t	idx;
+  char		*sig_msg;
 
-  idx = 0;
-  while (idx < SIG_MAX)
-    my_bzero(sh->sig_msg[idx++], NAME_MAX + 1);
-  my_strncpy(sh->sig_msg[SIGQUIT], "Quit from keyboard", NAME_MAX);
-  my_strncpy(sh->sig_msg[SIGILL], "Illegal instruction", NAME_MAX);
-  my_strncpy(sh->sig_msg[SIGABRT], "Abort signal from abort(3)", NAME_MAX);
-  my_strncpy(sh->sig_msg[SIGFPE], "Floating point exception", NAME_MAX);
-  my_strncpy(sh->sig_msg[SIGSEGV], "Invalid memory reference (SEGV)", \
-	     NAME_MAX);
-  my_strncpy(sh->sig_msg[SIGPIPE], "Broken pipe: write to pipe with no \
-readers", NAME_MAX);
-  my_strncpy(sh->sig_msg[SIGBUS], "Bus error (bad memory access)", NAME_MAX);
-  my_strncpy(sh->sig_msg[SIGBUS], "Bus error (bad memory access)", NAME_MAX);
-  my_strncpy(sh->sig_msg[SIGSYS], "Bad argument to routine", NAME_MAX);
-  my_strncpy(sh->sig_msg[SIGTRAP], "It's a trap", NAME_MAX);
-  my_strncpy(sh->sig_msg[SIGXCPU], "Cpu time limit exceeded", NAME_MAX);
-  my_strncpy(sh->sig_msg[SIGXFSZ], "File size limit exceeded", NAME_MAX);
-  my_strncpy(sh->sig_msg[SIGIOT], "It's also a trap", NAME_MAX);
-  my_strncpy(sh->sig_msg[SIGUNUSED], "Bad argument to routine", NAME_MAX);
-}
-
-int		exit_status(int status, t_mysh *sh)
-{
-  if (WIFSIGNALED(status) && sh->sig_msg[WTERMSIG(status)])
+  if (WIFSIGNALED(status))
     {
-      fprintf(stderr, "mysh: killed by signal %d: %s\n",
-	      WTERMSIG(status), sh->sig_msg[WTERMSIG(status)]);
+      if ((sig_msg = strsignal(status)))
+	fprintf(stderr, "mysh: killed by signal %d: %s\n",
+		WTERMSIG(status), sig_msg);
+      else
+	fprintf(stderr, "mysh: killed by signal %d: %s\n",
+		WTERMSIG(status), "unknown");
     }
   else
     status = WEXITSTATUS(status);
