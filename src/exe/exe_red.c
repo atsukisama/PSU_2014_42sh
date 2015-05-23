@@ -36,13 +36,13 @@ int		open_failure(char *file, int flags)
   return (-1);
 }
 
-int	do_red(int red_fd[2], int flags, t_ast *ast, t_mysh *sh, t_job *job)
+int	do_red(int red_fd[3], t_ast *ast, t_mysh *sh, t_job *job)
 {
   int	fd;
   int	save_fd[2];
 
-  if ((fd = open(ast->left->content.file, flags, 0644)) < 0)
-    return (open_failure(ast->left->content.file, flags));
+  if ((fd = open(ast->left->content.file, red_fd[2], 0644)) < 0)
+    return (open_failure(ast->left->content.file, red_fd[2]));
   save_fd[0] = dup(red_fd[0]);
   if (red_fd[1] > -1)
     {
@@ -68,29 +68,27 @@ int	swap_red(t_ast *ast, int red_fd[2])
 
 int	exe_red(t_ast *ast, t_mysh *sh, t_job *job)
 {
-  int	flags;
-  int	red_fd[2];
+  int	red_fd[3];
   int	ret;
 
-  flags = 0;
+  red_fd[2] = 0;
   red_fd[1] = -1;
   if (ast->content.red[0] == '&')
     swap_red(ast, red_fd);
   if (ast->content.red[0] == '<')
     {
-      flags = O_RDONLY;
+      red_fd[2] = O_RDONLY;
       red_fd[0] = 0;
     }
   else if (ast->content.red[0] == '>')
     {
-      flags = O_WRONLY | O_CREAT;
+      red_fd[2] = O_WRONLY | O_CREAT;
       red_fd[0] = 1;
     }
-  if (ast->content.red[1] && (flags & O_WRONLY))
-    flags |= O_APPEND;
-  else if (flags & O_WRONLY)
-    flags |= O_TRUNC;
-  /*ret = do_red(red_fd, flags, ast, sh, job);*/
-  ret = dash_left_check(red_fd, flags, ast, sh, job);
+  if (ast->content.red[1] && (red_fd[2] & O_WRONLY))
+    red_fd[2] |= O_APPEND;
+  else if (red_fd[2] & O_WRONLY)
+    red_fd[2] |= O_TRUNC;
+  ret = dash_left_check(red_fd, ast, sh, job);
   return (ret);
 }

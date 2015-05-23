@@ -78,13 +78,13 @@ int             do_double_red(t_ast *ast, t_mysh *sh, char *s, t_job *job)
   return (0);
 }
 
-int     dash_left_check(int red_fd[2], int flags, t_ast *ast, t_mysh *sh, t_job *job)
+int     dash_left_check(int red_fd[3], t_ast *ast, t_mysh *sh, t_job *job)
 {
   int   ret;
 
   if (ast->content.red[0] == '<' && ast->content.red[1])
     ret = do_double_red(ast, sh, "", job);
   else
-    ret = do_red(red_fd, flags, ast, sh, job);
+    ret = do_red(red_fd, ast, sh, job);
   return (ret);
 }
