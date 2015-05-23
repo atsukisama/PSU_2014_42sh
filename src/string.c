@@ -5,7 +5,7 @@
 ** Login   <king_j@epitech.net>
 **
 ** Started on  Thu May 14 00:41:06 2015 Jimmy KING
-** Last update Sat May 23 17:00:13 2015 Jimmy KING
+** Last update Sat May 23 17:06:02 2015 Jimmy KING
 */
 
 #include <stdlib.h>
@@ -51,9 +51,6 @@ char    *xstrncat(char *dest, char *src, int len)
   n = 0;
   i = xlen(dest);
 
-  printf("n: %d | i: %d | len: %d\n", n, i, len);
-
-  
   while (src[n] && n < len)
     dest[i++] = src[n++];
   dest[i] = '\0';
