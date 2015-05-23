@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Tue May  5 11:51:38 2015 
-** Last update Sun May 17 17:35:12 2015 Vertigo
+** Last update Sat May 23 13:34:24 2015 
 */
 #include <parser.h>
 
@@ -21,7 +21,8 @@ t_ast		*parse_expr(t_ast **ast, t_lex **lexem)
     {
       if (!(e_ast = parse_instr(ast, lexem)))
 	return (NULL);
-      while ((next = lexer_next_token(*lexem)) && next->type == LX_SEP)
+      while ((next = lexer_next_token(*lexem))
+	     && (next->type == LX_SEP || next->type == LX_AMP))
 	{
 	  tmp = e_ast;
 	  if (!(e_ast = make_binary(ast, &next)))

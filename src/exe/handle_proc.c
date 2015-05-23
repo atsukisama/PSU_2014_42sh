@@ -5,11 +5,11 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Wed May 20 19:14:07 2015
-** Last update Fri May 22 21:07:53 2015 
+** Last update Sat May 23 18:35:24 2015 
 */
 #include <mysh.h>
 
-int		init_proc(t_mysh *sh)
+int		init_proc(t_mysh *sh, t_job *job)
 {
   int		pid;
 
@@ -22,28 +22,36 @@ int		init_proc(t_mysh *sh)
       signal(SIGTTIN, SIG_DFL);
       signal(SIGTTOU, SIG_DFL);
       pid = getpid();
-      pid = setpgid(pid, pid);
-      tcsetpgrp(0, pid);
+      if (!job->pgid)
+	job->pgid = pid;
+      if ((setpgid(pid, job->pgid)))
+	{
+	  job->pgid = pid;
+	  setpgid(pid, pid);
+	}
+      if (job->status == JOB_FG)
+	tcsetpgrp(0, job->pgid);
     }
   return (0);
 }
 
-int		proc_status(t_mysh *sh, int pid)
+int		proc_status(t_mysh *sh, int pid, t_job *job)
 {
   if (sh->is_tty)
     {
-      if (sh->wait)
-	tcsetpgrp(0, pid);
-      setpgid(pid, pid);
+      if (setpgid(pid, job->pgid))
+	{
+	  job->pgid = pid;
+	  setpgid(pid, job->pgid);
+	}
+      if (job->status == JOB_FG)
+	tcsetpgrp(0, job->pgid);
     }
-  sh->status = wait_proc(sh, pid);
-  if (sh->is_tty && sh->wait)
-    {
-      printf("heal\n");
-    }
-  while (waitpid(-1, NULL, WNOHANG) > -1)
-    ;
-  return (0);
+  sh->status = wait_proc(sh, pid, job);
+  if (job->status == JOB_FG)
+    while (waitpid(-1, NULL, WNOHANG) > -1)
+      ;
+  return (sh->status);
 }
 
 
@@ -75,16 +83,22 @@ int	control_term(t_mysh *sh)
   return (0);
 }
 
-int		wait_proc(t_mysh *sh, int pid)
+int		wait_proc(t_mysh *sh, int pid, t_job *job)
 {
   int		status;
 
   status = 0;
-  if (sh->wait)
+  if (sh->wait && job->status == JOB_FG)
     {
       while (waitpid(-1, &status, 0) != pid)
-	status = exit_status(status);
-      status = exit_status(status);
+	{
+	  status = exit_status(status, job);
+	  if (WIFSIGNALED(status))
+	    killpg(job->pgid, SIGKILL);
+	}
+      status = exit_status(status, job);
+      if (WIFSIGNALED(status))
+	killpg(job->pgid, SIGKILL);
     }
   return (status);
 }

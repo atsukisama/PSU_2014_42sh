@@ -31,7 +31,9 @@ void	load_history(t_list *history)
 
 int	init_sh(t_mysh *sh, char **env)
 {
-  if ((sh->is_tty = isatty(0)) && !(sh->tsave = can_on(&sh->term)))
+  if (control_term(sh))
+    return (-1);
+  if (sh->is_tty && !(sh->tsave = can_on(&sh->term)))
     return (-1);
   sh->prompt = strdup(":> ");
   sh->env_list = list_create();

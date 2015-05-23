@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Fri May 15 14:36:48 2015 Vertigo
-** Last update Tue May 19 22:19:33 2015 
+** Last update Sat May 23 12:10:56 2015 
 */
 
 #include <unistd.h>
@@ -36,7 +36,7 @@ int		open_failure(char *file, int flags)
   return (-1);
 }
 
-int	do_red(int red_fd[2], int flags, t_ast *ast, t_mysh *sh)
+int	do_red(int red_fd[2], int flags, t_ast *ast, t_mysh *sh, t_job *job)
 {
   int	fd;
   int	save_fd[2];
@@ -50,7 +50,7 @@ int	do_red(int red_fd[2], int flags, t_ast *ast, t_mysh *sh)
       dup2(fd, red_fd[1]);
     }
   dup2(fd, red_fd[0]);
-  sh->status = sh->exe_ft[ast->right->type](ast->right, sh);
+  sh->status = sh->exe_ft[ast->right->type](ast->right, sh, job);
   dup2(save_fd[0], red_fd[0]);
   if (red_fd[1] > -1)
     dup2(save_fd[0], red_fd[1]);
@@ -66,7 +66,7 @@ int	swap_red(t_ast *ast, int red_fd[2])
   return (0);
 }
 
-int	exe_red(t_ast *ast, t_mysh *sh)
+int	exe_red(t_ast *ast, t_mysh *sh, t_job *job)
 {
   int	flags;
   int	red_fd[2];
@@ -91,6 +91,6 @@ int	exe_red(t_ast *ast, t_mysh *sh)
     flags |= O_APPEND;
   else if (flags & O_WRONLY)
     flags |= O_TRUNC;
-  ret = do_red(red_fd, flags, ast, sh);
+  ret = do_red(red_fd, flags, ast, sh, job);
   return (ret);
 }

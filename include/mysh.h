@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 09:57:43 2015 Vertigo
-** Last update Sat May 23 10:22:59 2015 Vertigo
+** Last update Sat May 23 18:29:14 2015 
 */
 
 #ifndef MYSH_H_
@@ -24,8 +24,18 @@
 # define HISTORY_FILE	".42sh_history"
 
 typedef struct s_mysh	t_mysh;
+typedef struct s_job	t_job;
 
 # define SIG_MAX	40
+
+# define JOB_BG		0
+# define JOB_FG		2
+
+struct			s_job
+{
+  int			pgid;
+  int			status;
+};
 
 struct			s_mysh
 {
@@ -38,7 +48,7 @@ struct			s_mysh
   t_list		*alias;
   struct termios	*term;
   struct termios	*tsave;
-  int			(*exe_ft[PA_TRM + 1])(t_ast *, t_mysh *);
+  int			(*exe_ft[PA_TRM + 1])(t_ast *, t_mysh *, t_job *);
   int			wait;
   char			*prompt;
   int			is_tty;
@@ -79,18 +89,19 @@ int			can_set(struct termios *term);
 ** Execution
 */
 
-int			exe_cmd(t_ast *ast, t_mysh *sh);
-int			exe_and(t_ast *ast, t_mysh *sh);
-int			exe_or(t_ast *ast, t_mysh *sh);
-int			exe_trm(t_ast *ast, t_mysh *sh);
-int			exe_pipe(t_ast *ast, t_mysh *sh);
-int			exe_red(t_ast *ast, t_mysh *sh);
+int			exe_cmd(t_ast *ast, t_mysh *sh, t_job *job);
+int			exe_and(t_ast *ast, t_mysh *sh, t_job *job);
+int			exe_or(t_ast *ast, t_mysh *sh, t_job *job);
+int			exe_trm(t_ast *ast, t_mysh *sh, t_job *job);
+int			exe_bg(t_ast *ast, t_mysh *sh, t_job *job);
+int			exe_pipe(t_ast *ast, t_mysh *sh, t_job *job);
+int			exe_red(t_ast *ast, t_mysh *sh, t_job *job);
 
 void			set_sig_msg(t_mysh *sh);
-int			exit_status(int status);
-int			wait_proc(t_mysh *sh, int pid);
-int			init_proc(t_mysh *sh);
-int			proc_status(t_mysh *sh, int pid);
+int			exit_status(int status, t_job *job);
+int			wait_proc(t_mysh *sh, int pid, t_job *job);
+int			init_proc(t_mysh *sh, t_job *job);
+int			proc_status(t_mysh *sh, int pid, t_job *job);
 int			control_term(t_mysh *sh);
 
 int			is_exe(char *cmd, char err);

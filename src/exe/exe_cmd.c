@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Fri May 15 06:14:14 2015 
-** Last update Fri May 22 21:16:35 2015 
+** Last update Sat May 23 18:33:00 2015 
 */
 #include <mysh.h>
 #include <sys/wait.h>
@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include <signal.h>
 
-int		exe_abs(char *cmd, char **arv, t_mysh *sh)
+int		exe_abs(char *cmd, char **arv, t_mysh *sh, t_job *job)
 {
   char		**env;
   int		pid;
@@ -31,13 +31,14 @@ int		exe_abs(char *cmd, char **arv, t_mysh *sh)
     {
       if (!pid)
 	{
-	  /*	  init_proc(sh);*/
-	  can_set(sh->tsave);
+	  init_proc(sh, job);
 	  execve(cmd, arv, env);
 	  write(2, "42sh: failed to execute command\n", 32);
 	  exit(126);
 	}
-      sh->status = wait_proc(sh, pid);
+      if (!job->pgid)
+	job->pgid = pid;
+      proc_status(sh, pid, job);
     }
   else
     status = -1;
@@ -45,7 +46,7 @@ int		exe_abs(char *cmd, char **arv, t_mysh *sh)
   return (status);
 }
 
-int		exe_path(char **cmd, t_mysh *sh)
+int		exe_path(char **cmd, t_mysh *sh, t_job *job)
 {
   char		pathname[NAME_MAX + PATH_MAX + 2];
   t_list       	*path_list;
@@ -67,7 +68,7 @@ int		exe_path(char **cmd, t_mysh *sh)
 	  p = cmd[0];
 	  cmd[0] = pathname;
 	  if (!get_exe(cmd) && !is_exe(cmd[0], 0))
-	    return (exe_abs(cmd[0], cmd, sh));
+	    return (exe_abs(cmd[0], cmd, sh, job));
 	  cmd[0] = p;
 	}
     }
@@ -75,7 +76,7 @@ int		exe_path(char **cmd, t_mysh *sh)
   return (127);
 }
 
-int		exe_rlt(char **cmd, t_mysh *sh)
+int		exe_rlt(char **cmd, t_mysh *sh, t_job *job)
 {
   char		cwd[PATH_MAX + 1];
   char		pathname[PATH_MAX + NAME_MAX + 2];
@@ -93,32 +94,30 @@ int		exe_rlt(char **cmd, t_mysh *sh)
 	  my_strncat(pathname, "/", 1);
 	  my_strncat(pathname, cmd[0] + 2, cmd_len);
 	  get_exe(cmd);
-	  return (exe_abs(pathname, cmd, sh));
+	  return (exe_abs(pathname, cmd, sh, job));
 	}
     }
   return (-1);
 }
 
-int		exe_cmd(t_ast *ast, t_mysh *sh)
+int		exe_cmd(t_ast *ast, t_mysh *sh, t_job *job)
 {
   if (ast->content.cmd[0])
     {
       if (!my_strncmp(ast->content.cmd[0], "./", 2))
-	sh->status = exe_rlt(ast->content.cmd, sh);
+	sh->status = exe_rlt(ast->content.cmd, sh, job);
       else if (chk_bult(sh, ast->content.cmd) != 0)
 	sh->status = 0;
       else if (*ast->content.cmd[0] == '/' && sh->status != 9)
-	sh->status = exe_abs(ast->content.cmd[0], ast->content.cmd, sh);
+	sh->status = exe_abs(ast->content.cmd[0], ast->content.cmd, sh, job);
       else
-	sh->status = exe_path(ast->content.cmd, sh);
+	sh->status = exe_path(ast->content.cmd, sh, job);
     }
   free(ast->content.cmd);
   free(ast);
-  while (waitpid(-1, NULL, WNOHANG) > -1)
-    ;
   if (sh->is_tty && sh->wait)
     {
-      /*      tcsetpgrp(0, sh->pgid);*/
+      tcsetpgrp(0, sh->pgid);
       can_set(sh->term);
     }
   return (sh->status);

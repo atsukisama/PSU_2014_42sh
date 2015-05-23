@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Wed May 20 19:05:12 2015 
-** Last update Fri May 22 21:11:11 2015 
+** Last update Sat May 23 14:15:16 2015 
 */
 #include <mysh.h>
 
@@ -49,18 +49,19 @@ int		get_exe(char **cmd)
   return (-1);
 }
 
-int		exit_status(int status)
+int		exit_status(int status, t_job *job)
 {
   char		*sig_msg;
 
   if (WIFSIGNALED(status))
     {
+      status = WTERMSIG(status);
       if ((sig_msg = strsignal(status)))
 	fprintf(stderr, "mysh: killed by signal %d: %s\n",
-		WTERMSIG(status), sig_msg);
+		status, sig_msg);
       else
 	fprintf(stderr, "mysh: killed by signal %d: %s\n",
-		WTERMSIG(status), "unknown");
+		status, "unknown");
     }
   else
     status = WEXITSTATUS(status);
