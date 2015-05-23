@@ -5,13 +5,14 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 10:21:40 2015 Vertigo
-** Last update Fri May 22 21:04:10 2015 
+** Last update Sat May 23 10:24:41 2015 Vertigo
 */
 
 #include <stdio.h>
-#include <mysh.h>
 #include <sys/wait.h>
+#include <mysh.h>
 #include <get_next_line.h>
+#include <project.h>
 
 void		init_ast(t_mysh *sh)
 {
@@ -35,6 +36,7 @@ int	my_sh(t_mysh *sh)
   while ((sh->is_tty && (line = get_line(sh)))
 	 || (!sh->is_tty && (line = get_next_line(0))))
     {
+      line = alias_replace(sh->alias, line);
       if ((lex = lexer(line)))
 	{
 	  if ((ast = parse_init(lex)))
