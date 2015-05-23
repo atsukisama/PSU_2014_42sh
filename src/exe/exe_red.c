@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Fri May 15 14:36:48 2015 Vertigo
-** Last update Sat May 23 12:10:56 2015 
+** Last update Tue May 19 22:19:33 2015 
 */
 
 #include <unistd.h>
@@ -14,29 +14,9 @@
 #include <parser.h>
 #include <mysh.h>
 #include <stdio.h>
+#include <get_next_line.h>
 
-int		open_failure(char *file, int flags)
-{
-  struct stat	s_stat;
-
-  if (access(file, F_OK))
-    {
-      if (flags & O_TRUNC)
-	fprintf(stderr, "42sh: %s: cannot create file\n", file);
-      else
-	fprintf(stderr, "42sh: %s: no such file or directory\n", file);
-    }
-  else if ((flags & O_WRONLY && access(file, W_OK))
-	   || (!flags && access(file, R_OK)))
-    fprintf(stderr, "42sh: %s: permission denied\n", file);
-  else if (flags && !(stat(file, &s_stat)) && S_ISDIR(s_stat.st_mode))
-    fprintf(stderr, "42sh: %s: is a directory\n", file);
-  else
-    fprintf(stderr, "42sh: %s: undefined error at open\n", file);
-  return (-1);
-}
-
-int	do_red(int red_fd[2], int flags, t_ast *ast, t_mysh *sh, t_job *job)
+int	do_red(int red_fd[2], int flags, t_ast *ast, t_mysh *sh)
 {
   int	fd;
   int	save_fd[2];
@@ -50,23 +30,61 @@ int	do_red(int red_fd[2], int flags, t_ast *ast, t_mysh *sh, t_job *job)
       dup2(fd, red_fd[1]);
     }
   dup2(fd, red_fd[0]);
-  sh->status = sh->exe_ft[ast->right->type](ast->right, sh, job);
+  sh->status = sh->exe_ft[ast->right->type](ast->right, sh);
   dup2(save_fd[0], red_fd[0]);
   if (red_fd[1] > -1)
     dup2(save_fd[0], red_fd[1]);
   return (sh->status);
 }
 
-int	swap_red(t_ast *ast, int red_fd[2])
+void	check_dash_line(char *s, char *file, t_list *list)
 {
-  ast->content.red[0] = ast->content.red[1];
-  ast->content.red[1] = ast->content.red[2];
-  ast->content.red[2] = 0;
-  red_fd[1] = 2;
+  if (s != NULL &&
+      my_strncmp(s, file, my_strlen(s)) != 0)
+    list_add(list, s, "");
+  if (s == NULL)
+    fprintf(stderr, "42sh: warning: delimited by end-of-file (wanted `%s')\n"
+	    , file);
+}
+
+int             do_double_red(t_ast *ast, t_mysh *sh, char *s)
+{
+  int           pid;
+  int           fd[2];
+  t_list        *list;
+
+  list = list_create();
+  can_set(sh->tsave);
+  while (s != NULL && my_strcmp(s, ast->left->content.file) != 0)
+    {
+      write(0, "> ", 2);
+      s = get_next_line(0);
+      check_dash_line(s, ast->left->content.file, list);
+    }
+  pipe(fd);
+  if ((pid = fork()) < 0)
+    return (-1);
+  if (pid == 0)
+    exec_double_dash_left(list, fd);
+  else if (pid > 0)
+    exec_parallel(ast, sh, fd);
+  can_on(&sh->term);
+  wait(&pid);
   return (0);
 }
 
-int	exe_red(t_ast *ast, t_mysh *sh, t_job *job)
+int	dash_left_check(int red_fd[2], int flags, t_ast *ast, t_mysh *sh)
+{
+  int   ret;
+
+  if (ast->content.red[0] == '<' && ast->content.red[1])
+    ret = do_double_red(ast, sh, "");
+  else
+    ret = do_red(red_fd, flags, ast, sh);
+  return (ret);
+}
+
+int	exe_red(t_ast *ast, t_mysh *sh)
 {
   int	flags;
   int	red_fd[2];
@@ -78,7 +96,6 @@ int	exe_red(t_ast *ast, t_mysh *sh, t_job *job)
     swap_red(ast, red_fd);
   if (ast->content.red[0] == '<')
     {
-
       flags = O_RDONLY;
       red_fd[0] = 0;
     }
@@ -91,6 +108,6 @@ int	exe_red(t_ast *ast, t_mysh *sh, t_job *job)
     flags |= O_APPEND;
   else if (flags & O_WRONLY)
     flags |= O_TRUNC;
-  ret = do_red(red_fd, flags, ast, sh, job);
+  ret = dash_left_check(red_fd, flags, ast, sh);
   return (ret);
 }

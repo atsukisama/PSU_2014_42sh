@@ -96,7 +96,11 @@ int			exe_trm(t_ast *ast, t_mysh *sh, t_job *job);
 int			exe_bg(t_ast *ast, t_mysh *sh, t_job *job);
 int			exe_pipe(t_ast *ast, t_mysh *sh, t_job *job);
 int			exe_red(t_ast *ast, t_mysh *sh, t_job *job);
+void                    exec_parallel(t_ast *ast, t_mysh *sh, int fd[2]);
+void                    exec_double_dash_left(t_list *list, int fd[2]);
+void                    check_dash_line(char *s, char *file, t_list *list);
 
+int                     open_failure(char *file, int flags);
 void			set_sig_msg(t_mysh *sh);
 int			exit_status(int status, t_job *job);
 int			wait_proc(t_mysh *sh, int pid, t_job *job);

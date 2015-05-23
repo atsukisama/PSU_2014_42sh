@@ -26,7 +26,7 @@ SRCS	= lexer/lexer.c lexer/lexer_common.c lexer/lexer_red.c \
 	builtins/exit.c \
 	list/list.c list/list_2.c list/list_goto.c \
 	exe/exe_cmd.c exe/exe_sep.c exe/exe_pipe.c exe/exe_red.c \
-	exe/handle_proc.c \
+	exe/handle_proc.c exe/exe_red_utils.c \
 	alias/alias.c
 
 OBJS	= $(addprefix obj/, $(SRCS:.c=.o))
