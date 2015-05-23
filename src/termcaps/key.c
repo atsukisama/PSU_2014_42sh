@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 21:57:58 2015 Vertigo
-** Last update Wed May 20 12:19:48 2015 Vertigo
+** Last update Sat May 23 12:25:20 2015 Vertigo
 */
 
 #include <stdlib.h>
@@ -74,7 +74,7 @@ int	particular_key(char buf[4], int *pos, t_mysh *sh, char **line)
   else if (buf[0] == 27 && buf[1] == 91 && (buf[2] >= 65 && buf[2] <= 68))
     arrow[buf[2] - 65](pos, line, sh);
   else if (buf[0] == 12)
-    clear_screen(sh);
+    clear_screen(sh, *line);
   else if (buf[0] == 27 && buf[1] == 79 && buf[2] == 70)
     end_key(*line, pos);
   else if (buf[0] == 4)
