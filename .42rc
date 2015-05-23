@@ -1,0 +1,6 @@
+alias		emacss		emacs -nw
+alias		ne		emacs -nw
+alias		sl		ls
+alias		cd..		cd ..
+alias		..		cd ..
+alias		...		cd ...

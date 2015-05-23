@@ -5,7 +5,7 @@
 ** Login   <king_j@epitech.net>
 **
 ** Started on  Thu May 14 00:41:06 2015 Jimmy KING
-** Last update Thu May 14 18:17:26 2015 Vertigo
+** Last update Sat May 23 17:06:02 2015 Jimmy KING
 */
 
 #include <stdlib.h>
@@ -50,6 +50,7 @@ char    *xstrncat(char *dest, char *src, int len)
 
   n = 0;
   i = xlen(dest);
+
   while (src[n] && n < len)
     dest[i++] = src[n++];
   dest[i] = '\0';

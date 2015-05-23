@@ -5,7 +5,7 @@
 ** Login   <king_j@epitech.net>
 **
 ** Started on  Wed May 13 21:25:47 2015 Jimmy KING
-** Last update Thu May 14 18:18:12 2015 Vertigo
+** Last update Sat May 23 17:16:36 2015 Jimmy KING
 */
 
 #include <stdlib.h>
@@ -40,8 +40,11 @@ int	xlen(char *str)
 {
   int	n;
 
-  n = -1;
-  while (str[++n]);
+  n = 0;
+  if (str == NULL)
+    return (n);
+  while (str[n] != '\0')
+    n++;
   return (n);
 }
 
@@ -55,14 +58,16 @@ char	*xreplace(char *src, char *key, char *nkey)
   char	*ret;
   int	len;
 
-  if ((ret = malloc(xlen(src) - xlen(key) + xlen(nkey) + 1)) == NULL)
+  len = 0;
+  if ((ret = malloc(xlen(src) + xlen(nkey))) == NULL)
     return (NULL);
+  ret[0] = '\0';
   pos = src;
   pos2 = xstrstr(pos, key);
   len = pos2 - pos;
-  xstrncat(ret, pos, len);
-  xstrncat(ret, nkey, xlen(nkey));
+  my_strncat(ret, pos, len);
+  my_strncat(ret, nkey, xlen(nkey));
   pos = pos2 + xlen(key);
-  xstrcat(ret, pos);
+  my_strcat(ret, pos);
   return (ret);
 }

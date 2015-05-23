@@ -5,7 +5,7 @@
 ** Login   <king_j@epitech.net>
 **
 ** Started on  Wed May 13 21:39:18 2015 Jimmy KING
-** Last update Sun May 17 17:42:56 2015 Vertigo
+** Last update Sat May 23 16:46:20 2015 Jimmy KING
 */
 
 #include "project.h"
@@ -60,6 +60,7 @@ int	words_lenght(char *str, int word, char *seps)
 
   n = 0;
   words = 0;
+  lenght = 0;
   while (str[n])
     {
       if (is_str(str[n], seps))
@@ -70,7 +71,8 @@ int	words_lenght(char *str, int word, char *seps)
 	    lenght++;
 	  n++;
 	}
-      n++;
+      if (str[n] != '\0')
+	n++;
     }
   return (lenght);
 }
@@ -100,7 +102,8 @@ char	*words_get(char *str, int word, char *seps)
 	      tmp[i++] = str[n];
 	  n++;
 	}
-      n++;
+      if (str[n] != '\0')
+	n++;
     }
   tmp[i] = '\0';
   return (tmp);
