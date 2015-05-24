@@ -5,7 +5,7 @@
 ** Login   <kerebe_p@epitech.eu>
 ** 
 ** Started on  Sat May 23 17:46:00 2015 Paul Kerebel
-** Last update Sun May 24 02:14:11 2015 
+** Last update Sun May 24 02:31:17 2015 
 */
 
 #include <sys/stat.h>
@@ -26,7 +26,6 @@ void    check_dash_line(char *s, char *file, t_list *list)
 int     exec_parallel(t_ast *ast, t_mysh *sh, int fd[2], t_job *job)
 {
   int   s;
-  int	ret;
 
   close(fd[1]);
   if ((s = dup(0)) < -1)
@@ -68,7 +67,8 @@ int             do_double_red(t_ast *ast, t_mysh *sh, char *s, t_job *job)
   can_set(sh->tsave);
   while (s != NULL && my_strcmp(s, ast->left->content.file) != 0)
     {
-      tcsetpgrp(0, job->pgid);
+      if (job->pgid)
+	tcsetpgrp(0, job->pgid);
       write(0, "> ", 2);
       s = get_next_line(0);
       check_dash_line(s, ast->left->content.file, list);
@@ -85,7 +85,7 @@ int             do_double_red(t_ast *ast, t_mysh *sh, char *s, t_job *job)
 
 int     dash_left_check(int red_fd[3], t_ast *ast, t_mysh *sh, t_job *job)
 {
-  int   ret;
+  int	ret;
 
   if (ast->content.red[0] == '<' && ast->content.red[1])
     ret = do_double_red(ast, sh, "", job);
