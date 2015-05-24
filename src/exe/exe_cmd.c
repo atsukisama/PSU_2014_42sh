@@ -18,18 +18,16 @@
 int		exe_abs(char *cmd, char **arv, t_mysh *sh, t_job *job)
 {
   char		**env;
-  int		pid;
-  int		status;
-  int		ret;
+  int		pid_status[2];
 
   get_exe(&cmd);
-  if ((ret = is_exe(cmd, 1)))
-    return (ret);
+  if ((pid_status[1] = is_exe(cmd, 1)))
+    return (pid_status[1]);
   if (!(env = list_to_tab(sh->env_list)))
     return (-1);
-  if ((pid = fork()) > -1)
+  if ((pid_status[0] = fork()) > -1)
     {
-      if (!pid)
+      if (!pid_status[0])
 	{
 	  init_proc(sh, job);
 	  execve(cmd, arv, env);
@@ -37,13 +35,13 @@ int		exe_abs(char *cmd, char **arv, t_mysh *sh, t_job *job)
 	  exit(126);
 	}
       if (!job->pgid)
-	job->pgid = pid;
-      proc_status(sh, pid, job);
+	job->pgid = pid_status[0];
+      proc_status(sh, pid_status[0], job);
     }
   else
-    status = -1;
+    pid_status[1] = -1;
   free(env);
-  return (status);
+  return (pid_status[1]);
 }
 
 int		exe_path(char **cmd, t_mysh *sh, t_job *job)
