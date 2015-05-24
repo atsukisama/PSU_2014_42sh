@@ -44,7 +44,7 @@ char		*dol_to_str(t_mysh *sh, char *str, int *i)
   var[k] = 0;
   if ((val = get_var_env(sh->env_list, var)) == NULL)
     {
-      printf("%s: Undefined variable\n", var);
+      fprintf(stderr, "%s: Undefined variable\n", var);
       return (NULL);
     }
   free(var);

@@ -23,12 +23,13 @@ char	*get_last_word(char *s)
   i = 0;
   while (nb >= 0 && s[nb] != ' ' && s[nb--] != '\t')
     ++i;
-  if (!(new = malloc(sizeof(*new) * (i))))
+  if (!(new = malloc(sizeof(*new) * (i + 1))))
     return (NULL);
   new[i--] = '\0';
   j = 0;
   while (j < i)
     new[j++] = s[++nb];
+  new[j] = 0;
   return (new);
 }
 

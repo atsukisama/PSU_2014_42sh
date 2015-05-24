@@ -55,7 +55,7 @@ char		*env_replacestr(t_list *list, char *content, int *err)
 	content = xreplace(content, key, tmp->content);
       else
 	{
-	  printf("%s: Undefined variable.\n", key + 1);
+	  fprintf(stderr, "%s: Undefined variable.\n", key + 1);
 	  *err = 1;
 	}
     }

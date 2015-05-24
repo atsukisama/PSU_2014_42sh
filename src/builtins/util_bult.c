@@ -63,12 +63,12 @@ int		check_cd_error(char **tab)
 
   if (tab[1] && (access(tab[1], F_OK & R_OK) == -1) && tab[1][0] != '-')
     {
-      printf("42sh: cd: %s : No such file or directory\n", tab[1]);
+      fprintf(stderr, "42sh: cd: %s : No such file or directory\n", tab[1]);
       return (-1);
     }
   if (tab[1] && tab[1][0] != '-' && (dir = opendir(tab[1])) == NULL)
     {
-      printf("42sh: cd: %s : Not a directory\n", tab[1]);
+      fprintf(stderr, "42sh: cd: %s : Not a directory\n", tab[1]);
       return (-1);
     }
   return (0);

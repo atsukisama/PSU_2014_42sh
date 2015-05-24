@@ -81,7 +81,7 @@ char		*histo_str(t_mysh *sh, char *val)
       tmp = tmp->prev;
       i--;
     }
-  printf("42sh: !%s: event not found\n", val);
+  fprintf(stderr, "42sh: !%s: event not found\n", val);
   return (NULL);
 }
 
