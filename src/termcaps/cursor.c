@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Tue May 19 15:55:37 2015 Vertigo
-** Last update Tue May 19 18:16:35 2015 Vertigo
+** Last update Sun May 24 18:34:48 2015 Vertigo
 */
 
 #include <sys/ioctl.h>
@@ -19,7 +19,7 @@ int			forward_cursor(t_mysh *sh, int pos)
   int			i;
 
   ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws);
-  nb = my_strlen(sh->prompt) + pos;
+  nb = my_strlen(sh->prompt) + pos - 53;
   while (nb >= ws.ws_col)
     nb -= ws.ws_col;
   if (nb == ws.ws_col - 1)
@@ -41,7 +41,7 @@ int			back_cursor(t_mysh *sh, int pos)
   int			i;
 
   ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws);
-  nb = my_strlen(sh->prompt) + pos;
+  nb = my_strlen(sh->prompt) + pos - 53;
   while (nb >= ws.ws_col)
     nb -= ws.ws_col;
   if (nb == 0)
