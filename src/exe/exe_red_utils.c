@@ -5,7 +5,7 @@
 ** Login   <kerebe_p@epitech.eu>
 ** 
 ** Started on  Sat May 23 17:46:00 2015 Paul Kerebel
-** Last update Sat May 23 17:46:00 2015 Paul Kerebel
+** Last update Sun May 24 02:14:11 2015 
 */
 
 #include <sys/stat.h>
@@ -23,16 +23,20 @@ void    check_dash_line(char *s, char *file, t_list *list)
 	    , file);
 }
 
-void     exec_parallel(t_ast *ast, t_mysh *sh, int fd[2], t_job *job)
+int     exec_parallel(t_ast *ast, t_mysh *sh, int fd[2], t_job *job)
 {
   int   s;
+  int	ret;
 
   close(fd[1]);
-  s = dup(0);
-  dup2(fd[0], 0);
+  if ((s = dup(0)) < -1)
+    return (-1);
+  if ((dup2(fd[0], 0) < -1))
+    return (-1);
   sh->status = sh->exe_ft[ast->right->type](ast->right, sh, job);
-  dup2(0, fd[0]);
-  dup2(s, 0);
+  ret = dup2(0, fd[0]);
+  ret = dup2(s, 0);
+  return (sh->status);
 }
 
 void             exec_double_dash_left(t_list *list, int fd[2])
@@ -40,7 +44,8 @@ void             exec_double_dash_left(t_list *list, int fd[2])
   t_list        *tmp;
 
   close(fd[0]);
-  dup2(fd[1], 1);
+  if (dup2(fd[1], 1))
+    exit(-1);
   tmp = list->next;
   while (tmp != list)
     {
@@ -48,7 +53,8 @@ void             exec_double_dash_left(t_list *list, int fd[2])
       my_putchar('\n');
       tmp = tmp->next;
     }
-  dup2(1, fd[1]);
+  if (dup2(1, fd[1]))
+    exit(-1);
   exit(0);
 }
 
@@ -62,20 +68,19 @@ int             do_double_red(t_ast *ast, t_mysh *sh, char *s, t_job *job)
   can_set(sh->tsave);
   while (s != NULL && my_strcmp(s, ast->left->content.file) != 0)
     {
+      tcsetpgrp(0, job->pgid);
       write(0, "> ", 2);
       s = get_next_line(0);
       check_dash_line(s, ast->left->content.file, list);
     }
-  pipe(fd);
+  if (pipe(fd))
+    return (-1);
   if ((pid = fork()) < 0)
     return (-1);
   if (pid == 0)
     exec_double_dash_left(list, fd);
-  else if (pid > 0)
-    exec_parallel(ast, sh, fd, job);
-  can_on(&sh->term);
-  wait(&pid);
-  return (0);
+  can_set(sh->term);
+  return (exec_parallel(ast, sh, fd, job));
 }
 
 int     dash_left_check(int red_fd[3], t_ast *ast, t_mysh *sh, t_job *job)

@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 09:57:43 2015 Vertigo
-** Last update Sun May 24 02:13:59 2015 Jimmy KING
+** Last update Sun May 24 01:57:54 2015 
 */
 
 #ifndef MYSH_H_
@@ -98,7 +98,7 @@ int			exe_pipe(t_ast *ast, t_mysh *sh, t_job *job);
 int			exe_red(t_ast *ast, t_mysh *sh, t_job *job);
 
 int			do_red(int red_fd[3], t_ast *ast, t_mysh *sh, t_job *job);
-void                    exec_parallel(t_ast *ast, t_mysh *sh, int fd[2], t_job *job);
+int                     exec_parallel(t_ast *ast, t_mysh *sh, int fd[2], t_job *job);
 void                    exec_double_dash_left(t_list *list, int fd[2]);
 void                    check_dash_line(char *s, char *file, t_list *list);
 int			dash_left_check(int red_fd[3], t_ast *ast, t_mysh *sh, t_job *job);
