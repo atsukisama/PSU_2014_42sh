@@ -5,7 +5,7 @@
 ## Login   <cano_c@epitech.net>
 ## 
 ## Started on  Mon May  4 07:03:45 2015 
-## Last update Sun May 24 20:51:48 2015 Jimmy KING
+## Last update Sun May 24 22:27:17 2015 Vertigo
 ##
 
 NAME	= 42sh
@@ -28,7 +28,7 @@ SRCS	= lexer/lexer.c lexer/lexer_common.c lexer/lexer_red.c \
         builtins/historic.c builtins/historic_c.c builtins/alias.c \
 	list/list.c list/list_2.c list/list_goto.c \
 	exe/exe_cmd.c exe/exe_sep.c exe/exe_pipe.c exe/exe_red.c \
-	exe/handle_proc.c exe/exe_red_utils.c \
+	exe/handle_proc.c exe/exe_red_utils.c exe/glob_arg.c \
 	alias/alias.c prompt/prompt.c prompt/git.c \
 	autocomplet/autocomplet.c autocomplet/keys.c autocomplet/select.c \
 	autocomplet/select_list.c autocomplet/terminal.c autocomplet/get_string.c \

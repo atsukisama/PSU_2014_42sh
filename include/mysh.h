@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 09:57:43 2015 Vertigo
-** Last update Sun May 24 22:12:45 2015 Jimmy KING
+** Last update Sun May 24 22:24:21 2015 Vertigo
 */
 
 #ifndef MYSH_H_
@@ -66,6 +66,7 @@ int			my_sh(t_mysh *);
 */
 
 char			*get_line(t_mysh *);
+char			**glob_arg(char **, char **);
 int			my_char_isprintable(char);
 int			particular_key(char buf[4], int *, t_mysh *, char **);
 void			left_arrow(int *, char **, t_mysh *);

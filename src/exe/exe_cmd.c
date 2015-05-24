@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Fri May 15 06:14:14 2015 Chloe Cano
-** Last update Sun May 24 23:39:25 2015 Jimmy KING
+** Last update Sun May 24 22:31:16 2015 Vertigo
 */
 #include <mysh.h>
 #include <sys/wait.h>
@@ -20,7 +20,7 @@ int		exe_abs(char *cmd, char **arv, t_mysh *sh, t_job *job)
   char		**env;
   int		pid_status[2];
 
-  get_exe(&cmd);
+  arv = glob_arg(&cmd, arv);
   if ((pid_status[1] = is_exe(cmd, 1)))
     return (pid_status[1]);
   if (!(env = list_to_tab(sh->env_list)))
@@ -40,7 +40,7 @@ int		exe_abs(char *cmd, char **arv, t_mysh *sh, t_job *job)
     }
   else
     pid_status[1] = -1;
-  free(env);
+  free_dab(env);
   return (pid_status[1]);
 }
 

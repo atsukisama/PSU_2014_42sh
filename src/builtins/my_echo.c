@@ -5,7 +5,7 @@
 ** Login   <nicolas.rusig@epitech.eu>
 ** 
 ** Started on  Thu May 14 11:51:53 2015 rusig_n
-** Last update Sun May 17 19:46:48 2015 Vertigo
+** Last update Sun May 24 22:28:28 2015 Vertigo
 */
 
 #include <stdio.h>
@@ -116,11 +116,9 @@ int	print_echo(char **cmd, int opt, t_mysh *sh)
 int		my_echo(char **cmd, t_mysh *sh)
 {
   char		opt;
-  int		i;
   int		j;
 
   j = 0;
-  i = -1;
   opt = 0;
   if (cmd[1][j] == '-')
     {
