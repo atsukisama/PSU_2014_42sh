@@ -5,7 +5,7 @@
 ** Login   <rusig_n@epitech.net>
 ** 
 ** Started on  Sun Mar  8 17:54:31 2015 nicolas rusig
-** Last update Fri May 15 12:34:45 2015 Vertigo
+** Last update Sun May 24 21:14:33 2015 Jimmy KING
 */
 
 #include	<termios.h>
@@ -39,6 +39,10 @@ int		chk_bult_next(t_mysh *sh, char **cmd)
     return (my_history(sh->history, cmd, 1, 0));
   else if (cmd[0] && cmd[0][0] == '!')
     return (my_seek_history(sh, cmd[0] + 1, 0));
+  else if (cmd[0] && my_strcmp("alias", cmd[0]) == 0)
+    return (my_alias(sh, cmd));
+  else if (cmd[0] && my_strcmp("source", cmd[0]) == 0)
+    return (my_source(sh, cmd));
   else if (cmd[0] && my_strcmp("exit", cmd[0]) == 0)
     {
       my_exit_n(sh, cmd);

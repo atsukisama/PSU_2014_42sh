@@ -5,7 +5,7 @@
 ** Login   <king_j@epitech.eu>
 **
 ** Started on  Thu May 14 01:58:41 2015 king_j
-** Last update Sun May 24 13:19:13 2015 Vertigo
+** Last update Sun May 24 22:08:18 2015 Jimmy KING
 */
 
 #ifndef PROJECT_H_
@@ -43,5 +43,6 @@ int	xstrcmp(char *, char *);
 int	list_count(t_list *);
 void	alias_initialize(t_list *);
 char	*alias_replace(t_list *, char *);
+void	alias_getcontent(t_list *alias, char *str);
 
 #endif /* !PROJECT_H_ */

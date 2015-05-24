@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 09:57:43 2015 Vertigo
-** Last update Sun May 24 18:38:07 2015 Vertigo
+** Last update Sun May 24 22:12:45 2015 Jimmy KING
 */
 
 #ifndef MYSH_H_
@@ -147,6 +147,8 @@ int                     my_histo_c(t_list *history);
 int                     my_exit_n(t_mysh *sh, char **cmd);
 int                     exe_histo(char *line, t_mysh *sh);
 char			**anlyse_b(char **cmd);
+int			my_source(t_mysh *sh, char **cmd);
+int			my_alias(t_mysh *sh, char **cmd);
 
 /*
 ** MISC
@@ -169,6 +171,14 @@ char			*get_prompt(t_mysh *sh);
 char			*alias_replace(t_list *alias, char *cmd);
 int			git_check();
 char                    *get_branch_name(t_mysh *sh, char **branch, int *status);
+
+/*
+** ALIAS
+*/
+void			alias_getcontent(t_list *alias, char *str);
+void			alias_openfile(t_list *alias, char *file);
+char			*alias_get(t_list *alias, char *key);
+char			*alias_replace(t_list *alias, char *cmd);
 
 /*
 ** Autocompletion
