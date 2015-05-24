@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Fri May 15 06:14:14 2015 Chloe Cano
-** Last update Sun May 24 23:04:11 2015 
+** Last update Sun May 24 23:06:33 2015 
 */
 #include <mysh.h>
 #include <sys/wait.h>
@@ -119,6 +119,5 @@ int		exe_cmd(t_ast *ast, t_mysh *sh, t_job *job)
       tcsetpgrp(0, sh->pgid);
       can_set(sh->term);
     }
-  printf("%d\n", sh->status);
   return (sh->status);
 }
