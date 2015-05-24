@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 10:21:40 2015 Vertigo
-** Last update Sat May 23 18:34:18 2015 
+** Last update Sun May 24 23:14:52 2015 Jimmy KING
 */
 
 #include <stdio.h>
@@ -41,7 +41,8 @@ int	my_sh(t_mysh *sh)
       while (waitpid(-1, NULL, WNOHANG) != -1)
 	;
       tcsetpgrp(0, sh->pgid);
-      can_set(sh->term);
+      if (sh->is_tty)
+	can_set(sh->term);
     }
   if (sh->is_tty)
     can_set(sh->tsave);

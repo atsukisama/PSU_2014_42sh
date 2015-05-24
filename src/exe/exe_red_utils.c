@@ -5,7 +5,7 @@
 ** Login   <kerebe_p@epitech.eu>
 **
 ** Started on  Sat May 23 17:46:00 2015 Paul Kerebel
-** Last update Sun May 24 22:26:08 2015 Jimmy KING
+** Last update Sun May 24 23:19:19 2015 Jimmy KING
 */
 
 #include <sys/stat.h>
@@ -62,7 +62,8 @@ int		do_double_red(t_ast *ast, t_mysh *sh, char *s, t_job *job)
   t_list	*list;
 
   list = list_create();
-  can_set(sh->tsave);
+  if (sh->is_tty)
+    can_set(sh->tsave);
   while (s != NULL && my_strcmp(s, ast->left->content.file) != 0)
     {
       if (job->pgid)
@@ -77,7 +78,8 @@ int		do_double_red(t_ast *ast, t_mysh *sh, char *s, t_job *job)
     return (-1);
   if (pid == 0)
     exec_double_dash_left(list, fd);
-  can_set(sh->term);
+  if (sh->is_tty)
+    can_set(sh->term);
   return (exec_parallel(ast, sh, fd, job));
 }
 

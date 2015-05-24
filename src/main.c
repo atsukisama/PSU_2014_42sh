@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 09:45:35 2015 Vertigo
-** Last update Sun May 24 22:23:31 2015 Jimmy KING
+** Last update Sun May 24 23:24:12 2015 Jimmy KING
 */
 
 #include <sys/stat.h>
@@ -54,7 +54,8 @@ void	ctrl_c(int sign)
   sign = sign;
   write(1, "\n", 1);
   g_mysh->status = 1;
-  g_mysh->line[0] = 0;
+  if (g_mysh->line != NULL)
+    g_mysh->line[0] = 0;
   g_mysh->prompt = get_prompt(g_mysh);
   my_putstr(g_mysh->prompt);
   g_mysh->pos = 0;
