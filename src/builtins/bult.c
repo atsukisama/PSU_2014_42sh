@@ -5,7 +5,7 @@
 ** Login   <rusig_n@epitech.net>
 ** 
 ** Started on  Sun Mar  8 17:54:31 2015 nicolas rusig
-** Last update Sun May 24 21:14:33 2015 Jimmy KING
+** Last update Sun May 24 23:34:19 2015 
 */
 
 #include	<termios.h>
