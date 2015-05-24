@@ -15,8 +15,6 @@ t_ast		*parse_expr(t_ast **ast, t_lex **lexem)
   t_ast		*e_ast;
   t_ast		*tmp;
 
-  if (DEBUG_PARSER)
-    my_putstr("parser -> EXPR\n");
   if (*lexem && (*lexem)->type != LX_EOL)
     {
       if (!(e_ast = parse_instr(ast, lexem)))
