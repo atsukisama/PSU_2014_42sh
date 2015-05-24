@@ -25,7 +25,7 @@ char		*get_cur_pwd()
   i = 0;
   if (getcwd(pwd, sizeof(pwd)) == NULL)
     {
-      fprintf(stderr,"getcwd() error");
+      fprintf(stderr, "getcwd() error");
       return (NULL);
     }
   while (pwd[i])

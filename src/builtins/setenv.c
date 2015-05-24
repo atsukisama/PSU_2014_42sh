@@ -51,7 +51,6 @@ char		*dol_to_str(t_mysh *sh, char *str, int *i)
   return (val);
 }
 
-
 char		*convert_dol(char *str, t_mysh *sh)
 {
   int		i;
