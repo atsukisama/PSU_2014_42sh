@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 09:57:43 2015 Vertigo
-** Last update Sun May 24 13:19:40 2015 Vertigo
+** Last update Sun May 24 15:56:03 2015 Jimmy KING
 */
 
 #ifndef MYSH_H_
@@ -158,6 +158,7 @@ void			free_dab(char **);
 
 char			*get_prompt(t_list *env_list);
 char			*alias_replace(t_list *alias, char *cmd);
+int			git_check();
 
 /*
 ** Autocompletion
