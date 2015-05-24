@@ -28,9 +28,6 @@ void		init_ast(t_mysh *sh)
 int	my_sh(t_mysh *sh)
 {
   char	*line;
-  t_lex	*lex;
-  t_ast	*ast;
-  t_job	*job;
 
   sh->status = 0;
   sh->wait = 1;
@@ -39,16 +36,8 @@ int	my_sh(t_mysh *sh)
 	 || (!sh->is_tty && (line = get_next_line(0))))
     {
       line = alias_replace(sh->alias, line);
-      if ((lex = lexer(line)))
-	{
-	  if (!(job = my_memalloc(sizeof(*job))))
-	    return (-1);
-	  job->status = JOB_FG;
-	  if ((ast = parse_init(lex)))
-	    sh->status = sh->exe_ft[ast->type](ast, sh, job);
-	  else
-	    sh->status = 0;
-	}
+      if (exe_histo(line, sh) == -1)
+	return (-1);
       while (waitpid(-1, NULL, WNOHANG) != -1)
 	;
       tcsetpgrp(0, sh->pgid);

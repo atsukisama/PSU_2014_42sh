@@ -33,7 +33,7 @@ int		exe_abs(char *cmd, char **arv, t_mysh *sh, t_job *job)
 	{
 	  init_proc(sh, job);
 	  execve(cmd, arv, env);
-	  write(2, "42sh: failed to execute command\n", 32);
+	  fprintf(stderr, "42sh: failed to execute command\n");
 	  exit(126);
 	}
       if (!job->pgid)

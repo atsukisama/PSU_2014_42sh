@@ -16,7 +16,8 @@ void	up_arrow(int *pos, char **line, t_mysh *sh)
 {
   char	*tab[2];
 
-  if (sh->history->prev->key != NULL && sh->history->prev == send_root_hist(sh))
+  if (sh->history->prev->key != NULL &&
+      sh->history->prev == send_root_hist(sh))
     return;
   while (sh->history->prev->key == NULL)
     {
