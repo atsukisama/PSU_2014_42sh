@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 17:40:46 2015 Vertigo
-** Last update Sun May 24 13:00:23 2015 Vertigo
+** Last update Sun May 24 15:59:30 2015 Jimmy KING
 */
 
 #include <stdlib.h>
@@ -78,7 +78,7 @@ char	*get_line(t_mysh *sh)
   int	pos;
 
   pos = 0;
-  sh->prompt = get_prompt(sh->env_list);
+  sh->prompt = get_prompt(sh);
   my_putstr(sh->prompt);
   if (!(line = malloc(sizeof(*line))))
     return (NULL);

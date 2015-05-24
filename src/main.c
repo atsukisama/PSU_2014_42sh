@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 09:45:35 2015 Vertigo
-** Last update Sun May 24 02:14:55 2015 Jimmy KING
+** Last update Sun May 24 15:59:14 2015 Jimmy KING
 */
 
 #include <sys/stat.h>
@@ -44,7 +44,7 @@ int	init_sh(t_mysh *sh, char **env)
   if (access(HISTORY_FILE, R_OK) == 0)
     load_history(sh->history);
   env_collect(env, sh->env_list);
-  sh->prompt = get_prompt(sh->env_list);
+  sh->prompt = get_prompt(sh);
   return (0);
 }
 

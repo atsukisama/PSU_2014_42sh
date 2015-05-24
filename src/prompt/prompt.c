@@ -5,7 +5,7 @@
 ** Login   <king_j@epitech.net>
 **
 ** Started on  Sat May 23 20:28:44 2015 Jimmy KING
-** Last update Sun May 24 02:10:55 2015 Jimmy KING
+** Last update Sun May 24 03:42:07 2015 Jimmy KING
 */
 
 #include <sys/stat.h>
@@ -44,15 +44,34 @@ char	*prompt_getdir(t_list *env_list)
   return (NULL);
 }
 
-char	*get_prompt(t_list *env)
+char	*get_git()
+{
+  char	*git;
+
+  //PRE: \e[33mgit:(
+  //BRANCH: \033[01;39mmaster
+  //BRANCH STATUS OK : \e[32m✓
+  //BRANCH STATUS NOT OK : \e[31m✗
+  //POST: \e[33m)
+
+  git = "\e[33mgit:(\033[01;39mmaster \e[32m✓ \e[33m) ";
+  return (git);
+}
+
+char	*get_prompt(t_mysh *sh)
 {
   char		*prompt;
 
-  prompt = strdup("%arrow \033[01;36m%pwd \033[00m");
+  git_check();
+  prompt = strdup("%arrow \033[01;36m%pwd %git\033[00m");
   prompt = xreplace(prompt, "%arrow", strdup("\033[01;32m➜ \033[00m"));
-  if (prompt_getdir(env) != NULL)
-    prompt = xreplace(prompt, "%pwd", prompt_getdir(env));
-  //  if (get_hostname() != NULL && match(prompt, "*%hostname*"))
-  // prompt = xreplace(prompt, "%hostname", get_hostname());
+  if (prompt_getdir(sh->env_list) != NULL)
+    prompt = xreplace(prompt, "%pwd", prompt_getdir(sh->env_list));
+  //if (get_hostname() != NULL)
+    // prompt = xreplace(prompt, "%hostname", get_hostname());
+  if (git_check() == 0)
+    prompt = xreplace(prompt, "%git", get_git());
+  else
+    prompt = xreplace(prompt, "%git", "");
   return (prompt);
 }
