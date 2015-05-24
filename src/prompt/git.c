@@ -5,10 +5,11 @@
 ** Login   <king_j@epitech.net>
 **
 ** Started on  Sun May 24 03:01:44 2015 Jimmy KING
-** Last update Sun May 24 19:05:00 2015 Jimmy KING
+** Last update Mon May 25 00:56:57 2015 Jimmy KING
 */
 
 #include <sys/stat.h>
+#include <sys/wait.h>
 #include <fcntl.h>
 #include <get_next_line.h>
 #include "project.h"
@@ -63,14 +64,33 @@ void	exec_git(t_mysh *sh)
   free(env);
 }
 
+void	exec_gitparent(char **branch, int *status, int fd)
+{
+  char	*tmp;
+
+  *branch = get_next_line(fd);
+  tmp = get_next_line(fd);
+  free(tmp);
+  tmp = get_next_line(fd);
+  if (strcmp("nothing to commit, working directory clean", tmp) == 0)
+    *status = 1;
+  else
+    *status = 0;
+}
+
 char	*get_branch_name(t_mysh *sh, char **branch, int *status)
 {
   int	pid;
   int	pipes[2];
-  char	*tmp;
 
   pipe(pipes);
-  if ((pid = fork() == 0))
+  pid = fork();
+  if (pid == -1)
+    {
+      *branch = NULL;
+      *status = -1;
+    }
+  else if (pid == 0)
     {
       close(pipes[0]);
       dup2(pipes[1], 1);
@@ -80,13 +100,8 @@ char	*get_branch_name(t_mysh *sh, char **branch, int *status)
   else
     {
       close(pipes[1]);
-      *branch = get_next_line(pipes[0]);
-      tmp = get_next_line(pipes[0]);
-      tmp = get_next_line(pipes[0]);
-      if (strcmp("nothing to commit, working directory clean", tmp) == 0)
-        *status = 1;
-      else
-        *status = 0;
+      exec_gitparent(branch, status, pipes[0]);
+      waitpid(pid, NULL, 0);
     }
   return (NULL);
 }

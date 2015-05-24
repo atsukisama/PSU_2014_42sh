@@ -1,6 +1,7 @@
 alias		emacss		emacs -nw
 alias		ne		emacs -nw
-alias		sl		ls
+alias		ls		ls --color=auto
+alias		sl		ls --color=auto
 alias		cd..		cd ..
 alias		..		cd ..
 alias		...		cd ...
