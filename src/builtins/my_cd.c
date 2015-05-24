@@ -5,7 +5,7 @@
 ** Login   <nicolas.rusig@epitech.eu>
 ** 
 ** Started on  Thu May 14 12:29:31 2015 rusig_n
-** Last update Thu May 14 12:29:31 2015 rusig_n
+** Last update Mon May 25 01:28:38 2015 Jimmy KING
 */
 
 #include <dirent.h>
@@ -56,7 +56,7 @@ void            my_old_cd(t_mysh *sh)
   env_set(sh->env_list, "PWD", sh->pwd);
 }
 
-void            my_home_cd(t_mysh *sh)
+void		my_home_cd(t_mysh *sh)
 {
   char		*str;
 

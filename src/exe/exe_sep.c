@@ -4,9 +4,10 @@
 ** Made by Chloe Cano
 ** Login   <cano_c@epitech.net>
 ** 
-** Started on  Fri May 15 09:38:50 2015 
-** Last update Sat May 23 18:32:23 2015 
+** Started on  Fri May 15 09:38:50 2015 Chloe Cano
+** Last update Mon May 25 01:35:00 2015 Jimmy KING
 */
+
 #include <mysh.h>
 
 int		exe_and(t_ast *ast, t_mysh *sh, t_job *job)

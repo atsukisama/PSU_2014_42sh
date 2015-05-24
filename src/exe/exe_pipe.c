@@ -4,9 +4,10 @@
 ** Made by Chloe Cano
 ** Login   <cano_c@epitech.net>
 ** 
-** Started on  Fri May 15 10:38:48 2015 
-** Last update Sat May 23 18:25:26 2015 
+** Started on  Fri May 15 10:38:48 2015 Chloe Cano
+** Last update Mon May 25 01:33:10 2015 Jimmy KING
 */
+
 #include <mysh.h>
 #include <sys/types.h>
 #include <sys/select.h>
