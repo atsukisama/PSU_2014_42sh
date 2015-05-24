@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 22:06:16 2015 Vertigo
-** Last update Sun May 24 12:50:51 2015 Vertigo
+** Last update Sun May 24 13:24:30 2015 Vertigo
 */
 
 #include <string.h>
@@ -16,8 +16,15 @@ void	up_arrow(int *pos, char **line, t_mysh *sh)
 {
   char	*tab[2];
 
+  if (sh->history->prev->key != NULL && sh->history->prev == send_root_hist(sh))
+    return;
   while (sh->history->prev->key == NULL)
-    sh->history = sh->history->prev;
+    {
+      if (sh->history->prev->prev->key != NULL &&
+	  sh->history->prev->prev == send_root_hist(sh))
+	return;
+      sh->history = sh->history->prev;
+    }
   tab[0] = sh->history->prev->key;
   tab[1] = *line;
   display_line_hist(tab, pos, 2, sh);
@@ -31,6 +38,8 @@ void    down_arrow(int *pos, char **line, t_mysh *sh)
   char	*tab[2];
 
   if (my_strcmp(sh->history->key, "") == 0)
+    return;
+  if (sh->history->key != NULL && sh->history == send_root_hist(sh))
     return;
   while (sh->history->next->key == NULL)
     sh->history = sh->history->next;

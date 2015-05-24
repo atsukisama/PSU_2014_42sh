@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 09:57:43 2015 Vertigo
-** Last update Sun May 24 09:56:32 2015 Vertigo
+** Last update Sun May 24 13:19:40 2015 Vertigo
 */
 
 #ifndef MYSH_H_
@@ -72,6 +72,7 @@ void			display_line(char *tab[2], int , int, t_mysh *);
 void			clear_screen(t_mysh *, char *);
 void			my_exit(t_mysh *, int, char *, int *);
 void			list_goto_root_hist(t_mysh *);
+t_list			*send_root_hist(t_mysh *);
 int			save_history(t_list *);
 int			back_cursor(t_mysh *, int);
 int			forward_cursor(t_mysh *, int);
