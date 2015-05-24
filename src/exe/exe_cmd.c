@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Fri May 15 06:14:14 2015 Chloe Cano
-** Last update Sun May 24 22:31:16 2015 Vertigo
+** Last update Sun May 24 23:04:11 2015 
 */
 #include <mysh.h>
 #include <sys/wait.h>
@@ -39,9 +39,9 @@ int		exe_abs(char *cmd, char **arv, t_mysh *sh, t_job *job)
       proc_status(sh, pid_status[0], job);
     }
   else
-    pid_status[1] = -1;
+    sh->status = -1;
   free_dab(env);
-  return (pid_status[1]);
+  return (sh->status);
 }
 
 int		exe_path(char **cmd, t_mysh *sh, t_job *job)
@@ -119,5 +119,6 @@ int		exe_cmd(t_ast *ast, t_mysh *sh, t_job *job)
       tcsetpgrp(0, sh->pgid);
       can_set(sh->term);
     }
+  printf("%d\n", sh->status);
   return (sh->status);
 }
