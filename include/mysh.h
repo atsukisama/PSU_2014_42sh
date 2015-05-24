@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 09:57:43 2015 Vertigo
-** Last update Sun May 24 18:14:29 2015 Vertigo
+** Last update Sun May 24 18:38:07 2015 Vertigo
 */
 
 #ifndef MYSH_H_
@@ -82,6 +82,7 @@ int			back_cursor(t_mysh *, int);
 int			forward_cursor(t_mysh *, int);
 void			clear_plus(char **, t_mysh *, int);
 void			display_line_hist(char *tab[2], int *, int, t_mysh *);
+void			ctrl_c(int);
 
 /*
 ** termcaps

@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Thu May 21 15:30:23 2015 Vertigo
-** Last update Sun May 24 14:15:53 2015 Vertigo
+** Last update Sun May 24 18:40:00 2015 Vertigo
 */
 
 #include <mysh.h>
@@ -53,9 +53,17 @@ char		*get_selected(t_complet *args)
 int		init_autocomplet(char **args, t_mysh *sh, char **line, int *pos)
 {
   if ((g_select.tty = open("/dev/tty", O_RDWR)) < 0)
-    return (my_putstr("Error, could not open \"/dev/tty\"\n"));
+    {
+      fprintf(stderr, "Error, could not open \"/dev/tty\"\n");
+      ctrl_c(0);
+      return (1);
+    }
   if ((tgetent(NULL, get_var_env(sh->env_list, "TERM"))) != 1)
-    return (my_putstr("Environment fail, autocomplet terminated.\n"));
+    {
+      fprintf(stderr, "Environment fail, autocomplet terminated.\n");
+      ctrl_c(0);
+      return (1);
+    }
   g_select.args = select_create();
   collect_args(g_select.args, args);
   signal(SIGWINCH, terminal_hook);
