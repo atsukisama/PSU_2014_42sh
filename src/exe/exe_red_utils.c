@@ -25,17 +25,16 @@ void    check_dash_line(char *s, char *file, t_list *list)
 
 int     exec_parallel(t_ast *ast, t_mysh *sh, int fd[2], t_job *job)
 {
-  int   s;
+  int   s_fd;
   int	ret;
 
   close(fd[1]);
-  if ((s = dup(0)) < -1)
+  if ((s_fd = dup(0)) == -1)
     return (-1);
-  if ((dup2(fd[0], 0) < -1))
+  if ((dup2(fd[0], 0)) == -1)
     return (-1);
   sh->status = sh->exe_ft[ast->right->type](ast->right, sh, job);
-  ret = dup2(0, fd[0]);
-  ret = dup2(s, 0);
+  ret = dup2(s_fd, 0);
   if (ret && !sh->status)
     sh->status = -1;
   return (sh->status);
@@ -46,7 +45,7 @@ void             exec_double_dash_left(t_list *list, int fd[2])
   t_list        *tmp;
 
   close(fd[0]);
-  if (dup2(fd[1], 1))
+  if (dup2(fd[1], 1) == -1)
     exit(-1);
   tmp = list->next;
   while (tmp != list)
@@ -55,8 +54,6 @@ void             exec_double_dash_left(t_list *list, int fd[2])
       my_putchar('\n');
       tmp = tmp->next;
     }
-  if (dup2(1, fd[1]))
-    exit(-1);
   exit(0);
 }
 
@@ -72,7 +69,6 @@ int             do_double_red(t_ast *ast, t_mysh *sh, char *s, t_job *job)
     {
       if (job->pgid)
 	tcsetpgrp(0, job->pgid);
-      write(0, "> ", 2);
       s = get_next_line(0);
       check_dash_line(s, ast->left->content.file, list);
     }
