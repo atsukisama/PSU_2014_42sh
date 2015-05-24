@@ -45,7 +45,7 @@ void    alias_openfile(t_list *alias, char *file)
   char  *tmp;
 
   if ((fd = open(file, O_RDONLY)) == -1)
-    printf("Error when oppening file : %s\n", file);
+    fprintf(stderr, "Error when oppening file : %s\n", file);
   else
     {
       while ((tmp = get_next_line(fd)) != NULL)

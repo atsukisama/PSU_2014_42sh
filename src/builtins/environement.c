@@ -61,7 +61,7 @@ char		*env_replacestr(t_list *list, char *content, int *err)
     }
   content = env_replace_tilde(list, content, err);
   if (*err == 2)
-    printf("(~)HOME: Undefined variable.\n");
+    fprintf(stderr, "(~)HOME: Undefined variable.\n");
   return (content);
 }
 

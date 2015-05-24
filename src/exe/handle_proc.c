@@ -53,7 +53,6 @@ int		proc_status(t_mysh *sh, int pid, t_job *job)
   return (sh->status);
 }
 
-
 int	control_term(t_mysh *sh)
 {
   int	pgid;
