@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Tue May 19 15:55:37 2015 Vertigo
-** Last update Sun May 24 18:34:48 2015 Vertigo
+** Last update Sun May 24 18:45:36 2015 Vertigo
 */
 
 #include <sys/ioctl.h>
@@ -17,9 +17,14 @@ int			forward_cursor(t_mysh *sh, int pos)
   int			nb;
   struct winsize	ws;
   int			i;
+  int			less;
 
-  ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws);
-  nb = my_strlen(sh->prompt) + pos - 53;
+  less = 53;
+  if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws) == -1)
+    return (-1);
+  if (git_check() != 1)
+    less = 28;
+  nb = my_strlen(sh->prompt) + pos - less;
   while (nb >= ws.ws_col)
     nb -= ws.ws_col;
   if (nb == ws.ws_col - 1)
@@ -39,9 +44,14 @@ int			back_cursor(t_mysh *sh, int pos)
   int			nb;
   struct winsize	ws;
   int			i;
+  int			less;
 
-  ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws);
-  nb = my_strlen(sh->prompt) + pos - 53;
+  less = 53;
+  if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws) == -1)
+    return (-1);
+  if (git_check() != 1)
+    less = 28;
+  nb = my_strlen(sh->prompt) + pos - less;
   while (nb >= ws.ws_col)
     nb -= ws.ws_col;
   if (nb == 0)
