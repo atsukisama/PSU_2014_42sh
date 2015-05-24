@@ -63,13 +63,25 @@ int		check_cd_error(char **tab)
 
   if (tab[1] && (access(tab[1], F_OK & R_OK) == -1) && tab[1][0] != '-')
     {
-      printf("bash: cd: %s : No such file or directory\n", tab[1]);
+      printf("42sh: cd: %s : No such file or directory\n", tab[1]);
       return (-1);
     }
   if (tab[1] && tab[1][0] != '-' && (dir = opendir(tab[1])) == NULL)
     {
-      printf("bash: cd: %s : Not a directory\n", tab[1]);
+      printf("42sh: cd: %s : Not a directory\n", tab[1]);
       return (-1);
     }
   return (0);
+}
+
+char		*my_malloc(int len, t_mysh *sh)
+{
+  char		*tmp;
+
+  if ((tmp = malloc(len)) == NULL)
+    {
+      my_putstr("malloc error\n");
+      my_exit_n(sh, NULL);
+    }
+  return (tmp);
 }

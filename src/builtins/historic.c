@@ -81,7 +81,7 @@ char		*histo_str(t_mysh *sh, char *val)
       tmp = tmp->prev;
       i--;
     }
-  printf("bash: !%s: event not found\n", val);
+  printf("42sh: !%s: event not found\n", val);
   return (NULL);
 }
 
@@ -105,9 +105,6 @@ char		*histo_neg(int nb, t_mysh *sh)
 int		my_seek_history(t_mysh *sh, char *val, int nb)
 {
   char		*line;
-  t_lex		*lex;
-  t_ast		*ast;
-  t_job		*job;
 
   if (val && (my_strcmp(val, "") == 0 || val[0] == '!'))
     return (1);
@@ -123,16 +120,8 @@ int		my_seek_history(t_mysh *sh, char *val, int nb)
   if (line == NULL)
     return (1);
   line = alias_replace(sh->alias, line);
-  if ((lex = lexer(line)))
-    {
-      if (!(job = my_memalloc(sizeof(*job))))
-	return (-1);
-      job->status = JOB_FG;
-      if ((ast = parse_init(lex)))
-	sh->status = sh->exe_ft[ast->type](ast, sh, job);
-      else
-	sh->status = 0;
-    }
+  if (exe_histo(line, sh) == -1)
+    return (-1);
   return (1);
 }
 

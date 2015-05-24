@@ -31,3 +31,22 @@ int		my_histo_c(t_list *history)
   close(fd);
   return (0);
 }
+
+int		exe_histo(char *line, t_mysh *sh)
+{
+  t_ast         *ast;
+  t_job         *job;
+  t_lex         *lex;
+
+  if ((lex = lexer(line)))
+    {
+      if (!(job = my_memalloc(sizeof(*job))))
+	return (-1);
+      job->status = JOB_FG;
+      if ((ast = parse_init(lex)))
+	sh->status = sh->exe_ft[ast->type](ast, sh, job);
+      else
+	sh->status = 0;
+    }
+  return (0);
+}

@@ -119,6 +119,7 @@ int			get_exe(char **cmd);
 ** Builtins
 */
 
+char			*my_malloc(int len, t_mysh *sh);
 int                     chk_bult(t_mysh *sh, char **cmd);
 int                     my_cd(t_mysh *sh, char **tab);
 int                     my_unsetenv(t_mysh *sh, char **cmd);
@@ -130,7 +131,7 @@ char                    *histo_neg(int nb, t_mysh *sh);
 char                    *histo_str(t_mysh *sh, char *val);
 int                     my_history(t_list *history, char **, int, int);
 int                     is_num(char *str);
-int                     echo_dol(char *s, int *i, t_mysh *sh);
+int                     echo_dol(char *s, int *i, t_mysh *sh, int j);
 char                    *get_var_env(t_list *list, char *var);
 int                     size_histo(t_list *history);
 int                     check_cd_error(char **);
@@ -138,6 +139,8 @@ char                    *convert_dol(char *str, t_mysh *sh);
 int                     check_dol(char *str);
 int                     get_dol_size(char *s, int i);
 int                     my_histo_c(t_list *history);
+int                     my_exit_n(t_mysh *sh, char **cmd);
+int                     exe_histo(char *line, t_mysh *sh);
 
 /*
 ** MISC

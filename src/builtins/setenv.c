@@ -35,7 +35,7 @@ char		*dol_to_str(t_mysh *sh, char *str, int *i)
 
   k = 0;
   len = get_dol_size(str, ++(*i));
-  var = malloc(sizeof(char *) * len);
+  var = my_malloc(sizeof(char *) * len, sh);
   while (len > 0)
     {
       var[k++] = str[(*i)++];
@@ -62,7 +62,7 @@ char		*convert_dol(char *str, t_mysh *sh)
 
   i = 0;
   j = 0;
-  tmp = malloc(sizeof(char *) * 2);
+  tmp = my_malloc(sizeof(char *) * my_strlen(str), sh);
   while (str[i])
     {
       k = 0;
@@ -72,11 +72,11 @@ char		*convert_dol(char *str, t_mysh *sh)
 	    return (NULL);
 	  while (val[k])
 	    tmp[j++] = val[k++];
-	  free(val);
 	}
       else
 	tmp[j++] = str[i++];
     }
+  tmp[j] = 0;
   return (tmp);
 }
 
@@ -102,7 +102,7 @@ int		my_setenv(t_mysh *sh, char **cmd)
       if (check_dol(val))
 	if ((val = (convert_dol(val, sh))) == NULL)
 	  return (-1);
-      if (var == NULL || my_strlen(var) == 0 || my_strchr(var, '=') != NULL)
+      if (var == NULL)
 	return (my_puterror("error var null\n", -1));
       env_set(sh->env_list, var, val);
     }

@@ -14,51 +14,34 @@
 #include	<project.h>
 #include	<mysh.h>
 
-int		my_exit_n(t_mysh *sh, char **tab)
-{
-  int		ret;
-
-  sh->tsave->c_lflag |= ICANON;
-  sh->tsave->c_lflag |= ECHO;
-  if ((tcsetattr(0, TCSANOW, sh->tsave)) == -1)
-    fprintf(stderr, "error : can't set values\n");
-  ret = 0;
-  save_history(sh->history);
-  if (tab && tab[0] && tab[1])
-    ret = my_getnbr(tab[1]);
-  exit(ret);
-}
-
-int		chk_bult_next(t_mysh *sh, char **cmd)
+int		chk_bult_b2(t_mysh *sh, char **cmd)
 {
   if (cmd[0] && my_strcmp("cd", cmd[0]) == 0)
-    return (my_cd(sh, cmd));
+    return (1);
   else if (cmd[0] && my_strcmp("echo", cmd[0]) == 0)
-    return (my_echo(cmd, sh));
+    return (1);
   else if (cmd[0] && my_strcmp("history", cmd[0]) == 0)
-    return (my_history(sh->history, cmd, 1, 0));
+    return (1);
   else if (cmd[0] && cmd[0][0] == '!')
-    return (my_seek_history(sh, cmd[0] + 1, 0));
+    return (1);
   else if (cmd[0] && my_strcmp("exit", cmd[0]) == 0)
     {
-      my_exit_n(sh, cmd);
       return (1);
     }
   return (0);
 }
 
-int		chk_bult(t_mysh *sh, char **cmd)
+int		chk_bult_b(t_mysh *sh, char **cmd)
 {
   if (cmd[0][0] == '\0')
     return (0);
   else if (my_strcmp("env", cmd[0]) == 0)
     {
-      env_show(sh->env_list);
       return (1);
     }
   else if (cmd[0] && my_strcmp("setenv", cmd[0]) == 0)
-    return (my_setenv(sh, cmd));
+    return (1);
   else if (cmd[0] && my_strcmp("unsetenv", cmd[0]) == 0)
-    return (my_unsetenv(sh, cmd));
-  return (chk_bult_next(sh, cmd));
+    return (1);
+  return (chk_bult_b2(sh, cmd));
 }

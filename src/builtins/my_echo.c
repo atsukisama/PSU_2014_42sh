@@ -52,7 +52,7 @@ int	exe_echo_opt_e(char *str, t_mysh *sh, int i)
 	}
       else if (str[i] == '$')
 	{
-	  echo_dol(str, &i, sh);
+	  echo_dol(str, &i, sh, 0);
 	  if (str[i] != '0')
 	    i--;
 	}
@@ -78,7 +78,7 @@ int	exe_echo(char *str, int opt, t_mysh *sh)
 	{
 	  if (str[i] == '$')
 	    {
-	      echo_dol(str, &i, sh);
+	      echo_dol(str, &i, sh, 0);
 	      if (str[i] != '0')
 		i--;
 	    }

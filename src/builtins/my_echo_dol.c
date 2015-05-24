@@ -52,13 +52,11 @@ int	get_dol_size(char *s, int i)
   return (j);
 }
 
-int	echo_dol(char *s, int *i, t_mysh *sh)
+int	echo_dol(char *s, int *i, t_mysh *sh, int j)
 {
-  int	j;
   char	*str;
   char	*val;
 
-  j = 0;
   (*i)++;
   if (is_dol_print(s[*i], sh) == 1)
     my_putchar('$');
@@ -69,10 +67,11 @@ int	echo_dol(char *s, int *i, t_mysh *sh)
     }
   else
     {
-      str = malloc(get_dol_size(s, *i) * sizeof(*str));
+      str = my_malloc(get_dol_size(s, *i) * sizeof(str), sh);
       j = 0;
       while ((s[*i] >= 'a' && s[*i] <= 'z') || (s[*i] >= 'A' && s[*i] <= 'Z'))
 	str[j++] = s[(*i)++];
+      str[j] = 0;
       if ((val = get_var_env(sh->env_list, str)) == NULL)
 	return (0);
       else
