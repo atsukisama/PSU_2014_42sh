@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 09:45:35 2015 Vertigo
-** Last update Sun May 24 15:59:14 2015 Jimmy KING
+** Last update Sun May 24 18:22:15 2015 Vertigo
 */
 
 #include <sys/stat.h>
@@ -48,9 +48,15 @@ int	init_sh(t_mysh *sh, char **env)
   return (0);
 }
 
-void	sig(int sign)
+void	ctrl_c(int sign)
 {
   sign = sign;
+  write(1, "\n", 1);
+  g_mysh->status = 1;
+  g_mysh->line[0] = 0;
+  g_mysh->prompt = get_prompt(g_mysh);
+  my_putstr(g_mysh->prompt);
+  g_mysh->pos = 0;
 }
 
 void		free_sh(t_mysh *sh)
@@ -61,19 +67,18 @@ void		free_sh(t_mysh *sh)
 
 int		main(int ac, char **av, char **env)
 {
-  t_mysh	*sh;
   int		ret;
 
   (void)ac;
   (void)av;
-  if (!(sh = malloc(sizeof(*sh))))
+  if (!(g_mysh = malloc(sizeof(*g_mysh))))
     malloc_error();
-  signal(SIGINT, sig);
-  if (init_sh(sh, env))
+  signal(SIGINT, ctrl_c);
+  if (init_sh(g_mysh, env))
     return (-1);
-  ret = my_sh(sh);
-  list_goto_root_hist(sh);
-  save_history(sh->history);
-  free_sh(sh);
+  ret = my_sh(g_mysh);
+  list_goto_root_hist(g_mysh);
+  save_history(g_mysh->history);
+  free_sh(g_mysh);
   return (ret);
 }

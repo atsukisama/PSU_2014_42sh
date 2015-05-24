@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Wed May 20 19:14:07 2015
-** Last update Sat May 23 18:35:24 2015 
+** Last update Sun May 24 18:17:33 2015 Vertigo
 */
 #include <mysh.h>
 
@@ -17,7 +17,6 @@ int		init_proc(t_mysh *sh, t_job *job)
     {
       can_set(sh->tsave);
       signal(SIGQUIT, SIG_DFL);
-      signal(SIGINT, SIG_DFL);
       signal(SIGSTOP, SIG_DFL);
       signal(SIGTTIN, SIG_DFL);
       signal(SIGTTOU, SIG_DFL);
@@ -64,7 +63,6 @@ int	control_term(t_mysh *sh)
       while (tcgetpgrp(0) != (pgid = getpgrp()))
         kill(-pgid, SIGTTIN);
       signal(SIGQUIT, SIG_IGN);
-      signal(SIGINT, SIG_IGN);
       signal(SIGSTOP, SIG_IGN);
       signal(SIGTTIN, SIG_IGN);
       signal(SIGTTOU, SIG_IGN);

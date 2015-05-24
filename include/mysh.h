@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 09:57:43 2015 Vertigo
-** Last update Sun May 24 17:49:43 2015 Jimmy KING
+** Last update Sun May 24 18:14:29 2015 Vertigo
 */
 
 #ifndef MYSH_H_
@@ -21,7 +21,7 @@
 # include "list.h"
 # include "parser.h"
 
-# define HISTORY_FILE	".42sh_history"
+# define HISTORY_FILE	"/tmp/.42sh_history"
 
 typedef struct s_mysh	t_mysh;
 typedef struct s_job	t_job;
@@ -43,6 +43,8 @@ struct			s_mysh
   int			status;
   char			*oldpwd;
   char			*pwd;
+  char			*line;
+  int			pos;
   t_list		*env_list;
   t_list		*history;
   t_list		*alias;
@@ -54,6 +56,8 @@ struct			s_mysh
   int			is_tty;
   int			pgid;
 };
+
+t_mysh			*g_mysh;
 
 int			my_sh(t_mysh *);
 

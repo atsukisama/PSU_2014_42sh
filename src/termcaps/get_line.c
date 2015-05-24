@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 17:40:46 2015 Vertigo
-** Last update Sun May 24 15:59:30 2015 Jimmy KING
+** Last update Sun May 24 18:16:05 2015 Vertigo
 */
 
 #include <stdlib.h>
@@ -73,21 +73,19 @@ char	*my_writer(char buf[3], char *line, int *pos, t_mysh *sh)
 
 char	*get_line(t_mysh *sh)
 {
-  char	*line;
   char	buf[4];
-  int	pos;
 
-  pos = 0;
+  sh->pos = 0;
   sh->prompt = get_prompt(sh);
   my_putstr(sh->prompt);
-  if (!(line = malloc(sizeof(*line))))
+  if (!(sh->line = malloc(sizeof(*sh->line))))
     return (NULL);
-  line[0] = '\0';
+  sh->line[0] = '\0';
   while (read(0, buf, 4) > 0 && buf[0] != '\n' &&
-	 (line = (my_writer(buf, line, &pos, sh))) != NULL);
+	 (sh->line = (my_writer(buf, sh->line, &sh->pos, sh))) != NULL);
   my_putchar('\n');
   list_goto_root_hist(sh);
-  if (line && line[0] != '\0' && match(line, "*!*") != 1)
-    list_add(sh->history, line, "");
-  return (line);
+  if (sh->line && sh->line[0] != '\0' && match(sh->line, "*!*") != 1)
+    list_add(sh->history, sh->line, "");
+  return (sh->line);
 }
