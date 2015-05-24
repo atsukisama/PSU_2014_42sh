@@ -23,8 +23,9 @@ int		my_exit_n(t_mysh *sh, char **tab)
   if ((tcsetattr(0, TCSANOW, sh->tsave)) == -1)
     fprintf(stderr, "error : can't set values\n");
   ret = 0;
+  save_history(sh->history);
   if (tab[1])
-    ret = atoi(tab[1]);
+    ret = my_getnbr(tab[1]);
   exit(ret);
 }
 
@@ -35,9 +36,9 @@ int		chk_bult2(t_mysh *sh, char **cmd)
   else if (cmd[0] && my_strcmp("echo", cmd[0]) == 0)
     return (my_echo(cmd, sh));
   else if (cmd[0] && my_strcmp("history", cmd[0]) == 0)
-    return (my_history(sh->history));
+    return (my_history(sh->history, cmd, 1, 0));
   else if (cmd[0] && cmd[0][0] == '!')
-    return (my_seek_history(sh->history, cmd[0] + 1));
+    return (my_seek_history(sh, cmd[0] + 1, 0));
   else if (cmd[0] && my_strcmp("exit", cmd[0]) == 0)
     {
       my_exit_n(sh, cmd);
@@ -56,8 +57,8 @@ int		chk_bult(t_mysh *sh, char **cmd)
       return (1);
     }
   else if (cmd[0] && my_strcmp("setenv", cmd[0]) == 0)
-    return (my_setenv(sh->env_list, cmd));
+    return (my_setenv(sh, cmd));
   else if (cmd[0] && my_strcmp("unsetenv", cmd[0]) == 0)
-    return (my_unsetenv(sh->env_list, cmd));
+    return (my_unsetenv(sh, cmd));
   return (chk_bult2(sh, cmd));
 }

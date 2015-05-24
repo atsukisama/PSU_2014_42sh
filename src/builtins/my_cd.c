@@ -5,27 +5,33 @@
 ** Login   <nicolas.rusig@epitech.eu>
 ** 
 ** Started on  Thu May 14 12:29:31 2015 rusig_n
-** Last update Wed May 20 19:34:23 2015 Cano Chloe
+** Last update Thu May 14 12:29:31 2015 rusig_n
 */
 
-# include       <sys/wait.h>
-# include       <sys/time.h>
-# include       <sys/types.h>
-# include       <stdlib.h>
-# include       <unistd.h>
-# include	"project.h"
+#include <dirent.h>
+#include <sys/wait.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include "project.h"
 
 char		*get_cur_pwd()
 {
   char		pwd[1024];
   char		*res;
+  int		i;
 
+  i = 0;
   if (getcwd(pwd, sizeof(pwd)) == NULL)
     {
-      fprintf(stderr, "getcwd() error");
+      fprintf(stderr,"getcwd() error");
       return (NULL);
     }
-  res = pwd;
+  while (pwd[i])
+    i++;
+  res = my_strdup(pwd);
+  res[i] = 0;
   return (res);
 }
 
@@ -71,12 +77,8 @@ int            my_cd(t_mysh *sh, char **tab)
   sh->pwd = get_cur_pwd();
   if (sh->oldpwd == NULL)
     sh->oldpwd = sh->pwd;
-  if ((access(tab[1], F_OK & R_OK) == -1) && tab[1] && tab[1][0] != '-')
-    {
-      printf("bash: cd: %s", tab[1]);
-      printf(": No such file or directory\n");
-      return (-1);
-    }
+  if (check_cd_error(tab) == -1)
+    return (-1);
   if (tab[1] == NULL)
     my_home_cd(sh);
   else if (tab[1][0] == '-')

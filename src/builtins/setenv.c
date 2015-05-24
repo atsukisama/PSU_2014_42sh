@@ -12,39 +12,99 @@
 #include <unistd.h>
 #include "project.h"
 
-char	*add_egale(char *var)
+int		check_dol(char *str)
 {
-  int	size;
-  char	*tmp;
-  int	i;
+  int		i;
 
-  size = my_strlen(var);
-  if ((tmp = (char*)malloc(size + 2)) == NULL)
-    return (NULL);
   i = 0;
-  while (var[i])
-  {
-    tmp[i] = var[i];
-    i = i + 1;
-  }
-  tmp[i++] = '=';
-  tmp[i] = 0;
+  while (str[i])
+    {
+      if (str[i] == '$')
+	return (1);
+      i++;
+    }
+  return (0);
+}
+
+char		*dol_to_str(t_mysh *sh, char *str, int *i)
+{
+  int		len;
+  char		*var;
+  char		*val;
+  int		k;
+
+  k = 0;
+  len = get_dol_size(str, ++(*i));
+  var = malloc(sizeof(char *) * len);
+  while (len > 0)
+    {
+      var[k++] = str[(*i)++];
+      len--;
+    }
+  var[k] = 0;
+  if ((val = get_var_env(sh->env_list, var)) == NULL)
+    {
+      printf("%s: Undefined variable\n", var);
+      return (NULL);
+    }
+  free(var);
+  return (val);
+}
+
+
+char		*convert_dol(char *str, t_mysh *sh)
+{
+  int		i;
+  int		j;
+  int		k;
+  char		*tmp;
+  char		*val;
+
+  i = 0;
+  j = 0;
+  tmp = malloc(sizeof(char *) * 2);
+  while (str[i])
+    {
+      k = 0;
+      if (str[i] == '$')
+	{
+	  if ((val = dol_to_str(sh, str, &i)) == NULL)
+	    return (NULL);
+	  while (val[k])
+	    tmp[j++] = val[k++];
+	  free(val);
+	}
+      else
+	tmp[j++] = str[i++];
+    }
   return (tmp);
 }
 
-int		my_setenv(t_list *list, char **cmd)
+int		my_setenv(t_mysh *sh, char **cmd)
 {
+  char		*var;
+  char		*val;
+
   if (cmd[1] == NULL)
-    return (my_puterror("usage: setenv [key] [content] or setenv [key] \n",
-			-1));
+    {
+      env_show(sh->env_list);
+      return (1);
+    }
+  var = cmd[1];
+  if (check_dol(var))
+    if ((var = (convert_dol(var, sh))) == NULL)
+      return (-1);
   if (cmd[2] == NULL)
-    env_set(list, cmd[1], "");
+    env_set(sh->env_list, var, "");
   else
     {
-      if (cmd[1] == NULL || my_strlen(cmd[1]) == 0
-	  || my_strchr(cmd[1], '=') != NULL)
-	return (my_puterror("error cmd[1] null\n", -1));
-      env_set(list, cmd[1], cmd[2]);
+      val = cmd[2];
+      if (check_dol(val))
+	if ((val = (convert_dol(val, sh))) == NULL)
+	  return (-1);
+      if (var == NULL || my_strlen(var) == 0 || my_strchr(var, '=') != NULL)
+	return (my_puterror("error var null\n", -1));
+      env_set(sh->env_list, var, val);
     }
   return (1);
 }
