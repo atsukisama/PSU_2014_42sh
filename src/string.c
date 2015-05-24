@@ -5,7 +5,7 @@
 ** Login   <king_j@epitech.net>
 **
 ** Started on  Thu May 14 00:41:06 2015 Jimmy KING
-** Last update Sat May 23 17:06:02 2015 Jimmy KING
+** Last update Sun May 24 22:24:45 2015 Jimmy KING
 */
 
 #include <stdlib.h>
@@ -14,9 +14,9 @@
 /*
 ** Compare two strings and return the differance
 */
-int     xstrcmp(char *str_1, char *str_2)
+int	xstrcmp(char *str_1, char *str_2)
 {
-  int   n;
+  int	n;
 
   n = 0;
   while (str_1[n] && str_2[n] && str_1[n] == str_2[n])
@@ -27,10 +27,10 @@ int     xstrcmp(char *str_1, char *str_2)
 /*
 ** Copy a string to the end of a another string
 */
-char    *xstrcat(char *dest, char *src)
+char	*xstrcat(char *dest, char *src)
 {
-  int   n;
-  int   i;
+  int	n;
+  int	i;
 
   n = 0;
   i = xlen(dest);
@@ -43,10 +43,10 @@ char    *xstrcat(char *dest, char *src)
 /*
 ** Copy 'x' character of  a string to the end of a another string
 */
-char    *xstrncat(char *dest, char *src, int len)
+char	*xstrncat(char *dest, char *src, int len)
 {
-  int   n;
-  int   i;
+  int	n;
+  int	i;
 
   n = 0;
   i = xlen(dest);

@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 22:06:16 2015 Vertigo
-** Last update Sun May 24 13:24:30 2015 Vertigo
+** Last update Sun May 24 22:34:38 2015 Jimmy KING
 */
 
 #include <string.h>
@@ -34,7 +34,7 @@ void	up_arrow(int *pos, char **line, t_mysh *sh)
   *pos = my_strlen(*line);
 }
 
-void    down_arrow(int *pos, char **line, t_mysh *sh)
+void	down_arrow(int *pos, char **line, t_mysh *sh)
 {
   char	*tab[2];
 

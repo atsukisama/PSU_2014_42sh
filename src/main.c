@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 09:45:35 2015 Vertigo
-** Last update Sun May 24 18:22:15 2015 Vertigo
+** Last update Sun May 24 22:23:31 2015 Jimmy KING
 */
 
 #include <sys/stat.h>
@@ -22,11 +22,12 @@ void	load_history(t_list *history)
   int	fd;
   char	*s;
 
-  if ((fd = open(HISTORY_FILE, O_RDONLY)) < 0)
-    return;
-  while ((s = get_next_line(fd)) != NULL)
-    list_add(history, s, "");
-  close(fd);
+  if ((fd = open(HISTORY_FILE, O_RDONLY)) >= 0)
+    {
+      while ((s = get_next_line(fd)) != NULL)
+	list_add(history, s, "");
+      close(fd);
+    }
 }
 
 int	init_sh(t_mysh *sh, char **env)

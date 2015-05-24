@@ -5,7 +5,7 @@
 ** Login   <fulmine@epitech.net>
 **
 ** Started on  Thu Jan  8 22:59:29 2015 KING Jimmy
-** Last update Sat May 23 15:45:41 2015 Vertigo
+** Last update Sun May 24 22:29:58 2015 Jimmy KING
 */
 
 #include <autocomplet.h>
@@ -13,7 +13,7 @@
 /*
 ** Event when the key SPACE is pressed
 */
-void    key_space(t_complet *args, int *n)
+void	key_space(t_complet *args, int *n)
 {
   if (terminal_checksize())
     {
@@ -30,7 +30,7 @@ void    key_space(t_complet *args, int *n)
 /*
 ** Event when the key DELETE or BACKSPACE is pressed
 */
-int   key_delete(t_complet *args, int *n, t_mysh *sh, char *line)
+int	key_delete(t_complet *args, int *n, t_mysh *sh, char *line)
 {
   if (terminal_checksize())
     {
@@ -50,7 +50,7 @@ int   key_delete(t_complet *args, int *n, t_mysh *sh, char *line)
 /*
 ** Event when left arrow or right arrow is pressed
 */
-void    arrows_left_right(t_complet *args, int *n, int key)
+void	arrows_left_right(t_complet *args, int *n, int key)
 {
   if (key == MKEY_RIGHT && (*n + g_select.rows) <= complet_count(args))
     *n = g_select.rows + *n - 1;
@@ -63,7 +63,7 @@ void    arrows_left_right(t_complet *args, int *n, int key)
 /*
 ** Event when an arrow key is pressed
 */
-void    key_arrows(t_complet *args, int *n, int key)
+void	key_arrows(t_complet *args, int *n, int key)
 {
   if (terminal_checksize())
     {
