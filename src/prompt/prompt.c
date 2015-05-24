@@ -5,7 +5,7 @@
 ** Login   <king_j@epitech.net>
 **
 ** Started on  Sat May 23 20:28:44 2015 Jimmy KING
-** Last update Sun May 24 03:42:07 2015 Jimmy KING
+** Last update Sun May 24 17:45:06 2015 Jimmy KING
 */
 
 #include <sys/stat.h>
@@ -44,17 +44,21 @@ char	*prompt_getdir(t_list *env_list)
   return (NULL);
 }
 
-char	*get_git()
+char	*get_git(t_mysh *sh)
 {
   char	*git;
+  char	*branch;
+  int	status;
 
-  //PRE: \e[33mgit:(
-  //BRANCH: \033[01;39mmaster
-  //BRANCH STATUS OK : \e[32m✓
-  //BRANCH STATUS NOT OK : \e[31m✗
-  //POST: \e[33m)
-
-  git = "\e[33mgit:(\033[01;39mmaster \e[32m✓ \e[33m) ";
+  status = 0;
+  get_branch_name(sh, &branch, &status);
+  branch = words_get(branch, 3, " ");
+  git = "\e[33mgit:(\033[01;39m%branch %git_status\e[33m) ";
+  git = xreplace(git, "%branch", branch);
+  if (status == 1)
+    git = xreplace(git, "%git_status", "\e[32m✓");
+  else
+    git = xreplace(git, "%git_status", "\e[31m✗");
   return (git);
 }
 
@@ -62,15 +66,15 @@ char	*get_prompt(t_mysh *sh)
 {
   char		*prompt;
 
-  git_check();
+
   prompt = strdup("%arrow \033[01;36m%pwd %git\033[00m");
   prompt = xreplace(prompt, "%arrow", strdup("\033[01;32m➜ \033[00m"));
   if (prompt_getdir(sh->env_list) != NULL)
     prompt = xreplace(prompt, "%pwd", prompt_getdir(sh->env_list));
   //if (get_hostname() != NULL)
     // prompt = xreplace(prompt, "%hostname", get_hostname());
-  if (git_check() == 0)
-    prompt = xreplace(prompt, "%git", get_git());
+  if (git_check() == 1)
+    prompt = xreplace(prompt, "%git", get_git(sh));
   else
     prompt = xreplace(prompt, "%git", "");
   return (prompt);
