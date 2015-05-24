@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Thu May 21 15:30:23 2015 Vertigo
-** Last update Sun May 24 13:10:13 2015 Vertigo
+** Last update Sun May 24 14:15:53 2015 Vertigo
 */
 
 #include <mysh.h>
@@ -63,6 +63,5 @@ int		init_autocomplet(char **args, t_mysh *sh, char **line, int *pos)
     *line = generate_file_line(*line, get_selected(g_select.args));
   clearscreen(sh, *line);
   *pos = my_strlen(*line);
-  free_select();
   return (0);
 }

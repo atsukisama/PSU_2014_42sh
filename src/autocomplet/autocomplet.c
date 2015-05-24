@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 20 12:21:18 2015 Vertigo
-** Last update Sun May 24 13:08:15 2015 Vertigo
+** Last update Sun May 24 14:13:48 2015 Vertigo
 */
 
 #include <sys/types.h>
@@ -77,6 +77,5 @@ int	autocomplet(char *s, t_mysh *sh, char **line, int *pos)
     init_autocomplet(files, sh, line, pos);
   else if (count_dab(files) == 2)
     disp_alone(line, files[1], pos, sh);
-  free(g_select.args);
   return (0);
 }
