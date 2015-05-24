@@ -5,7 +5,7 @@
 ## Login   <cano_c@epitech.net>
 ## 
 ## Started on  Mon May  4 07:03:45 2015 
-## Last update Sun May 24 00:06:46 2015 Vertigo
+## Last update Sun May 24 02:08:09 2015 Jimmy KING
 ##
 
 NAME	= 42sh
@@ -27,7 +27,7 @@ SRCS	= lexer/lexer.c lexer/lexer_common.c lexer/lexer_red.c \
 	list/list.c list/list_2.c list/list_goto.c \
 	exe/exe_cmd.c exe/exe_sep.c exe/exe_pipe.c exe/exe_red.c \
 	exe/handle_proc.c exe/exe_red_utils.c \
-	alias/alias.c
+	alias/alias.c prompt/prompt.c
 
 OBJS	= $(addprefix obj/, $(SRCS:.c=.o))
 
@@ -49,6 +49,7 @@ obj/:
 	mkdir obj/exe/
 	mkdir obj/basics/
 	mkdir obj/alias/
+	mkdir obj/prompt/
 
 $(NAME): $(OBJS)
 	make -C lib/my
