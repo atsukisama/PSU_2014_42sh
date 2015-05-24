@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 17:40:46 2015 Vertigo
-** Last update Sun May 24 02:16:16 2015 Jimmy KING
+** Last update Sun May 24 13:00:23 2015 Vertigo
 */
 
 #include <stdlib.h>
@@ -87,6 +87,7 @@ char	*get_line(t_mysh *sh)
 	 (line = (my_writer(buf, line, &pos, sh))) != NULL);
   my_putchar('\n');
   list_goto_root_hist(sh);
-  list_add(sh->history, line, "");
+  if (line && line[0] != '\0' && match(line, "*!*") != 1)
+    list_add(sh->history, line, "");
   return (line);
 }

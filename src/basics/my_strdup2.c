@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 20 13:10:41 2015 Vertigo
-** Last update Wed May 20 15:27:02 2015 Vertigo
+** Last update Sun May 24 12:36:33 2015 Vertigo
 */
 
 #include <stdlib.h>
@@ -33,5 +33,6 @@ char	*my_strdup2(char *str, char *buf)
       ++j;
     }
   s[i] = '\0';
+  free(str);
   return (s);
 }

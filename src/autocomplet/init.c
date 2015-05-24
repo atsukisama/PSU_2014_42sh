@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Thu May 21 15:30:23 2015 Vertigo
-** Last update Sun May 24 01:52:14 2015 Vertigo
+** Last update Sun May 24 13:10:13 2015 Vertigo
 */
 
 #include <mysh.h>
@@ -29,7 +29,7 @@ char	*generate_file_line(char *line, char *file)
   int	i;
 
   i = my_strlen(line);
-  while (i >= 0 && line[i] != ' ' && line[i] != '\t' && line[i] != '/')
+  while (i >= 0 && line[i] != ' ')
     --i;
   line[i + 1] = '\0';
   new = my_strdup2(line, file);

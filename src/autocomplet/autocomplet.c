@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 20 12:21:18 2015 Vertigo
-** Last update Sun May 24 09:14:26 2015 Vertigo
+** Last update Sun May 24 13:08:15 2015 Vertigo
 */
 
 #include <sys/types.h>
@@ -29,18 +29,24 @@ int	contain_folder(char *s)
   return (-1);
 }
 
-char		**generate_array(DIR *dir, char *s)
+char		**generate_array(char *s)
 {
-  struct dirent	*entry;
   char		**tab;
+  glob_t	s_glob;
+  int		i;
 
+  i = 0;
+  memset(&s_glob, 0, sizeof(s_glob));
   if (!(tab = malloc(sizeof(*tab) * 2)))
     return (NULL);
   tab[0] = my_strdup("autocomplet");
   tab[1] = NULL;
-  while ((entry = readdir(dir)) != NULL)
-    if (match(entry->d_name, my_strdup2(s, "*")) == 1)
-      tab = add_line(tab, entry->d_name);
+  if (glob(my_strdup2(s, "*"), 0, NULL, &s_glob) == 0)
+    while (s_glob.gl_pathv[i] != NULL)
+      {
+	tab = add_line(tab, s_glob.gl_pathv[i]);
+	++i;
+      }
   return (tab);
 }
 
@@ -63,24 +69,14 @@ void			disp_alone(char **line, char *file, int *pos,
 int	autocomplet(char *s, t_mysh *sh, char **line, int *pos)
 {
   char	*last;
-  DIR	*dir;
   char	**files;
-  char	*file;
 
   last = get_last_word(s);
-  file = get_file_name(last);
-  if (contain_folder(last) == 0)
-    dir = opendir(get_foldername(last));
-  else
-    dir = opendir(".");
-  if (dir == NULL)
-    return (-1);
-  files = generate_array(dir, file);
+  files = generate_array(last);
   if (count_dab(files) > 2)
     init_autocomplet(files, sh, line, pos);
   else if (count_dab(files) == 2)
     disp_alone(line, files[1], pos, sh);
-  closedir(dir);
   free(g_select.args);
   return (0);
 }

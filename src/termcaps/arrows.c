@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 22:06:16 2015 Vertigo
-** Last update Wed May 20 11:15:58 2015 Vertigo
+** Last update Sun May 24 12:50:51 2015 Vertigo
 */
 
 #include <string.h>
@@ -30,6 +30,8 @@ void    down_arrow(int *pos, char **line, t_mysh *sh)
 {
   char	*tab[2];
 
+  if (my_strcmp(sh->history->key, "") == 0)
+    return;
   while (sh->history->next->key == NULL)
     sh->history = sh->history->next;
   tab[0] = sh->history->next->key;
