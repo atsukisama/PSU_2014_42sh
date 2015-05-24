@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 20 12:21:18 2015 Vertigo
-** Last update Sun May 24 22:30:37 2015 Jimmy KING
+** Last update Mon May 25 01:08:52 2015 Jimmy KING
 */
 
 #include <sys/types.h>
@@ -53,7 +53,7 @@ char		**generate_array(char *s)
 void			disp_alone(char **line, char *file, int *pos,
 				   t_mysh *sh)
 {
-  int	i;
+  int			i;
   struct winsize	ws;
 
   i = 0;

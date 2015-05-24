@@ -5,7 +5,7 @@
 ** Login   <king_j@epitech.net>
 **
 ** Started on  Sun May 24 03:01:44 2015 Jimmy KING
-** Last update Mon May 25 00:56:57 2015 Jimmy KING
+** Last update Mon May 25 01:07:14 2015 Jimmy KING
 */
 
 #include <sys/stat.h>
@@ -15,19 +15,10 @@
 #include "project.h"
 #include "my.h"
 
-void	remove_lastword(char *str)
-{
-  int	n;
-
-  n = 0;
-  while (str[strlen(str) - n] != '/')
-    n++;
-  str[strlen(str) - n] = '\0';
-}
-
 int	check_dir(char *current)
 {
   int	n;
+  int	i;
 
   while (current[0] != '\0')
     {
@@ -40,8 +31,14 @@ int	check_dir(char *current)
       current[n + 5] = '\0';
       if (access(current, F_OK) == 0)
         return (1);
-      remove_lastword(current);
-      remove_lastword(current);
+      i = 0;
+      while (current[strlen(current) - i] != '/')
+	i++;
+      current[strlen(current) - i] = '\0';
+      i = 0;
+      while (current[strlen(current) - i] != '/')
+	i++;
+      current[strlen(current) - i] = '\0';
     }
   return (0);
 }
@@ -58,7 +55,6 @@ void	exec_git(t_mysh *sh)
   env = list_to_tab(sh->env_list);
   execve("/usr/bin/git", args, env);
   n = -1;
-  exit(1);
   while (env[++n])
     free(env[n]);
   free(env);
@@ -96,6 +92,7 @@ char	*get_branch_name(t_mysh *sh, char **branch, int *status)
       dup2(pipes[1], 1);
       close(pipes[1]);
       exec_git(sh);
+      exit(0);
     }
   else
     {
