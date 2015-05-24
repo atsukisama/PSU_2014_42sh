@@ -5,7 +5,7 @@
 ** Login   <king_j@epitech.net>
 **
 ** Started on  Sun May 24 03:01:44 2015 Jimmy KING
-** Last update Sun May 24 17:43:59 2015 Jimmy KING
+** Last update Sun May 24 19:05:00 2015 Jimmy KING
 */
 
 #include <sys/stat.h>
@@ -13,19 +13,6 @@
 #include <get_next_line.h>
 #include "project.h"
 #include "my.h"
-
-void	add_dotgit(char *str)
-{
-  int	n;
-
-  n = strlen(str);
-  str[n] = '/';
-  str[n + 1] = '.';
-  str[n + 2] = 'g';
-  str[n + 3] = 'i';
-  str[n + 4] = 't';
-  str[n + 5] = '\0';
-}
 
 void	remove_lastword(char *str)
 {
@@ -39,21 +26,45 @@ void	remove_lastword(char *str)
 
 int	check_dir(char *current)
 {
+  int	n;
+
   while (current[0] != '\0')
     {
-      add_dotgit(current);
+      n = strlen(current);
+      current[n] = '/';
+      current[n + 1] = '.';
+      current[n + 2] = 'g';
+      current[n + 3] = 'i';
+      current[n + 4] = 't';
+      current[n + 5] = '\0';
       if (access(current, F_OK) == 0)
-	return (1);
+        return (1);
       remove_lastword(current);
       remove_lastword(current);
     }
   return (0);
 }
 
-char	*get_branch_name(t_mysh *sh, char **branch, int *status)
+void	exec_git(t_mysh *sh)
 {
   char	*args[3];
   char	**env;
+  int	n;
+
+  args[0] = "git";
+  args[1] = "status";
+  args[2] = NULL;
+  env = list_to_tab(sh->env_list);
+  execve("/usr/bin/git", args, env);
+  n = -1;
+  exit(1);
+  while (env[++n])
+    free(env[n]);
+  free(env);
+}
+
+char	*get_branch_name(t_mysh *sh, char **branch, int *status)
+{
   int	pid;
   int	pipes[2];
   char	*tmp;
@@ -64,12 +75,7 @@ char	*get_branch_name(t_mysh *sh, char **branch, int *status)
       close(pipes[0]);
       dup2(pipes[1], 1);
       close(pipes[1]);
-      args[0] = "git";
-      args[1] = "status";
-      args[2] = NULL;
-      env = list_to_tab(sh->env_list);
-      execve("/usr/bin/git", args, env);
-      exit(1);
+      exec_git(sh);
     }
   else
     {
@@ -78,9 +84,9 @@ char	*get_branch_name(t_mysh *sh, char **branch, int *status)
       tmp = get_next_line(pipes[0]);
       tmp = get_next_line(pipes[0]);
       if (strcmp("nothing to commit, working directory clean", tmp) == 0)
-	*status = 1;
+        *status = 1;
       else
-	*status = 0;
+        *status = 0;
     }
   return (NULL);
 }
@@ -90,6 +96,6 @@ int	git_check()
   char	current[1042];
 
   if (getcwd(current, sizeof(current)) != NULL)
-    return(check_dir(current));
+    return (check_dir(current));
   return (0);
 }
