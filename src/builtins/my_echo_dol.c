@@ -14,6 +14,24 @@
 #include <stdlib.h>
 #include "project.h"
 
+char            **anlyse_b(char **cmd)
+{
+  int           i;
+  int           j;
+  char          **tmp;
+
+  i = 0;
+  tmp = cmd;
+  while (tmp[i])
+    {
+      j = my_strlen(tmp[i]);
+      if (tmp[i][j - 2] == '\\' && tmp[i][j - 1] == 'b')
+	tmp[i][j - 3] = 0;
+      i++;
+    }
+  return (tmp);
+}
+
 int	is_dol_print(char c, t_mysh *sh)
 {
   char	*val;

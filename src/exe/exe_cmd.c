@@ -99,12 +99,14 @@ int		exe_rlt(char **cmd, t_mysh *sh, t_job *job)
 
 int		exe_cmd(t_ast *ast, t_mysh *sh, t_job *job)
 {
+  int		ret;
+
   if (ast->content.cmd[0])
     {
       if (!my_strncmp(ast->content.cmd[0], "./", 2))
 	sh->status = exe_rlt(ast->content.cmd, sh, job);
-      else if (chk_bult(sh, ast->content.cmd) != 0)
-	sh->status = 0;
+      else if (ret = chk_bult(sh, ast->content.cmd))
+	sh->status = ret - 1;
       else if (*ast->content.cmd[0] == '/' && sh->status != 9)
 	sh->status = exe_abs(ast->content.cmd[0], ast->content.cmd, sh, job);
       else

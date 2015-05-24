@@ -146,6 +146,7 @@ int                     get_dol_size(char *s, int i);
 int                     my_histo_c(t_list *history);
 int                     my_exit_n(t_mysh *sh, char **cmd);
 int                     exe_histo(char *line, t_mysh *sh);
+char			**anlyse_b(char **cmd);
 
 /*
 ** MISC

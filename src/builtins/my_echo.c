@@ -129,6 +129,8 @@ int		my_echo(char **cmd, t_mysh *sh)
       if ((my_strcmp(cmd[i], "-E")) == 0)
 	opt = 0;
     }
+  if (opt == 2)
+    cmd = anlyse_b(cmd);
   print_echo(cmd, opt, sh);
   return (1);
 }
