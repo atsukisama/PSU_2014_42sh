@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Wed May 20 19:14:07 2015
-** Last update Sun May 24 22:59:11 2015 
+** Last update Sun May 24 23:25:07 2015 Vertigo
 */
 #include <mysh.h>
 
@@ -94,7 +94,6 @@ int		wait_proc(t_mysh *sh, int pid, t_job *job)
 	    killpg(job->pgid, SIGKILL);
 	}
       status = exit_status(status, job);
-
       if (WIFSIGNALED(status))
 	killpg(job->pgid, SIGKILL);
     }
