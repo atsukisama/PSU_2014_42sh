@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Fri May 15 06:14:14 2015 Chloe Cano
-** Last update Sun May 24 22:27:00 2015 Jimmy KING
+** Last update Sun May 24 23:39:25 2015 Jimmy KING
 */
 #include <mysh.h>
 #include <sys/wait.h>
@@ -105,7 +105,7 @@ int		exe_cmd(t_ast *ast, t_mysh *sh, t_job *job)
     {
       if (!my_strncmp(ast->content.cmd[0], "./", 2))
 	sh->status = exe_rlt(ast->content.cmd, sh, job);
-      else if (ret = chk_bult(sh, ast->content.cmd))
+      else if ((ret = chk_bult(sh, ast->content.cmd)))
 	sh->status = ret - 1;
       else if (*ast->content.cmd[0] == '/' && sh->status != 9)
 	sh->status = exe_abs(ast->content.cmd[0], ast->content.cmd, sh, job);
