@@ -82,7 +82,7 @@ int	exe_echo(char *str, int opt, t_mysh *sh)
 	      if (str[i] != '0')
 		i--;
 	    }
-	  else
+	  else if (str[i] != '\\')
 	    my_putchar(str[i]);
 	}
     }
@@ -108,7 +108,7 @@ int	print_echo(char **cmd, int opt, t_mysh *sh)
 	    my_putchar(' ');
 	}
     }
-  if (opt == 0 || opt == 2)
+  if (opt == 0 || opt == 2 || opt == 3)
     my_putchar(10);
   return (0);
 }
@@ -117,20 +117,27 @@ int		my_echo(char **cmd, t_mysh *sh)
 {
   char		opt;
   int		i;
+  int		j;
 
+  j = 0;
   i = -1;
   opt = 0;
-  while (cmd[++i] != NULL)
+  if (cmd[1][j] == '-')
     {
-      if ((my_strcmp(cmd[i], "-n")) == 0)
+      while (cmd[1][j])
+	j++;
+      if (cmd[1][j - 1] == 'n')
 	opt = 1;
-      if ((my_strcmp(cmd[i], "-e")) == 0)
+      if (cmd[1][j - 1] == 'e')
 	opt = 2;
-      if ((my_strcmp(cmd[i], "-E")) == 0)
-	opt = 0;
+      if (cmd[1][j - 1] == 'E')
+	opt = 3;
     }
   if (opt == 2)
     cmd = anlyse_b(cmd);
-  print_echo(cmd, opt, sh);
+  if (opt != 0)
+    print_echo(cmd + 1, opt, sh);
+  else
+    print_echo(cmd, opt, sh);
   return (1);
 }
