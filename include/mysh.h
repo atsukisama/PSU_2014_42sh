@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 09:57:43 2015 Vertigo
-** Last update Sun May 24 01:57:54 2015 
+** Last update Sun May 24 09:56:32 2015 Vertigo
 */
 
 #ifndef MYSH_H_
@@ -145,6 +145,11 @@ int                     my_histo_c(t_list *history);
 char			*my_strchr(char *, int);
 int			my_puterror(char *, int);
 void			malloc_error();
+char			*my_strdup2(char *, char *);
+int			match(char *, char *);
+char			**add_line(char **, char *);
+int			count_dab(char **);
+void			free_dab(char **);
 
 /*
 ** PROMPT
@@ -152,4 +157,14 @@ void			malloc_error();
 
 char			*get_prompt(t_list *env_list);
 char			*alias_replace(t_list *alias, char *cmd);
+
+/*
+** Autocompletion
+*/
+
+int			autocomplet(char *, t_mysh *, char **, int *);
+char			*get_last_word(char *);
+char			*get_foldername(char *);
+char			*get_file_name(char *);
+
 #endif /* !MYSH_H_ */

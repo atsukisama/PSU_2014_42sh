@@ -5,7 +5,7 @@
 ## Login   <cano_c@epitech.net>
 ## 
 ## Started on  Mon May  4 07:03:45 2015 
-## Last update Sun May 24 02:08:09 2015 Jimmy KING
+## Last update Sun May 24 09:55:07 2015 Vertigo
 ##
 
 NAME	= 42sh
@@ -14,6 +14,7 @@ SRCS	= lexer/lexer.c lexer/lexer_common.c lexer/lexer_red.c \
 	lexer/lexer_pct.c lexer/lexer_lst.c \
 	basics/make_binary.c basics/make_leaf.c basics/cmd_utils.c \
 	basics/error.c basics/sh.c basics/basic.c basics/match.c \
+	basics/my_strdup2.c basics/doublearray.c \
 	parser/parse_cmd.c parser/parse_expr.c \
 	parser/parse_instr.c parser/parser.c parser/parse_red.c \
 	parser/parser_get_token.c \
@@ -28,7 +29,11 @@ SRCS	= lexer/lexer.c lexer/lexer_common.c lexer/lexer_red.c \
 	list/list.c list/list_2.c list/list_goto.c \
 	exe/exe_cmd.c exe/exe_sep.c exe/exe_pipe.c exe/exe_red.c \
 	exe/handle_proc.c exe/exe_red_utils.c \
-	alias/alias.c prompt/prompt.c
+	alias/alias.c prompt/prompt.c \
+	autocomplet/autocomplet.c autocomplet/keys.c autocomplet/select.c \
+	autocomplet/select_list.c autocomplet/terminal.c autocomplet/get_string.c \
+	autocomplet/my_select.c autocomplet/actions.c autocomplet/utils.c \
+	autocomplet/init.c autocomplet/free.c
 
 OBJS	= $(addprefix obj/, $(SRCS:.c=.o))
 
@@ -51,10 +56,11 @@ obj/:
 	mkdir obj/basics/
 	mkdir obj/alias/
 	mkdir obj/prompt/
+	mkdir obj/autocomplet/
 
 $(NAME): $(OBJS)
 	make -C lib/my
-	gcc -o $(NAME) $(OBJS) -Llib -lmy
+	gcc -o $(NAME) $(OBJS) -lncurses -Llib -lmy
 
 obj/%.o: src/%.c
 	gcc $(CFLAGS) -c -o $@ $< -I include
