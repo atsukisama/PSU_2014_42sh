@@ -5,7 +5,7 @@
 ## Login   <cano_c@epitech.net>
 ## 
 ## Started on  Mon May  4 07:03:45 2015 
-## Last update Sun May 24 22:27:17 2015 Vertigo
+## Last update Mon May 25 01:12:17 2015 Jimmy KING
 ##
 
 NAME	= 42sh
@@ -67,6 +67,7 @@ obj/%.o: src/%.c
 
 clean:
 	make -C lib/my clean
+	rm -rf obj/
 	rm -rf $(OBJS)
 
 fclean: clean
