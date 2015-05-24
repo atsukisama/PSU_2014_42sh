@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Wed May 20 19:05:12 2015 
-** Last update Sat May 23 14:15:16 2015 
+** Last update Sun May 24 02:33:43 2015 
 */
 #include <mysh.h>
 
@@ -49,7 +49,7 @@ int		get_exe(char **cmd)
   return (-1);
 }
 
-int		exit_status(int status, t_job *job)
+int		exit_status(int status, t_job UN *job)
 {
   char		*sig_msg;
 

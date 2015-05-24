@@ -5,7 +5,7 @@
 ** Login   <kerebe_p@epitech.eu>
 ** 
 ** Started on  Sat May 23 17:46:00 2015 Paul Kerebel
-** Last update Sun May 24 02:31:17 2015 
+** Last update Sun May 24 02:33:17 2015 
 */
 
 #include <sys/stat.h>
@@ -26,6 +26,7 @@ void    check_dash_line(char *s, char *file, t_list *list)
 int     exec_parallel(t_ast *ast, t_mysh *sh, int fd[2], t_job *job)
 {
   int   s;
+  int	ret;
 
   close(fd[1]);
   if ((s = dup(0)) < -1)
@@ -35,6 +36,8 @@ int     exec_parallel(t_ast *ast, t_mysh *sh, int fd[2], t_job *job)
   sh->status = sh->exe_ft[ast->right->type](ast->right, sh, job);
   ret = dup2(0, fd[0]);
   ret = dup2(s, 0);
+  if (ret && !sh->status)
+    sh->status = -1;
   return (sh->status);
 }
 
