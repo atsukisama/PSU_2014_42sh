@@ -1,4 +1,4 @@
-alias		emacss		emacs -nw
+alias		emacs		emacs -nw
 alias		ne		emacs -nw
 alias		ls		ls --color=auto
 alias		sl		ls --color=auto
@@ -6,5 +6,4 @@ alias		cd..		cd ..
 alias		..		cd ..
 alias		...		cd ...
 
-alias		cleara		echo clearb
 
