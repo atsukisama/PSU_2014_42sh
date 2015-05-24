@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 09:45:35 2015 Vertigo
-** Last update Sun May 24 23:24:12 2015 Jimmy KING
+** Last update Sun May 24 23:21:06 2015 
 */
 
 #include <sys/stat.h>
@@ -73,7 +73,7 @@ int		main(int ac, char **av, char **env)
 
   (void)ac;
   (void)av;
-  if (!(g_mysh = malloc(sizeof(*g_mysh))))
+  if (!(g_mysh = my_memalloc(sizeof(*g_mysh))))
     malloc_error();
   signal(SIGINT, ctrl_c);
   if (init_sh(g_mysh, env))
