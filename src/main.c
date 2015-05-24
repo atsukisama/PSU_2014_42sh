@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 09:45:35 2015 Vertigo
-** Last update Sat May 23 10:23:36 2015 Vertigo
+** Last update Sun May 24 02:14:55 2015 Jimmy KING
 */
 
 #include <sys/stat.h>
@@ -35,7 +35,6 @@ int	init_sh(t_mysh *sh, char **env)
     return (-1);
   if (sh->is_tty && !(sh->tsave = can_on(&sh->term)))
     return (-1);
-  sh->prompt = strdup(":> ");
   sh->env_list = list_create();
   sh->history = list_create();
   sh->alias = list_create();
@@ -43,6 +42,7 @@ int	init_sh(t_mysh *sh, char **env)
   if (access(HISTORY_FILE, R_OK) == 0)
     load_history(sh->history);
   env_collect(env, sh->env_list);
+  sh->prompt = get_prompt(sh->env_list);
   return (0);
 }
 

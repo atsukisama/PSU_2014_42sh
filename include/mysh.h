@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 09:57:43 2015 Vertigo
-** Last update Sat May 23 12:24:47 2015 K6
+** Last update Sun May 24 02:13:59 2015 Jimmy KING
 */
 
 #ifndef MYSH_H_
@@ -133,5 +133,11 @@ int			my_setenv(t_list *list, char **cmd);
 char			*my_strchr(char *, int);
 int			my_puterror(char *, int);
 void			malloc_error();
+
+/*
+** PROMPT
+*/
+
+char			*get_prompt(t_list *env_list);
 
 #endif /* !MYSH_H_ */
