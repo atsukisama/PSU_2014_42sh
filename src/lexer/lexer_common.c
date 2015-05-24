@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Sun May 10 02:12:09 2015 
-** Last update Fri May 15 13:39:58 2015 
+** Last update Sun May 24 23:26:26 2015 
 */
 #include <parser.h>
 
@@ -30,7 +30,7 @@ int		lex_idt(t_lex *lex, char **line, char *types)
 int		lex_sep(t_lex *lex, char **line, char *types)
 {
   while (types[(int)**line] == C_DCOM)
-      ++(*line);
+    ++(*line);
   lex->len = 1;
   return (LX_SEP);
 }
