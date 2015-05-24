@@ -50,18 +50,17 @@ int		exe_path(char **cmd, t_mysh *sh, t_job *job)
 {
   char		pathname[NAME_MAX + PATH_MAX + 2];
   t_list       	*path_list;
-  char		*path;
+  char		*path[2];
   char		*p;
-  char		*path_cpy;
 
   if ((path_list = get_node_by_key(sh->env_list, "PATH")))
     {
-      path = path_list->content;
-      if (!(path_cpy = strdup(path)))
+      path[0] = path_list->content;
+      if (!(path[1] = strdup(path[0])))
 	return (-1);
-      while ((p = strtok(path_cpy, ":")))
+      while ((p = strtok(path[1], ":")))
 	{
-	  path_cpy = NULL;
+	  path[1] = NULL;
 	  strncpy(pathname, p, PATH_MAX + 1);
 	  strncat(pathname, "/", 2);
 	  strncat(pathname, cmd[0], NAME_MAX);
