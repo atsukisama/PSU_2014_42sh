@@ -35,7 +35,10 @@ void		env_show(t_list *list)
   tmp = list->next;
   while (tmp != list)
     {
-      printf("%s=%s\n", tmp->key, tmp->content);
+      my_putstr(tmp->key);
+      my_putchar('=');
+      my_putstr(tmp->content);
+      my_putchar(10);
       tmp = tmp->next;
     }
 }

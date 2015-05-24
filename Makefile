@@ -21,9 +21,10 @@ SRCS	= lexer/lexer.c lexer/lexer_common.c lexer/lexer_red.c \
 	termcaps/can.c termcaps/get_line.c termcaps/disp.c termcaps/cursor.c \
 	termcaps/char_isprintable.c termcaps/key.c termcaps/clear_screen.c \
 	termcaps/arrows.c \
-	builtins/environement.c builtins/environement_2.c builtins/my_unsetenv.c \
-	builtins/setenv.c builtins/my_cd.c builtins/bult.c builtins/my_echo.c \
-	builtins/exit.c \
+        builtins/environement.c builtins/environement_2.c builtins/my_unsetenv.c \
+        builtins/setenv.c builtins/my_cd.c builtins/bult.c builtins/my_echo.c \
+        builtins/util_bult.c builtins/my_echo_dol.c builtins/exit.c \
+        builtins/historic.c builtins/historic_c.c \
 	list/list.c list/list_2.c list/list_goto.c \
 	exe/exe_cmd.c exe/exe_sep.c exe/exe_pipe.c exe/exe_red.c \
 	exe/handle_proc.c exe/exe_red_utils.c \

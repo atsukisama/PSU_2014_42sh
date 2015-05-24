@@ -35,6 +35,8 @@ int	init_sh(t_mysh *sh, char **env)
     return (-1);
   if (sh->is_tty && !(sh->tsave = can_on(&sh->term)))
     return (-1);
+  sh->oldpwd = NULL;
+  sh->pwd = NULL;
   sh->env_list = list_create();
   sh->history = list_create();
   sh->alias = list_create();

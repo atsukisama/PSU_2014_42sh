@@ -21,13 +21,25 @@ int		chk_var(char *var)
   return (0);
 }
 
-int             my_unsetenv(t_list *list, char **cmd)
+int             my_unsetenv(t_mysh *sh, char **cmd)
 {
-  if (chk_var(cmd[1]) == 1)
+  char		*var;
+  int		i;
+
+  i = 0;
+  if (chk_var(cmd[1]) == -1)
     return (-1);
   if (cmd[1] == NULL || my_strlen(cmd[1]) == 0
       || my_strchr(cmd[1], '=') != NULL)
-    return (my_puterror("error : cmd[1] NULL\n", -1));
-  env_unset(list, cmd[1]);
+    return (my_puterror("usage : usetenv var\n", -1));
+  while (cmd[i])
+    {
+      var = cmd[i];
+      if (check_dol(var))
+	if ((var = (convert_dol(var, sh))) == NULL)
+	  return (-1);
+      env_unset(sh->env_list, var);
+      i++;
+    }
   return (1);
 }

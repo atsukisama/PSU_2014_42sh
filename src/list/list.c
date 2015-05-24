@@ -51,8 +51,10 @@ void	list_delete_node(t_list *node)
 {
   node->prev->next = node->next;
   node->next->prev = node->prev;
-  free(node->key);
-  free(node->content);
+  if (node->key != NULL)
+    free(node->key);
+  if (node->content != NULL && my_strcmp(node->content, "") != 0)
+    free(node->content);
   free(node);
 }
 
