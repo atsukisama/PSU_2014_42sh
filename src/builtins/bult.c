@@ -5,7 +5,7 @@
 ** Login   <rusig_n@epitech.net>
 ** 
 ** Started on  Sun Mar  8 17:54:31 2015 nicolas rusig
-** Last update Sun May 24 23:34:19 2015 
+** Last update Thu May 28 18:52:21 2015 Vertigo
 */
 
 #include	<termios.h>
@@ -26,7 +26,9 @@ int		my_exit_n(t_mysh *sh, char **tab)
   save_history(sh->history);
   if (tab && tab[0] && tab[1])
     ret = my_getnbr(tab[1]);
-  exit(ret);
+  sh->ret_exit = -3;
+  sh->status = ret;
+  return (0);
 }
 
 int		chk_bult_next(t_mysh *sh, char **cmd)

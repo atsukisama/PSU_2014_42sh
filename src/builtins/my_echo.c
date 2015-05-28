@@ -5,7 +5,7 @@
 ** Login   <nicolas.rusig@epitech.eu>
 ** 
 ** Started on  Thu May 14 11:51:53 2015 rusig_n
-** Last update Sun May 24 22:28:28 2015 Vertigo
+** Last update Thu May 28 18:43:26 2015 Vertigo
 */
 
 #include <stdio.h>
@@ -120,7 +120,7 @@ int		my_echo(char **cmd, t_mysh *sh)
 
   j = 0;
   opt = 0;
-  if (cmd[1][j] == '-')
+  if (cmd[1] && cmd[1][j] == '-')
     {
       while (cmd[1][j])
 	j++;

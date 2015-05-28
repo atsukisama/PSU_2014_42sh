@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 09:57:43 2015 Vertigo
-** Last update Sun May 24 22:24:21 2015 Vertigo
+** Last update Thu May 28 18:48:50 2015 Vertigo
 */
 
 #ifndef MYSH_H_
@@ -44,6 +44,7 @@ struct			s_mysh
   char			*oldpwd;
   char			*pwd;
   char			*line;
+  int			ret_exit;
   int			pos;
   t_list		*env_list;
   t_list		*history;

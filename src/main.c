@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 09:45:35 2015 Vertigo
-** Last update Sun May 24 23:21:06 2015 
+** Last update Thu May 28 18:49:24 2015 Vertigo
 */
 
 #include <sys/stat.h>
@@ -46,6 +46,7 @@ int	init_sh(t_mysh *sh, char **env)
     load_history(sh->history);
   env_collect(env, sh->env_list);
   sh->prompt = get_prompt(sh);
+  sh->ret_exit = 0;
   return (0);
 }
 
@@ -74,7 +75,7 @@ int		main(int ac, char **av, char **env)
   (void)ac;
   (void)av;
   if (!(g_mysh = my_memalloc(sizeof(*g_mysh))))
-    malloc_error();
+    return (-1);
   signal(SIGINT, ctrl_c);
   if (init_sh(g_mysh, env))
     return (-1);

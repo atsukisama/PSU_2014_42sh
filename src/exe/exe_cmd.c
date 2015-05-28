@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Fri May 15 06:14:14 2015 Chloe Cano
-** Last update Mon May 25 01:32:55 2015 Jimmy KING
+** Last update Thu May 28 19:02:00 2015 Vertigo
 */
 
 #include <mysh.h>
@@ -106,15 +106,19 @@ int		exe_cmd(t_ast *ast, t_mysh *sh, t_job *job)
     {
       if (!my_strncmp(ast->content.cmd[0], "./", 2))
 	sh->status = exe_rlt(ast->content.cmd, sh, job);
-      else if ((ret = chk_bult(sh, ast->content.cmd)))
-	sh->status = ret - 1;
-      else if (*ast->content.cmd[0] == '/' && sh->status != 9)
+      else if ((ret = chk_bult(sh, ast->content.cmd)) != 0)
+	{
+	  if (sh->ret_exit == -3)
+	    return (sh->status);
+	  else
+	    sh->status = ret - 1;
+	}
+      else if (*ast->content.cmd[0] == '/')
 	sh->status = exe_abs(ast->content.cmd[0], ast->content.cmd, sh, job);
       else
 	sh->status = exe_path(ast->content.cmd, sh, job);
     }
   free(ast->content.cmd);
-  free(ast);
   if (sh->is_tty && sh->wait)
     {
       tcsetpgrp(0, sh->pgid);

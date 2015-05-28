@@ -5,7 +5,7 @@
 ## Login   <cano_c@epitech.net>
 ## 
 ## Started on  Mon May  4 07:03:45 2015 
-## Last update Mon May 25 01:12:17 2015 Jimmy KING
+## Last update Thu May 28 18:44:33 2015 Vertigo
 ##
 
 NAME	= 42sh
@@ -13,7 +13,7 @@ NAME	= 42sh
 SRCS	= lexer/lexer.c lexer/lexer_common.c lexer/lexer_red.c \
 	lexer/lexer_pct.c lexer/lexer_lst.c \
 	basics/make_binary.c basics/make_leaf.c basics/cmd_utils.c \
-	basics/error.c basics/sh.c basics/basic.c basics/match.c \
+	basics/sh.c basics/basic.c basics/match.c \
 	basics/my_strdup2.c basics/doublearray.c \
 	parser/parse_cmd.c parser/parse_expr.c \
 	parser/parse_instr.c parser/parser.c parser/parse_red.c \

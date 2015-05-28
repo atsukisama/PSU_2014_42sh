@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 10:21:40 2015 Vertigo
-** Last update Sun May 24 23:14:52 2015 Jimmy KING
+** Last update Thu May 28 18:51:25 2015 Vertigo
 */
 
 #include <stdio.h>
@@ -43,6 +43,8 @@ int	my_sh(t_mysh *sh)
       tcsetpgrp(0, sh->pgid);
       if (sh->is_tty)
 	can_set(sh->term);
+      if (sh->ret_exit != 0)
+	break;
     }
   if (sh->is_tty)
     can_set(sh->tsave);
