@@ -81,7 +81,10 @@ int		main(int ac, char **av, char **env)
     return (-1);
   ret = my_sh(g_mysh);
   list_goto_root_hist(g_mysh);
-  save_history(g_mysh->history);
-  free_sh(g_mysh);
+  if (g_mysh->is_tty != 0)
+    {
+      save_history(g_mysh->history);
+      free_sh(g_mysh);
+    }
   return (ret);
 }
