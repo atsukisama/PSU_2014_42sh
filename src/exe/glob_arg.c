@@ -27,7 +27,6 @@ char		**replace_glob(char **tab, int i)
   i = 0;
   while (gl.gl_pathv[i] != NULL)
     {
-      my_putchar('a');
       tab = add_line(tab, gl.gl_pathv[i]);
       ++i;
     }
