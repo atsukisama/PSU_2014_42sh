@@ -5,7 +5,7 @@
 ** Login   <nicolas.rusig@epitech.eu>
 ** 
 ** Started on  Mon May 18 14:02:59 2015 rusig_n
-** Last update Mon May 18 14:02:59 2015 rusig_n
+** Last update Tue Jun  2 17:00:59 2015 Vertigo
 */
 
 #include <sys/stat.h>
@@ -106,9 +106,11 @@ int		my_seek_history(t_mysh *sh, char *val, int nb)
 {
   char		*line;
 
-  if (val && (my_strcmp(val, "") == 0 || val[0] == '!'))
+  if (val && my_strcmp(val, "") == 0)
     return (1);
-  if (is_num(val) == 0)
+  if (val[0] == '!')
+    line = histo_pos(1, sh);
+  else if (is_num(val) == 0)
     {
       if ((nb = my_getnbr(val)) > 0)
 	line = histo_pos(nb, sh);
