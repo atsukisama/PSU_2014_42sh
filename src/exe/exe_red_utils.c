@@ -67,10 +67,10 @@ int		do_double_red(t_ast *ast, t_mysh *sh, char *s, t_job *job)
   while (s != NULL && my_strcmp(s, ast->left->content.file) != 0)
     {
       if (job->pgid > 0 && sh->is_tty)
-        tcsetpgrp(0, job->pgid);
+	tcsetpgrp(0, job->pgid);
       else if (sh->is_tty)
 	tcsetpgrp(0, sh->pgid);
-      write(0, "> ", 2);
+      write(1, "> ", 2);
       s = get_next_line(0);
       check_dash_line(s, ast->left->content.file, list);
     }
