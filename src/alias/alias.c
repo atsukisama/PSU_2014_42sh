@@ -5,7 +5,7 @@
 ** Login   <king_j@epitech.net>
 **
 ** Started on  Tue May 19 01:18:47 2015 Jimmy KING
-** Last update Sat May 23 16:49:03 2015 Jimmy KING
+** Last update Tue Jun  2 21:39:38 2015 
 */
 
 #include <sys/stat.h>
@@ -34,8 +34,6 @@ void		alias_getcontent(t_list *alias, char *str)
 	  else
 	    tmp->content = cmd;
         }
-      else
-        free(key);
     }
 }
 
@@ -54,6 +52,7 @@ void    alias_openfile(t_list *alias, char *file)
           free(tmp);
         }
     }
+  close(fd);
 }
 
 char		*alias_get(t_list *alias, char *key)

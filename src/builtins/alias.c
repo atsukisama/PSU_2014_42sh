@@ -5,7 +5,7 @@
 ** Login   <king_j@epitech.net>
 **
 ** Started on  Sun May 24 20:48:23 2015 Jimmy KING
-** Last update Sun May 24 22:13:56 2015 Jimmy KING
+** Last update Tue Jun  2 21:43:54 2015 Jimmy KING
 */
 
 #include <mysh.h>
@@ -41,9 +41,11 @@ int		my_alias(t_mysh *sh, char **cmd)
 
   if (cmd[1] != NULL && cmd[2] != NULL)
     {
-      str = tab_to_str(cmd);
-      alias_getcontent(sh->alias, str);
-      free(str);
+      if ((str = tab_to_str(cmd)) != NULL)
+	{
+	  str = tab_to_str(cmd);
+	  alias_getcontent(sh->alias, str);
+	}
       return (1);
     }
   else
