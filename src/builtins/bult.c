@@ -18,10 +18,13 @@ int		my_exit_n(t_mysh *sh, char **tab)
 {
   int		ret;
 
-  sh->tsave->c_lflag |= ICANON;
-  sh->tsave->c_lflag |= ECHO;
-  if ((tcsetattr(0, TCSANOW, sh->tsave)) == -1)
-    fprintf(stderr, "error : can't set values\n");
+  if (sh->is_tty != 0)
+    {
+      sh->tsave->c_lflag |= ICANON;
+      sh->tsave->c_lflag |= ECHO;
+      if ((tcsetattr(0, TCSANOW, sh->tsave)) == -1)
+	fprintf(stderr, "error : can't set values\n");
+    }
   ret = 0;
   save_history(sh->history);
   if (tab && tab[0] && tab[1])

@@ -23,6 +23,8 @@ char		*tab_to_str(char **tab)
   if ((str = malloc(sizeof(char) * len)) == NULL)
     return (NULL);
   i = 0;
+  if (str != NULL)
+    str[0] = '\0';
   while (tab[i] != NULL)
     {
       strcat(str, tab[i]);
