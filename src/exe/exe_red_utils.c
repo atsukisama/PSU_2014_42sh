@@ -5,7 +5,7 @@
 ** Login   <kerebe_p@epitech.eu>
 **
 ** Started on  Sat May 23 17:46:00 2015 Paul Kerebel
-** Last update Sun May 24 23:19:19 2015 Jimmy KING
+** Last update Tue Jun  2 18:19:41 2015 
 */
 
 #include <sys/stat.h>
@@ -66,8 +66,10 @@ int		do_double_red(t_ast *ast, t_mysh *sh, char *s, t_job *job)
     can_set(sh->tsave);
   while (s != NULL && my_strcmp(s, ast->left->content.file) != 0)
     {
-      if (job->pgid)
+      if (job->pgid > 0 && sh->is_tty)
         tcsetpgrp(0, job->pgid);
+      else if (sh->is_tty)
+	tcsetpgrp(0, sh->pgid);
       write(0, "> ", 2);
       s = get_next_line(0);
       check_dash_line(s, ast->left->content.file, list);

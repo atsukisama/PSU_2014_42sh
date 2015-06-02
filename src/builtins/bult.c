@@ -56,12 +56,14 @@ int		chk_bult_next(t_mysh *sh, char **cmd)
   return (0);
 }
 
-int		chk_bult(t_mysh *sh, char **cmd)
+int		chk_bult(t_mysh *sh, char **cmd, t_job *job)
 {
   if (cmd[0][0] == '\0')
     return (0);
   else if (my_strcmp("env", cmd[0]) == 0)
     {
+      if (sh->is_tty)
+        tcsetpgrp(0, job->pgid < 1 ? sh->pgid : job->pgid); 
       env_show(sh->env_list);
       return (1);
     }
