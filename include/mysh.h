@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 09:57:43 2015 Vertigo
-** Last update Tue Jun  2 18:09:56 2015 
+** Last update Wed Jun  3 00:17:54 2015 Jimmy KING
 */
 
 #ifndef MYSH_H_
@@ -151,6 +151,7 @@ int                     exe_histo(char *line, t_mysh *sh);
 char			**anlyse_b(char **cmd);
 int			my_source(t_mysh *sh, char **cmd);
 int			my_alias(t_mysh *sh, char **cmd);
+int			my_unalias(t_mysh *sh, char **cmd);
 
 /*
 ** MISC

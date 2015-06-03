@@ -5,7 +5,7 @@
 ** Login   <king_j@epitech.net>
 **
 ** Started on  Thu May 14 00:41:06 2015 Jimmy KING
-** Last update Sun May 24 22:24:45 2015 Jimmy KING
+** Last update Wed Jun  3 03:32:03 2015 Jimmy KING
 */
 
 #include <stdlib.h>
@@ -41,7 +41,7 @@ char	*xstrcat(char *dest, char *src)
 }
 
 /*
-** Copy 'x' character of  a string to the end of a another string
+** Copy 'x' character of a string to the end of a another string
 */
 char	*xstrncat(char *dest, char *src, int len)
 {
@@ -50,7 +50,6 @@ char	*xstrncat(char *dest, char *src, int len)
 
   n = 0;
   i = xlen(dest);
-
   while (src[n] && n < len)
     dest[i++] = src[n++];
   dest[i] = '\0';

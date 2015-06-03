@@ -5,7 +5,7 @@
 ** Login   <king_j@epitech.net>
 **
 ** Started on  Sun May 24 20:48:23 2015 Jimmy KING
-** Last update Tue Jun  2 21:43:54 2015 Jimmy KING
+** Last update Wed Jun  3 00:50:08 2015 Jimmy KING
 */
 
 #include <mysh.h>
@@ -38,18 +38,46 @@ char		*tab_to_str(char **tab)
 int		my_alias(t_mysh *sh, char **cmd)
 {
   char		*str;
+  t_list	*tmp;
 
   if (cmd[1] != NULL && cmd[2] != NULL)
     {
       if ((str = tab_to_str(cmd)) != NULL)
+	alias_getcontent(sh->alias, str);
+    }
+  else if (count_dab(cmd) == 1)
+    {
+      tmp = sh->alias->next;
+      while (tmp != sh->alias)
 	{
-	  str = tab_to_str(cmd);
-	  alias_getcontent(sh->alias, str);
+	  printf("%s\t%s\n", tmp->key, tmp->content);
+	  tmp = tmp->next;
 	}
-      return (1);
     }
   else
     return (-1);
+  return (1);
+}
+
+int		my_unalias(t_mysh *sh, char **cmd)
+{
+  t_list	*tmp;
+
+  if (cmd[1] != NULL)
+    {
+      tmp = sh->alias->next;
+      while (tmp != sh->alias)
+	{
+	  if (match(tmp->key, cmd[1]) == 1)
+	    list_delete_node(tmp);
+	  tmp = tmp->next;
+	}
+    }
+  else
+    {
+	fprintf(stderr, "unalias: Too few arguments.\n");
+      return (-1);
+    }
   return (1);
 }
 

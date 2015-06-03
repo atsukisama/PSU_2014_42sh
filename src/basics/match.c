@@ -5,13 +5,12 @@
 ** Login   <gascon_n@epitech.net>
 **
 ** Started on  Thu Oct  9 08:27:44 2014 Nicolas Gascon
-** Last update Mon Mar  2 06:40:26 2015 GASCON Nicolas
+** Last update Wed Jun  3 03:30:44 2015 Jimmy KING
 */
 
 /*
 ** Check if s1 match with s2
 */
-
 int	match(char *s1, char *s2)
 {
   if (*s1 == 0 && *s2 == 0)
