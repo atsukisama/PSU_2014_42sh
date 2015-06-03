@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 21:57:58 2015 Vertigo
-** Last update Sun May 24 09:57:47 2015 Vertigo
+** Last update Wed Jun  3 03:52:41 2015 Jimmy KING
 */
 
 #include <stdlib.h>
@@ -32,9 +32,9 @@ void	delete_char(char *line, int *pos, char c, t_mysh *sh)
   else
     nb = *pos;
   if (nb < 0 || nb >= my_strlen(line))
-    return;
+    return ;
   if (!(old = my_strdup(line)))
-    return;
+    return ;
   remove_letter(line, nb);
   if (c != 127)
     *pos = *pos + 1;

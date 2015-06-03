@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 20 11:14:43 2015 Vertigo
-** Last update Wed May 20 12:14:14 2015 Vertigo
+** Last update Wed Jun  3 03:53:49 2015 Jimmy KING
 */
 
 #include <mysh.h>
@@ -48,6 +48,6 @@ void	my_put_blank_from_pos(char *s, int pos, t_mysh *sh)
 void	clear_plus(char **str, t_mysh *sh, int pos)
 {
   if (my_strlen(str[0]) > my_strlen(str[1]))
-    return;
+    return ;
   my_put_blank_from_pos(str[1], pos, sh);
 }

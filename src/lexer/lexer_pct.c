@@ -5,8 +5,9 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Sun May 10 02:13:58 2015 
-** Last update Sat May 23 13:33:23 2015 
+** Last update Wed Jun  3 03:41:06 2015 Jimmy KING
 */
+
 #include <parser.h>
 
 int		lex_and(t_lex *lex, char **line, char UN *types)

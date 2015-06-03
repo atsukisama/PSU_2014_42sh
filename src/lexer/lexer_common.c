@@ -5,8 +5,9 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Sun May 10 02:12:09 2015 
-** Last update Sun May 24 23:26:26 2015 
+** Last update Wed Jun  3 03:40:52 2015 Jimmy KING
 */
+
 #include <parser.h>
 
 int		lex_idt(t_lex *lex, char **line, char *types)
