@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Thu May 21 15:30:23 2015 Vertigo
-** Last update Sun May 24 18:40:00 2015 Vertigo
+** Last update Wed Jun  3 13:27:41 2015 Jimmy KING
 */
 
 #include <mysh.h>
@@ -50,7 +50,7 @@ char		*get_selected(t_complet *args)
   return (NULL);
 }
 
-int		init_autocomplet(char **args, t_mysh *sh, char **line, int *pos)
+int	init_autocomplet(char **args, t_mysh *sh, char **line, int *pos)
 {
   if ((g_select.tty = open("/dev/tty", O_RDWR)) < 0)
     {

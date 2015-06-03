@@ -5,13 +5,13 @@
 ** Login   <nicolas.rusig@epitech.eu>
 ** 
 ** Started on  Thu May 14 11:17:28 2015 rusig_n
-** Last update Thu May 14 11:17:28 2015 rusig_n
+** Last update Wed Jun  3 13:26:40 2015 Jimmy KING
 */
 
 #include <my.h>
 #include <project.h>
 
-int		chk_var(char *var)
+int	chk_var(char *var)
 {
   if (var == NULL)
     {
@@ -21,10 +21,10 @@ int		chk_var(char *var)
   return (0);
 }
 
-int             my_unsetenv(t_mysh *sh, char **cmd)
+int	my_unsetenv(t_mysh *sh, char **cmd)
 {
-  char		*var;
-  int		i;
+  char	*var;
+  int	i;
 
   i = 0;
   if (chk_var(cmd[1]) == -1)
