@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 22:06:16 2015 Vertigo
-** Last update Sun May 24 22:34:38 2015 Jimmy KING
+** Last update Wed Jun  3 10:46:54 2015 Vertigo
 */
 
 #include <string.h>
@@ -18,12 +18,12 @@ void	up_arrow(int *pos, char **line, t_mysh *sh)
 
   if (sh->history->prev->key != NULL &&
       sh->history->prev == send_root_hist(sh))
-    return;
+    return ;
   while (sh->history->prev->key == NULL)
     {
       if (sh->history->prev->prev->key != NULL &&
 	  sh->history->prev->prev == send_root_hist(sh))
-	return;
+	return ;
       sh->history = sh->history->prev;
     }
   tab[0] = sh->history->prev->key;
@@ -39,9 +39,9 @@ void	down_arrow(int *pos, char **line, t_mysh *sh)
   char	*tab[2];
 
   if (my_strcmp(sh->history->key, "") == 0)
-    return;
+    return ;
   if (sh->history->key != NULL && sh->history == send_root_hist(sh))
-    return;
+    return ;
   while (sh->history->next->key == NULL)
     sh->history = sh->history->next;
   tab[0] = sh->history->next->key;
@@ -55,7 +55,7 @@ void	down_arrow(int *pos, char **line, t_mysh *sh)
 void    right_arrow(int *pos, char **line, t_mysh *sh)
 {
   if (*pos >= my_strlen(*line))
-    return;
+    return ;
   forward_cursor(sh, *pos);
   *pos = *pos + 1;
 }
@@ -64,7 +64,7 @@ void    left_arrow(int *pos, char **line, t_mysh *sh)
 {
   (void)line;
   if (*pos <= 0)
-    return;
+    return ;
   back_cursor(sh, *pos);
   *pos = *pos - 1;
 }
