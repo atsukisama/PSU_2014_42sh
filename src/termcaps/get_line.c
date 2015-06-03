@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 17:40:46 2015 Vertigo
-** Last update Sun May 24 18:16:05 2015 Vertigo
+** Last update Wed Jun  3 08:18:47 2015 Vertigo
 */
 
 #include <stdlib.h>
@@ -14,7 +14,8 @@
 
 void	my_put_from_pos(char *s, int pos)
 {
-  while (s[pos] && write(1, &s[pos++], 1));
+  while (s[pos])
+    write(1, &s[pos++], 1);
 }
 
 void	display_line(char **str, int pos, int mode, t_mysh *sh)
