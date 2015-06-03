@@ -1,11 +1,11 @@
 /*
-** bult.c for  in /home/rusig_n/rendu/minishell2/PSU_2014_minishell2
+1;2802;0c** bult.c for  in /home/rusig_n/rendu/minishell2/PSU_2014_minishell2
 ** 
 ** Made by nicolas rusig
 ** Login   <rusig_n@epitech.net>
 ** 
 ** Started on  Sun Mar  8 17:54:31 2015 nicolas rusig
-** Last update Wed Jun  3 13:14:44 2015 Jimmy KING
+** Last update Wed Jun  3 11:32:12 2015 
 */
 
 #include	<termios.h>
@@ -60,7 +60,7 @@ int		chk_bult_next(t_mysh *sh, char **cmd)
 
 int		chk_bult(t_mysh *sh, char **cmd, t_job *job)
 {
-  if (chk_bult_b(sh, cmd))
+  if (chk_bult_b(cmd))
     {
       if (sh->is_tty)
 	tcsetpgrp(0, job->pgid < 1 ? sh->pgid : job->pgid);

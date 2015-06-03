@@ -5,7 +5,7 @@
 ** Login   <rusig_n@epitech.net>
 ** 
 ** Started on  Sun Mar  8 17:54:31 2015 nicolas rusig
-** Last update Wed Jun  3 13:17:51 2015 Jimmy KING
+** Last update Wed Jun  3 11:33:42 2015 
 */
 
 #include	<termios.h>
@@ -14,9 +14,8 @@
 #include	<project.h>
 #include	<mysh.h>
 
-int		chk_bult_b2(t_mysh *sh, char **cmd)
+int		chk_bult_b2(char **cmd)
 {
-  (void)sh;
   if (cmd[0] && my_strcmp("cd", cmd[0]) == 0)
     return (1);
   else if (cmd[0] && my_strcmp("echo", cmd[0]) == 0)
@@ -38,7 +37,7 @@ int		chk_bult_b2(t_mysh *sh, char **cmd)
   return (0);
 }
 
-int		chk_bult_b(t_mysh *sh, char **cmd)
+int		chk_bult_b(char **cmd)
 {
   if (cmd[0][0] == '\0')
     return (0);
@@ -50,5 +49,5 @@ int		chk_bult_b(t_mysh *sh, char **cmd)
     return (1);
   else if (cmd[0] && my_strcmp("unsetenv", cmd[0]) == 0)
     return (1);
-  return (chk_bult_b2(sh, cmd));
+  return (chk_bult_b2(cmd));
 }

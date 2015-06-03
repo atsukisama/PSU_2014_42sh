@@ -5,7 +5,7 @@
 ** Login   <kerebe_p@epitech.eu>
 **
 ** Started on  Sat May 23 17:46:00 2015 Paul Kerebel
-** Last update Wed Jun  3 12:49:54 2015 Jimmy KING
+** Last update Wed Jun  3 11:37:18 2015 
 */
 
 #include <sys/stat.h>
@@ -47,11 +47,11 @@ void		exec_double_dash_left(t_list *list, int fd[2])
   close(fd[0]);
   tmp = list->next;
   while (tmp != list)
-    {
-      write(fd[1], tmp->key, my_strlen(tmp->key));
-      write(fd[1], "\n", 1);
-      tmp = tmp->next;
-    }
+  {
+    write(fd[1], tmp->key, my_strlen(tmp->key));
+    write(fd[1], "\n", 1);
+    tmp = tmp->next;
+  }
   exit(0);
 }
 
@@ -65,20 +65,32 @@ int		do_double_red(t_ast *ast, t_mysh *sh, char *s, t_job *job)
   if (sh->is_tty)
     can_set(sh->tsave);
   while (s != NULL && my_strcmp(s, ast->left->content.file) != 0)
+  {
+    if (job->pgid > 0 && sh->is_tty)
     {
-      if (job->pgid > 0 && sh->is_tty)
-	tcsetpgrp(0, job->pgid);
-      else if (sh->is_tty)
-	tcsetpgrp(0, sh->pgid);
-      s = get_next_line(0);
-      check_dash_line(s, ast->left->content.file, list);
+      setpgid(getpid(), job->pgid);
+      tcsetpgrp(0, job->pgid);
     }
+    else if (sh->is_tty)
+      tcsetpgrp(0, sh->pgid);
+    s = get_next_line(0);
+    check_dash_line(s, ast->left->content.file, list);
+  }
   if (pipe(fd))
     return (-1);
   if ((pid = fork()) < 0)
     return (-1);
   if (pid == 0)
+  {
+    if (job->pgid > 0 && sh->is_tty)
+    {
+        setpgid(getpid(), job->pgid);
+        tcsetpgrp(0, job->pgid);
+    }
+    else if (sh->is_tty)
+      tcsetpgrp(0, sh->pgid);
     exec_double_dash_left(list, fd);
+  }
   if (sh->is_tty)
     can_set(sh->term);
   return (exec_parallel(ast, sh, fd, job));

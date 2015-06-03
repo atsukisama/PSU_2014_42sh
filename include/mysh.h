@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 09:57:43 2015 Vertigo
-** Last update Wed Jun  3 00:17:54 2015 Jimmy KING
+** Last update Wed Jun  3 11:32:39 2015 
 */
 
 #ifndef MYSH_H_
@@ -128,6 +128,7 @@ int			get_exe(char **cmd);
 
 char			*my_malloc(int len, t_mysh *sh);
 int                     chk_bult(t_mysh *sh, char **cmd, t_job *job);
+int                     chk_bult_b(char **cmd);
 int                     my_cd(t_mysh *sh, char **tab);
 int                     my_unsetenv(t_mysh *sh, char **cmd);
 int                     my_echo(char **cmd, t_mysh *sh);
