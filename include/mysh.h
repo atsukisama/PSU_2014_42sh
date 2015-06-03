@@ -5,7 +5,7 @@
 ** Login   <gascon@epitech.net>
 **
 ** Started on  Wed May 13 09:57:43 2015 Vertigo
-** Last update Wed Jun  3 11:32:39 2015 
+** Last update Wed Jun  3 13:40:18 2015 Jimmy KING
 */
 
 #ifndef MYSH_H_
@@ -105,11 +105,14 @@ int			exe_bg(t_ast *ast, t_mysh *sh, t_job *job);
 int			exe_pipe(t_ast *ast, t_mysh *sh, t_job *job);
 int			exe_red(t_ast *ast, t_mysh *sh, t_job *job);
 
-int			do_red(int red_fd[3], t_ast *ast, t_mysh *sh, t_job *job);
-int                     exec_parallel(t_ast *ast, t_mysh *sh, int fd[2], t_job *job);
+int			do_red(int red_fd[3], t_ast *ast, t_mysh *sh,
+			       t_job *job);
+int                     exec_parallel(t_ast *ast, t_mysh *sh, int fd[2],
+				      t_job *job);
 void                    exec_double_dash_left(t_list *list, int fd[2]);
 void                    check_dash_line(char *s, char *file, t_list *list);
-int			dash_left_check(int red_fd[3], t_ast *ast, t_mysh *sh, t_job *job);
+int			dash_left_check(int red_fd[3], t_ast *ast, t_mysh *sh,
+					t_job *job);
 
 int                     open_failure(char *file, int flags);
 void			set_sig_msg(t_mysh *sh);
@@ -174,7 +177,8 @@ void			free_dab(char **);
 char			*get_prompt(t_mysh *sh);
 char			*alias_replace(t_list *alias, char *cmd);
 int			git_check();
-char                    *get_branch_name(t_mysh *sh, char **branch, int *status);
+char                    *get_branch_name(t_mysh *sh, char **branch,
+					 int *status);
 
 /*
 ** ALIAS

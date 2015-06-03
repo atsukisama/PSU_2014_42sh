@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Mon May  4 06:17:13 2015 
-** Last update Sun May 17 17:22:05 2015 Vertigo
+** Last update Wed Jun  3 13:42:31 2015 Jimmy KING
 */
 
 #ifndef LEXER_H_
@@ -75,4 +75,4 @@ int		lex_bar(t_lex *lex, char **line, char *types);
 t_lex		*lex_append_new(t_lex **lex, char *line);
 void		free_lex(t_lex *lex);
 
-#endif
+#endif /* !LEXER_H_ */

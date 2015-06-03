@@ -5,18 +5,17 @@
 ** Login   <king_j@epitech.eu>
 **
 ** Started on  Thu May 14 01:58:41 2015 king_j
-** Last update Sun May 24 22:08:18 2015 Jimmy KING
+** Last update Wed Jun  3 13:41:21 2015 Jimmy KING
 */
 
 #ifndef PROJECT_H_
-
 # define PROJECT_H_
 
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
-#include "list.h"
-#include "mysh.h"
+# include <stdlib.h>
+# include <string.h>
+# include <stdio.h>
+# include "list.h"
+# include "mysh.h"
 
 char	*xstrstr(char *str, char *keyword);
 int	xlen(char *str);

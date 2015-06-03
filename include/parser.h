@@ -5,7 +5,7 @@
 ** Login   <cano_c@epitech.net>
 ** 
 ** Started on  Tue May  5 10:13:00 2015
-** Last update Sat May 23 18:29:11 2015 
+** Last update Wed Jun  3 13:43:02 2015 Jimmy KING
 */
 
 #ifndef PARSER_H_
@@ -65,4 +65,4 @@ t_ast		*make_red(t_ast **ast, t_lex *lex);
 t_ast		*make_leaf(t_ast **ast, t_lex **lexem, int type);
 t_ast		*make_cmd(t_lex **lex);
 
-#endif
+#endif /* !PARSER_H_ */
