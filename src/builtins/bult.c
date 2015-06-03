@@ -5,7 +5,7 @@
 ** Login   <rusig_n@epitech.net>
 ** 
 ** Started on  Sun Mar  8 17:54:31 2015 nicolas rusig
-** Last update Wed Jun  3 03:11:16 2015 Jimmy KING
+** Last update Wed Jun  3 13:14:44 2015 Jimmy KING
 */
 
 #include	<termios.h>
@@ -60,12 +60,15 @@ int		chk_bult_next(t_mysh *sh, char **cmd)
 
 int		chk_bult(t_mysh *sh, char **cmd, t_job *job)
 {
+  if (chk_bult_b(sh, cmd))
+    {
+      if (sh->is_tty)
+	tcsetpgrp(0, job->pgid < 1 ? sh->pgid : job->pgid);
+    }
   if (cmd[0][0] == '\0')
     return (0);
   else if (my_strcmp("env", cmd[0]) == 0)
     {
-      if (sh->is_tty)
-        tcsetpgrp(0, job->pgid < 1 ? sh->pgid : job->pgid);
       env_show(sh->env_list);
       return (1);
     }

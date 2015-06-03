@@ -5,7 +5,7 @@
 ** Login   <king_j@epitech.net>
 **
 ** Started on  Wed May 13 21:35:35 2015 Jimmy KING
-** Last update Wed May 20 19:32:47 2015 Cano Chloe
+** Last update Wed Jun  3 13:04:23 2015 Jimmy KING
 */
 
 #include "project.h"
@@ -31,7 +31,7 @@ void	env_collect(char **env, t_list *list)
 void		env_show(t_list *list)
 {
   t_list	*tmp;
-
+  printf("LOLOLOL\n");
   tmp = list->next;
   while (tmp != list)
     {

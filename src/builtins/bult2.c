@@ -5,7 +5,7 @@
 ** Login   <rusig_n@epitech.net>
 ** 
 ** Started on  Sun Mar  8 17:54:31 2015 nicolas rusig
-** Last update Fri May 15 12:34:45 2015 Vertigo
+** Last update Wed Jun  3 13:17:51 2015 Jimmy KING
 */
 
 #include	<termios.h>
@@ -16,11 +16,18 @@
 
 int		chk_bult_b2(t_mysh *sh, char **cmd)
 {
+  (void)sh;
   if (cmd[0] && my_strcmp("cd", cmd[0]) == 0)
     return (1);
   else if (cmd[0] && my_strcmp("echo", cmd[0]) == 0)
     return (1);
   else if (cmd[0] && my_strcmp("history", cmd[0]) == 0)
+    return (1);
+  else if (cmd[0] && my_strcmp("alias", cmd[0]) == 0)
+    return (1);
+  else if (cmd[0] && my_strcmp("unalias", cmd[0]) == 0)
+    return (1);
+  else if (cmd[0] && my_strcmp("source", cmd[0]) == 0)
     return (1);
   else if (cmd[0] && cmd[0][0] == '!')
     return (1);

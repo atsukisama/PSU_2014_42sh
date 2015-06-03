@@ -5,7 +5,7 @@
 ## Login   <cano_c@epitech.net>
 ## 
 ## Started on  Mon May  4 07:03:45 2015 
-## Last update Thu May 28 18:44:33 2015 Vertigo
+## Last update Wed Jun  3 13:15:37 2015 Jimmy KING
 ##
 
 NAME	= 42sh
@@ -25,7 +25,7 @@ SRCS	= lexer/lexer.c lexer/lexer_common.c lexer/lexer_red.c \
         builtins/environement.c builtins/environement_2.c builtins/my_unsetenv.c \
         builtins/setenv.c builtins/my_cd.c builtins/bult.c builtins/my_echo.c \
         builtins/util_bult.c builtins/my_echo_dol.c builtins/exit.c \
-        builtins/historic.c builtins/historic_c.c builtins/alias.c \
+        builtins/historic.c builtins/historic_c.c builtins/alias.c builtins/bult2.c\
 	list/list.c list/list_2.c list/list_goto.c \
 	exe/exe_cmd.c exe/exe_sep.c exe/exe_pipe.c exe/exe_red.c \
 	exe/handle_proc.c exe/exe_red_utils.c exe/glob_arg.c \
