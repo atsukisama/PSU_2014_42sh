@@ -5,7 +5,7 @@
 ** Login   <kerebe_p@epitech.eu>
 **
 ** Started on  Sat May 23 17:46:00 2015 Paul Kerebel
-** Last update Tue Jun  2 18:19:41 2015 
+** Last update Wed Jun  3 12:49:54 2015 Jimmy KING
 */
 
 #include <sys/stat.h>
@@ -70,7 +70,6 @@ int		do_double_red(t_ast *ast, t_mysh *sh, char *s, t_job *job)
 	tcsetpgrp(0, job->pgid);
       else if (sh->is_tty)
 	tcsetpgrp(0, sh->pgid);
-      write(1, "> ", 2);
       s = get_next_line(0);
       check_dash_line(s, ast->left->content.file, list);
     }
