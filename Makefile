@@ -5,7 +5,7 @@
 ## Login   <cano_c@epitech.net>
 ## 
 ## Started on  Mon May  4 07:03:45 2015 
-## Last update Wed Jun  3 13:15:37 2015 Jimmy KING
+## Last update Wed Jun  3 11:39:21 2015 
 ##
 
 NAME	= 42sh
@@ -22,16 +22,19 @@ SRCS	= lexer/lexer.c lexer/lexer_common.c lexer/lexer_red.c \
 	termcaps/can.c termcaps/get_line.c termcaps/disp.c termcaps/cursor.c \
 	termcaps/char_isprintable.c termcaps/key.c termcaps/clear_screen.c \
 	termcaps/arrows.c \
-        builtins/environement.c builtins/environement_2.c builtins/my_unsetenv.c \
+        builtins/environement.c builtins/environement_2.c \
+	builtins/my_unsetenv.c \
         builtins/setenv.c builtins/my_cd.c builtins/bult.c builtins/my_echo.c \
         builtins/util_bult.c builtins/my_echo_dol.c builtins/exit.c \
-        builtins/historic.c builtins/historic_c.c builtins/alias.c builtins/bult2.c\
+        builtins/historic.c builtins/historic_c.c builtins/alias.c \
+	builtins/bult2.c\
 	list/list.c list/list_2.c list/list_goto.c \
 	exe/exe_cmd.c exe/exe_sep.c exe/exe_pipe.c exe/exe_red.c \
 	exe/handle_proc.c exe/exe_red_utils.c exe/glob_arg.c \
 	alias/alias.c prompt/prompt.c prompt/git.c \
 	autocomplet/autocomplet.c autocomplet/keys.c autocomplet/select.c \
-	autocomplet/select_list.c autocomplet/terminal.c autocomplet/get_string.c \
+	autocomplet/select_list.c autocomplet/terminal.c \
+	autocomplet/get_string.c \
 	autocomplet/my_select.c autocomplet/actions.c autocomplet/utils.c \
 	autocomplet/init.c autocomplet/free.c
 
